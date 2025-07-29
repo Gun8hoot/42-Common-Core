@@ -1,39 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sqrt.c                                          :+:      :+:    :+:   */
+/*   ft_sort_int_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 15:03:57 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/29 11:32:17 by nclavel          ###   ########.fr       */
+/*   Created: 2025/07/29 08:53:36 by nclavel           #+#    #+#             */
+/*   Updated: 2025/07/29 09:27:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-
-int	ft_sqrt(int nb)
+void	ft_swap(int *a, int *b)
 {
-	int	res;
-	int	num;
+	int	tmp;
 
-	num = 1;
-	res = 0;
-	if (nb == 0 || nb < 0)
-		return (0);
-	while (num < nb)
-	{
-		res = num * num;
-		if (res == nb)
-			return (num);
-		num++;
-	}
-	return (0);
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
-/*
+
+void	ft_sort_int_tab(int *tab, int size)
+{
+	int	i;
+	int	j;
+	int	already_swap;
+
+	already_swap = 0;
+	i = 0;
+	j = 0;
+	while (i < size - 1)
+	{
+		already_swap = 0;
+		while (j < size - 1)
+	}
+}
+
 int	main(void)
 {
-	printf("sqrt ; %d^2\n", ft_sqrt(10));
-	return (0);
+	int	tab = {9, 5 ,4 ,59, 26, 1, 37};
+	int	size = 7;
+
+	
 }
-*/

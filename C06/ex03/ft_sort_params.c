@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 08:31:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/29 08:47:11 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/29 11:16:53 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,60 +18,40 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	unsigned int	cursor;
 
 	cursor = 0;
-	while (cursor < n && (s1[cursor] || s1[cursor]))
+	while ((s1[cursor] || s2[cursor]) && cursor < n)
 	{
 		if (s1[cursor] != s2[cursor])
 		{
-			break ;
+			return (s1[cursor] - s2[cursor]);
 		}
 		cursor++;
 	}
-	return (s1[cursor] - s2[cursor]);
+	return (0);
 }
 
-char	*ft_strcat(char *dest, char *src)
+char	*ft_strcpy(char *dest, char *src)
 {
-	int	cursor;
-	int	len;
+	int	i;
 
-	cursor = 0;
-	len = 0;
-	while (dest[cursor] != '\0')
+	i = 0;
+	while (src[i] != '\0')
 	{
-		cursor++;
+		dest[i] = src[i];
+		i++;
 	}
-	while (src[len] != '\0')
-	{
-		dest[cursor + len] = src[len];
-		len++;
-	}
-	dest[cursor + len] = '\0';
+	dest[i] = '\0';
 	return (dest);
-}
-
-void	ft_swap(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
 }
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	char	**tmp;
+	(void)argc;
+	int		i;
+	int		j;
+	char		**tmp;
 
 	tmp = NULL;
 	i = 1;
-	while (i <= argc)
-	{
-		if (ft_strncmp(argv[i], argv[i + 1], 1) > 0)
-			ft_strcat(tmp[i], argv[i + 1]);
-		else
-			ft_strcat(tmp[i], argv[i]);
-		i++;
-	}
+	j = 0;
 	return (0);
 }
