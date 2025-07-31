@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 16:54:52 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/28 14:19:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:26:48 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 char	*ft_strcpy(char *dest, char *src)
 {
@@ -51,21 +52,20 @@ char	*ft_strdup(char *src)
 	ft_strcpy(copy, src);
 	return (copy);
 }
-/*
-#include <stdio.h>
-#include <unistd.h>
-int	main(void)
-{
-	char	*str = "Copie moi ca stp ! Tiee un tigre";
-	char	*copy = ft_strdup(str);
-	char	*ocopy = strdup(str);
+/* VERIF */
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char	*str = "Some string to copy";
+// 	char	*copy = ft_strdup(str);
+// 	char	*ocopy = strdup(str);
 
-	if (copy != NULL)
-	{
-//		printf("copy funct ; %s\ncopy  ; %s", copy, ocopy);
-		free(copy);
-		free(ocopy);
-	}
-	return (0);
-}
-*/
+// 	if (copy != NULL && ocopy != NULL)
+// 	{
+// 		printf("copy ; \"%s\"\nocopy ; \"%s\"\n", copy, ocopy);
+// 		printf("comp : %d", strcmp(copy, ocopy));
+// 		free(copy);
+// 		free(ocopy);
+// 	}
+// 	return (0);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ultimate_range.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 11:01:39 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/24 09:03:20 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/31 14:27:21 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	ft_ultimate_range(int **range, int min, int max)
 	i = 0;
 	if (min >= max)
 	{
+		range = NULL;
 		return (0);
 	}
-	*range = malloc(4 * (max - min));
+	*range = malloc(sizeof(int) * (max - min));
 	if (range == NULL)
 		return (-1);
 	while (min + i < max)
@@ -33,19 +34,23 @@ int	ft_ultimate_range(int **range, int min, int max)
 	}
 	return (max - min);
 }
-/*
-int	main(void)
-{
-	// xyz
-	int min = 5;
-	int max = -5;
-	int *range = NULL;
+/* VERIF */
+// int	main(void)
+// {
+// 	int min = -4;
+// 	int max = 5;
+// 	int *range = NULL;
+// 	int i = 0;
 
-	ft_ultimate_range(&range, min, max);
-	if (range != NULL)
-	{
-		free(range);
-	}
-	return (0);
-}
-*/
+// 	printf("size = %d\n", ft_ultimate_range(&range, min, max));
+// 	if (range != NULL)
+// 	{
+// 		while (i < max-min)
+// 		{
+// 			printf("%d, ", range[i]);
+// 			i++;
+// 		}
+// 	}
+// 	free(range);
+// 	return (0);
+// }
