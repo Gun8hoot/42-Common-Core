@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 11:24:16 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/29 11:29:16 by nclavel          ###   ########.fr       */
+/*   Created: 2025/07/29 17:44:48 by nclavel           #+#    #+#             */
+/*   Updated: 2025/07/30 11:29:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,14 @@ int	ft_find_next_prime(int nb)
 	}
 	return (0);
 }
-/*
-int	main(void)
-{
-	int	nb = 62;
-	printf("Prime number %d >= %d", nb, ft_find_next_prime(nb));
-	return (0);
-}
-*/
+/* VERIFIER */
+// int	main(void)
+// {
+// 	int	nb = 1;
+// 	while (nb <= 100)
+// 	{
+// 		printf("Prime number %d >= %d\n", nb, ft_find_next_prime(nb));
+// 		nb++;
+// 	}
+// 	return (0);
+// }

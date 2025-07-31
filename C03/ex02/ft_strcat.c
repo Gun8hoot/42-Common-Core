@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 14:07:30 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/21 13:29:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/31 12:29:19 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ char	*ft_strcat(char *dest, char *src)
 }
 /* Verifier */
 
-// #include <stdio.h>
-// #include <string.h>
-// int	main(void)
-// {
-// 	char	src[128] = "   Malhas   dlas";
-// 	char	dest[128] = "Helloworld";
-// 	char	odest[128] = "Helloworld";
+#include <stdio.h>
+#include <string.h>
+int	main(void)
+{
+	char	src[128] = "   Malhas   dlas";
+	char	dest[128] = "Helloworld";
+	char	odest[128] = "Helloworld";
 
-// 	printf("src ; \"%s\", dest ; \"%s\"\n", src, dest);
-// 	ft_strcat(dest, src);
-// 	printf("Modif ; \"%s\"\n", dest);
-// 	printf("strcat ; \"%s\"\n", strcat(odest, src));
-// 	printf("strcmp ; %d\n", strcmp(dest, odest));
-// 	return (0);
-// }
+	printf("src ; \"%s\", dest ; \"%s\"\n", src, dest);
+	ft_strcat(dest, src);
+	printf("Modif ; \"%s\"\n", dest);
+	printf("strcat ; \"%s\"\n", strcat(odest, src));
+	printf("strcmp ; %d\n", strcmp(dest, odest));
+	return (0);
+}

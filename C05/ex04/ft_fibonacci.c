@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fibrionacci.c                                   :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:06:07 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/22 09:26:53 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/30 11:28:19 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
 
 int	ft_fibonacci(int index)
 {
@@ -21,17 +20,16 @@ int	ft_fibonacci(int index)
 		return (1);
 	return (ft_fibonacci(index - 2) + ft_fibonacci(index - 1));
 }
-
-/*
-int	main(void)
-{
-	int	nb = 30;
-	int	i = 0;
-	while (i <= nb)
-	{
-		printf("nth : %d ; fibonacci : %d\n" , i, ft_fibonacci(i));
-		i++;
-	}
-	return (0);
-}
-*/
+/* VERIFIER */
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	// MAIN
+// 	int	i = 0;
+// 	while (i <= 27)
+// 	{
+// 		printf("nth : %d ; fibonacci : %d\n" , i, ft_fibonacci(i));
+// 		i++;
+// 	}
+// 	return (0);
+// }

@@ -6,19 +6,19 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 08:31:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/29 11:16:53 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/29 12:14:14 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+int	ft_strncmp(char *s1, char *s2)
 {
 	unsigned int	cursor;
 
 	cursor = 0;
-	while ((s1[cursor] || s2[cursor]) && cursor < n)
+	while ((s1[cursor] || s2[cursor]) && cursor < 1)
 	{
 		if (s1[cursor] != s2[cursor])
 		{
@@ -45,7 +45,6 @@ char	*ft_strcpy(char *dest, char *src)
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
 	int		i;
 	int		j;
 	char		**tmp;
@@ -53,5 +52,10 @@ int	main(int argc, char **argv)
 	tmp = NULL;
 	i = 1;
 	j = 0;
+	while (i < argc)
+	{
+		printf("%d", ft_strncmp(argv[i], argv[i+1]));
+		i++;
+	}
 	return (0);
 }

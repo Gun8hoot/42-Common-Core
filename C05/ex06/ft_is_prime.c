@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_prime.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/29 11:18:20 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/29 11:28:44 by nclavel          ###   ########.fr       */
+/*   Created: 2025/07/29 17:44:52 by nclavel           #+#    #+#             */
+/*   Updated: 2025/07/30 11:28:32 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,17 @@ int	ft_is_prime(int nb)
 		return (1);
 	return (0);
 }
-/*
-int	main(void)
-{
-	int	nb = 1;
+/* VERIFIER */
+// int	main(void)
+// {
+// 	//	MAIN
+// 	int	nb = 1;
 
-	while (nb < 100)
-	{
-		if (ft_is_prime(nb) == 1)
-			printf("%d is prime\n", nb);
-		else
-			;
-//			printf("%d is not prime\n", nb);
-		nb++;
-	}
+// 	while (nb < 100)
+// 	{
+// 		if (ft_is_prime(nb) == 1)
+// 			printf("%d is prime\n", nb);
+// 		nb++;
+// 	}
 
-}
-*/
+// }

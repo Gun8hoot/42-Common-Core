@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 09:32:41 by nclavel           #+#    #+#             */
-/*   Updated: 2025/07/22 09:45:10 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/07/30 11:04:37 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	ft_recursive_factorial(int nb)
 {
-	printf("%d, ", nb);
 	if (nb < 0)
 	{
 		return (0);
@@ -25,9 +24,15 @@ int	ft_recursive_factorial(int nb)
 	}
 	return (nb * ft_recursive_factorial(nb - 1));
 }
-
-int	main(void)
-{
-	printf("\n%d", ft_recursive_factorial(0));
-	return (0);
-}
+/* VERIFIER */
+// int	main(void)
+// {
+// 	int	nb = 1;
+// 	while (nb < 12)
+// 	{
+// 		printf("Factoriel de %d = %d\n", nb, ft_recursive_factorial(nb));
+// 		nb++;
+// 	}
+// 	//	MAX 12, Le reste ne rentre pas dans les int
+// 	return (0);
+// }
