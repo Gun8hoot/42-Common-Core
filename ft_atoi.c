@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:02:26 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 15:21:38 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 16:18:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ int	ft_atoi(const char *nptr)
 	return (res * sign);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-int main(void)
-{
-	char *nb = "     -10";
-	printf("%d ; %d", ft_atoi(nb), atoi(nb));
-}
+// int main(void)
+// {
+// 	// char *nb = "     \t-2147483648";
+// 	char *nb = "--5";
+// 	int aaa = ft_atoi(nb);
+// 	printf("%d ; %d\n", aaa, atoi(nb));
+// }

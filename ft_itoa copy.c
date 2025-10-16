@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_itoa copy.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:32:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 16:43:40 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 16:37:24 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_countnb(int nb)
+static int	ft_countnb(int nb)
 {
 	int c;
 	int tmp;
@@ -30,30 +30,16 @@ int	ft_countnb(int nb)
 	return (c);
 }
 
-int	ft_isneg(int n)
+static int	ft_isneg(int n)
 {
 	if (n < 0)
 		return (1);
 	return (0);
 }
 
-static char *ft_put_and_revers(int n, size_t len, char *arr)
+static char	*ft_put_and_revers(int n, size_t len)
 {
-	if (ft_isneg(n) == 1)
-	{
-		arr[0] = '-';
-		n = -n;
-	}
-	else
-		len--;
-	if (n == 0)
-		arr[len++] = '0';
-	while (n != 0)
-	{
-		arr[len] = (n % 10) + 48;
-		n /= 10;
-		len--;
-	}
+	
 }
 
 char *ft_itoa(int n)
@@ -88,7 +74,7 @@ char *ft_itoa(int n)
 
 int main(void)
 {
-	int nb  = -2147483648;
+	int nb  = -4;
 	printf("%s", ft_itoa(nb));
 	return (0);
 }

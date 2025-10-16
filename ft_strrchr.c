@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:50:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 09:42:04 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:31:37 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(s);
 	while (!(i < 0))

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 09:14:57 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:31:15 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 
 // #include <stdio.h>
 // #include <bsd/string.h>
-// int main(void)
+// int main(int argc, char	**argv)
 // {
 // 	char src[] = "Ajoute";
 // 	char dst[20] = "ashdsa";
 // 	char tmp[20] = "ashdsa";
-// 	size_t aaa = ft_strlcat(dst, src, 8);
-// 	size_t bbb = strlcat(tmp, src, 8);
+// 	int	jjj = 10;
+// 	printf("%d\n", jjj);
+// 	size_t aaa = ft_strlcat(dst, src, jjj);
+// 	size_t bbb = strlcat(tmp, src, jjj);
 // 	printf("%s;%ld\n%s;%ld", dst, aaa, tmp, bbb);
 // 	return (0);
 // }

@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 08:39:14 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:39:40 by nclavel          ###   ########.fr       */
+/*   Created: 2025/10/16 17:22:51 by nclavel           #+#    #+#             */
+/*   Updated: 2025/10/16 17:38:17 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void ft_ft_toupper(unsigned int i , char *c)
 {
-	char	*str;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strlen(s);
-	str = malloc(sizeof(char) * len);
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if (c >= 'a' && c <= 'z')
+		*c = *c - 48;
 }
 
-// int main(void)
-// {
-// 	char str1[100] = "String a copier";
-// 	char *str2;
+void ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	int		i;
 
-// 	str2 = ft_strdup(str1);
-// 	printf("%s\n", str2);
-// 	free(str2);
-// 	return (0);
-// }
+	i = 0;
+	while (s[i])
+	{
+
+		f(1, &((char*)s)[i]);
+		i++;
+	}
+}
+
+int	main(void)
+{
+	char *str;
+	
+	str = "Met Tous EN MAJ";
+	ft_striteri(str, ft_ft_toupper);
+	printf("%s\n", str);
+	return (0);
+}

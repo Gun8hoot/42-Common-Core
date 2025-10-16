@@ -6,12 +6,12 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:24:46 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 09:35:54 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 17:47:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LIBFT_H
-# define FT_LIBFT_H
+#ifndef LIBFT_H
+# define LIBFT_H
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>

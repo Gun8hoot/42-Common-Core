@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:42 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 15:32:28 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:13:46 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ void	*ft_calloc(size_t nmemb, size_t size)
 //     printf("\n");
 // }
 
-int main(void)
-{
-	char *arr;
+// int main(void)
+// {
+// 	char *arr;
 
-	arr = ft_calloc(10, sizeof(char));
-	//ft_print_tab(arr, 10);
-	//for (int i = 0; i < 10; i++)
-	//	printf("%d\n", arr[i]);
-	printf("%s\n", arr);
-	free(arr);
-	return (0);
-}
+// 	arr = ft_calloc(10, sizeof(char));
+// 	//ft_print_tab(arr, 10);
+// 	//for (int i = 0; i < 10; i++)
+// 	//	printf("%d\n", arr[i]);
+// 	printf("%s\n", arr);
+// 	free(arr);
+// 	return (0);
+// }

@@ -1,44 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/15 08:39:14 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:39:40 by nclavel          ###   ########.fr       */
+/*   Created: 2025/10/16 17:18:08 by nclavel           #+#    #+#             */
+/*   Updated: 2025/10/16 17:18:42 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s)
+void ft_putchar_fd(char c, int fd)
 {
-	char	*str;
-	size_t	len;
-	size_t	i;
-
-	i = 0;
-	len = ft_strlen(s);
-	str = malloc(sizeof(char) * len);
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	write(fd, &c, 1);
 }
-
-// int main(void)
-// {
-// 	char str1[100] = "String a copier";
-// 	char *str2;
-
-// 	str2 = ft_strdup(str1);
-// 	printf("%s\n", str2);
-// 	free(str2);
-// 	return (0);
-// }
