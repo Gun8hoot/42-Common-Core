@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:39:46 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 17:06:21 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:03:58 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 char ft_ft_toupper(unsigned int i , char c)
 {
+	(void)i;
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
+	return (c);
 }
 
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
@@ -29,7 +31,7 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	{
 		if (str == NULL)
 			return (NULL);
-		str[i] = f(1, s[i]);
+		str[i] = f(i, s[i]);
 		i++;
 	}
 	str[i] = '\0';

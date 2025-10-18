@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:06:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:36:48 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 14:59:35 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-// int main(void)
-// {
-// 	char *str;
+int main(void)
+{
+	char *str;
 
-// 	str = ft_strjoin("mots1", "mots2");
-// 	printf("%s\n", str);
-// 	free(str);
-// 	return (0);
-// }
+	str = ft_strjoin("", "");
+	printf("\"%s\"\n", str);
+	free(str);
+	return (0);
+}

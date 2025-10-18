@@ -6,15 +6,17 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:43:57 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/14 09:46:19 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:57:36 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
+		c += 32;
+	return (c);
 }
+
 
 // #include <stdio.h>
 // int main(void)

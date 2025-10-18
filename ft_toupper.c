@@ -6,14 +6,15 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:36:12 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/14 07:56:57 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 12:58:13 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-		return (c - 32);
+		c -= 32;
+	return (c);
 }
 
 //int main(void)

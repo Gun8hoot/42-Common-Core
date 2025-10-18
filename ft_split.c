@@ -6,12 +6,23 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 12:29:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:34:03 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 17:22:20 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
+
+static void	ft_free_alem(char **arr, int z)
+{
+	z -= 1;
+	while (z >= 0)
+	{
+		free(arr[z]);
+		z--;
+	}
+	free(arr);
+}
 
 static	int	ft_countword(const char *str, const char c)
 {
@@ -31,6 +42,28 @@ static	int	ft_countword(const char *str, const char c)
 	return (count);
 }
 
+static size_t	ft_lenword(const char *str, const char c)
+{
+	size_t i;
+	size_t count;
+
+	i = 0;
+	count = 0;
+	while (str[i] && str[i] != c)
+	{
+		if (str[i] == c)
+		{
+			i++;
+		}
+		while (str[i] != c && str[i])
+		{
+			i++;
+			count++;
+		}
+	}
+	return (count);
+}
+
 static	char	*ft_dup(const char *s, const char c)
 {
 	char	*str;
@@ -38,10 +71,9 @@ static	char	*ft_dup(const char *s, const char c)
 	size_t	i;
 
 	i = 0;
-	len = ft_strlen(s);
-	if ((str = malloc(sizeof(char) * len + 1)) == NULL);
+	len = ft_lenword(s, c);
+	if ((str = malloc(sizeof(char) * len + 1)) == NULL)
 		return (NULL);
-	printf("%ld\n", len);
 	while (i < len)
 	{
 		str[i] = s[i];
@@ -56,76 +88,41 @@ char **ft_split(char const *s, char c)
 	char	**arr;
 	int		i;
 	int		j;
+	int	passed;
 
 	i = 0;
 	j = 0;
-	if ((arr = malloc(sizeof(char*) * ft_countword(s, c) + 1)) == NULL)
+	arr = malloc(sizeof(char*) * ft_countword(s, c) + 1);
+	if (arr == NULL)
 		return (NULL);
 	while (s[i])
 	{
-		if (s[i] != c)
-		{
-			arr[j] = ft_dup(&((char*)s)[i], c);
-			printf("%c\n", s[i]);
-		}
+		passed = 0;
 		while (s[i] != c && s[i])
 		{
-			printf("%c\n", s[i]);
+			if (passed == 0 && s[i] != c)
+			{
+				arr[j] = ft_dup(&s[i], c);
+				passed++;
+			}
 			i++;
 		}
-		while (s[i] == c && s[i])
-		{
-			printf("\n%c\n\n", s[i]);
-			i++;
-		}
-		printf("%s", arr[j]);
 		j++;
+		i++;
 	}
 	arr[j] = NULL;
 	return (arr);
 }
 
-void test_free(char **arr)
-{
-	arr = malloc(sizeof(char*) * 3 + 1);
-	for (int i = 0; i < 3; i++)
-	{
-		arr[i] = malloc(sizeof(char) * 10 + 1);
-	}
-	arr[0] = "str1\n";
-	arr[1] = "str2\n";
-	arr[2] = "str3\n";
-	for (int i = 0; i < 3; i++)
-	{
-		printf("%s", arr[i]);
-	}
-	free(arr);
-}
-
-static void	ft_free_alem(char **arr)
-{
-	int i;
-	int j;
-
-	j = 0;
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
-}
-
 int main(void)
 {
 	//char **arr;
-	 char arr[] = "Split-this-Ghing";
-	// printf("%s\n%d\n", arr, ft_countword(arr, '-'));
+	char arr[] = "Split-quelle--fonction-de-con-lv";
+	//printf("%s ; %ld , %d\n", &arr[10], ft_lenword(&arr[10], '-'), ft_countword(&arr[10], '-'));
 	char **splited = ft_split(arr, '-');
-	for (int i = 0; i < 3; i++)
-		printf("%s\n", splited[i]);
-//	test_free(arr);
+	for (int z = 0; splited[z]; z++)
+		printf("%s\n", splited[z]);
 
+//	ft_free_alem(splited, 6);
 	return (0);
 }

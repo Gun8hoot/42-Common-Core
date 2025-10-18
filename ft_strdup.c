@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 08:39:14 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:39:40 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 15:52:33 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-// int main(void)
+// int main(int argc, char **argv)
 // {
-// 	char str1[100] = "String a copier";
+// 	char *str1 = argv[1];
 // 	char *str2;
 
+// 	if (argc == 1)
+// 		return (1);
 // 	str2 = ft_strdup(str1);
 // 	printf("%s\n", str2);
 // 	free(str2);

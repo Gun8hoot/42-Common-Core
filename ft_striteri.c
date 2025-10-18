@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:22:51 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 17:38:17 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 15:50:19 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void ft_ft_toupper(unsigned int i , char *c)
 {
-	if (c >= 'a' && c <= 'z')
+	if (*c >= 'a' && *c <= 'z')
 		*c = *c - 48;
 }
 
@@ -26,7 +26,7 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 	while (s[i])
 	{
 
-		f(1, &((char*)s)[i]);
+		f(i, &((char *)s)[i]);
 		i++;
 	}
 }

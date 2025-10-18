@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:15:41 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 09:15:46 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 15:59:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-// #include <stdio.h>
-// #include <string.h>
-// int main(void)
-// {
-// 	char dst[999] = "akjsdsads";
-// 	char aaa[999] = "akjsdsads";
-// 	char *src = "copythisstrplz";
-// 	size_t ff = ft_strlcpy(dst, src, 8);
-// 	size_t zz = strlcpy(aaa, src, 8);
-// 	printf("%ld > %s\n", ff, dst);
-// 	printf("%ld > %s\n", zz, aaa);
-// }
+#include <stdio.h>
+#include <bsd/string.h>
+int main(void)
+{
+	char dst[999] = "akjsdsads";
+	char aaa[999] = "akjsdsads";
+	char *src = "copythisstrplz";
+	size_t ff = ft_strlcpy(dst, src, 8);
+	size_t zz = strlcpy(aaa, src, 8);
+	printf("%ld > %s\n", ff, dst);
+	printf("%ld > %s\n", zz, aaa);
+}

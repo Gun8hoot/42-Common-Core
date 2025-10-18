@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:44:52 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/16 15:35:51 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/18 15:37:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-// #include <stdio.h>
-// int main() {    
-//     char *s = "Findersss";
-//     char *sub;
+#include <stdio.h>
+#include <string.h>
+int main() {    
+    char *s = "Findersss";
+    char *sub;
 
-//     // Extract two characters of s1 (starting
-//     // from index 3)
-// 	sub = ft_substr(s, 3, 6);
+	sub = ft_substr(s, 3, 4);
 
-//     printf("%s\n", sub);
-// 	free(sub);
-//     return (0);
-// }
+    printf("%s\n", sub);
+	free(sub);
+    return (0);
+}
