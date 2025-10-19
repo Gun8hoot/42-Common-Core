@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char ft_ft_toupper(unsigned int i , char c)
+char	ft_ft_toupper(unsigned int i, char c)
 {
 	(void)i;
 	if (c >= 'a' && c <= 'z')
@@ -20,7 +20,7 @@ char ft_ft_toupper(unsigned int i , char c)
 	return (c);
 }
 
-char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char	*str;
 	int		i;
@@ -38,12 +38,11 @@ char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	return (str);
 }
 
-int	main(void)
-{
-	char *str;
-	
-	str = ft_strmapi("Met Tous EN MAJ", ft_ft_toupper);
-	printf("%s\n", str);
-	free(str);
-	return (0);
-}
+// int	main(void)
+// {
+// 	char *str;
+// 	str = ft_strmapi("Met Tous EN MAJ", ft_ft_toupper);
+// 	printf("%s\n", str);
+// 	free(str);
+// 	return (0);
+// }

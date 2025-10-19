@@ -32,8 +32,8 @@ int	ft_isset(const char *set, const char *s)
 
 static int	ft_setontbegend(char const *s1, char const *set)
 {
-	size_t len_set;
-	size_t len_s1;
+	size_t	len_set;
+	size_t	len_s1;
 	size_t	i;
 	size_t	c;
 
@@ -43,7 +43,8 @@ static int	ft_setontbegend(char const *s1, char const *set)
 	c = 0;
 	while (s1[i])
 	{
-		if ((i == 0 || i == len_s1 - len_set) && ft_isset(&((char *)s1)[i], set) == 1)
+		if ((i == 0 || i == len_s1 - len_set) 
+			&& ft_isset(&((char *)s1)[i], set) == 1)
 			c++;
 		i++;
 	}
@@ -78,17 +79,17 @@ char *ft_strtrim(char const *s1, char const *set)
 	return (arr);
 }
 
-int	main(void)
-{
-	char *arr = " ===STR To=== TRIM===";
-	char *set = "===";
-	char *str = ft_strtrim(arr, set);
-		printf("%s\n", str);
-	free(str);
-	// char *str = "ashkdas===string";
-	// for (int i = 0; i < ft_strlen(str); i++)
-	// {
-	// 	printf("%d\n", ft_isset("===", &((char*)str)[i]));
-	// }
-	return (0);
-}
+// int	main(void)
+// {
+// 	char *arr = "===STR To=== TRIM===";
+// 	char *set = "===";
+// 	char *str = ft_strtrim(arr, set);
+// 		printf("%s\n", str);
+// 	free(str);
+// 	// char *str = "ashkdas===string";
+// 	// for (int i = 0; i < ft_strlen(str); i++)
+// 	// {
+// 	// 	printf("%d\n", ft_isset("===", &((char*)str)[i]));
+// 	// }
+// 	return (0);
+// }

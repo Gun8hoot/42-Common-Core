@@ -31,14 +31,14 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	return (0);
 }
 
-int main(void)
-{
-	int i;
-	char	arr[65] = "asdasda";
-	char	test[65] = "dsad";
-	char	aaa[64];
-	char	bbb[64];
-	i = 0;
-	int	yy = memcmp(bbb, test, 9 + 1);
-	printf("%d ; %d\n", ft_memcmp(test, arr, 9), memcmp(test, arr, 9));
-}
+// int main(void)
+// {
+// 	int i;
+// 	char	arr[65] = "asdasda";
+// 	char	test[65] = "dsad";
+// 	char	aaa[64];
+// 	char	bbb[64];
+// 	i = 0;
+// 	int	yy = memcmp(bbb, test, 9 + 1);
+// 	printf("%d ; %d\n", ft_memcmp(test, arr, 9), memcmp(test, arr, 9));
+// }

@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(void)
+void	test_atoi(void)
 {
 	// ATOI
 	printf("--- ATOI ---\n");
@@ -22,6 +24,12 @@ int main(void)
 	printf("libft : %d\norigin : %d\n", ft_atoi("-2147483647"), atoi("-2147483647"));
 	printf("libft : %d\norigin : %d\n", ft_atoi("   -1"), atoi("   -1"));
 	printf("libft : %d\norigin : %d\n", ft_atoi("+25"), atoi("+25"));
-	printf("libft : %d\norigin : %d\n", ft_atoi("0"), atoi("0"));
+	printf("libft : %d\norigin : %d\n", ft_atoi("   -1l543"), atoi("   -1l543"));
+	return (0);
+}
+
+int main(void)
+{
+	test_atoi();
 	return (0);
 }

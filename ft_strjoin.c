@@ -39,12 +39,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (str);
 }
 
-int main(void)
-{
-	char *str;
+// int main(void)
+// {
+// 	char *str;
 
-	str = ft_strjoin("", "");
-	printf("\"%s\"\n", str);
-	free(str);
-	return (0);
-}
+// 	str = ft_strjoin("", "");
+// 	printf("\"%s\"\n", str);
+// 	free(str);
+// 	return (0);
+// }

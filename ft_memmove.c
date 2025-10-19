@@ -39,14 +39,14 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (tmp_dest);
 }
 
-int main(int argc, char **argv)
-{
-	int i;
-	char	*src = "strsdsds";
-	char	*dest = "aasdsa";
+// int main(int argc, char **argv)
+// {
+// 	int i;
+// 	char	*src = "strsdsds";
+// 	char	*dest = "aasdsa";
 	
-	char *tt = ft_memmove(dest, src, 9);
-	char *yy = memmove(dest, src, 9);
-	i = 0;
-	printf("%s ; \n%s", yy, tt);
-}
+// 	char *tt = ft_memmove(dest, src, 9);
+// 	char *yy = memmove(dest, src, 9);
+// 	i = 0;
+// 	printf("%s ; \n%s", yy, tt);
+// }

@@ -28,29 +28,29 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-    // define a string
-    const char* str = "GeeksforGeeks";
-    // define a char ch to be searched in str
-    char ch = 's';
+// #include <stdio.h>
+// #include <string.h>
+// int main()
+// {
+//     // define a string
+//     const char* str = "GeeksforGeeks";
+//     // define a char ch to be searched in str
+//     char ch = 's';
 
-    // Use strchr to find the first occurrence of the
-    // character 's'
-    const char* result = ft_strchr(str, ch);
-    const char* tmp = strchr(str, ch);
+//     // Use strchr to find the first occurrence of the
+//     // character 's'
+//     const char* result = ft_strchr(str, ch);
+//     const char* tmp = strchr(str, ch);
 
-    if (result != NULL) {
-        // Calculate the position by subtracting the base
-        // pointer from the result pointer
-        printf("Character '%c' found at position: %ld %s\n",
-               ch, result - str, result);
-    }
-    else {
-        printf("Character '%c' not found.\n", ch);
-    }
+//     if (result != NULL) {
+//         // Calculate the position by subtracting the base
+//         // pointer from the result pointer
+//         printf("Character '%c' found at position: %ld %s\n",
+//                ch, result - str, result);
+//     }
+//     else {
+//         printf("Character '%c' not found.\n", ch);
+//     }
 
-    return 0;
-}
+//     return 0;
+// }

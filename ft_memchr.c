@@ -26,16 +26,15 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	return (NULL);
 }
 
-#include <string.h>
-#include <stdio.h>
-
-int main()
-{
-	char str[] = "asdcacsdsad";
-	char let = 'c';
-	if (ft_memchr(str, let, 2))
-    	printf("%c is in the str\n", let);
-	else
-    	printf("%c is not in the str\n", let);
-    return 0;
-}
+// #include <string.h>
+// #include <stdio.h>
+// int main()
+// {
+// 	char str[] = "asdcacsdsad";
+// 	char let = 'c';
+// 	if (ft_memchr(str, let, 2))
+//     	printf("%c is in the str\n", let);
+// 	else
+//     	printf("%c is not in the str\n", let);
+//     return 0;
+// }

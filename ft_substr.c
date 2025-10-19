@@ -38,15 +38,15 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (str);
 }
 
-#include <stdio.h>
-#include <string.h>
-int main() {    
-    char *s = "Findersss";
-    char *sub;
+// #include <stdio.h>
+// #include <string.h>
+// int main() {    
+//     char *s = "Findersss";
+//     char *sub;
 
-	sub = ft_substr(s, 3, 4);
+// 	sub = ft_substr(s, 3, 4);
 
-    printf("%s\n", sub);
-	free(sub);
-    return (0);
-}
+//     printf("%s\n", sub);
+// 	free(sub);
+//     return (0);
+// }

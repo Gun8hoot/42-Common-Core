@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "libft.h"
 
-static void	ft_free_alem(char **arr, int z)
+static void	*ft_free_alem(char **arr, int z)
 {
 	z -= 1;
 	while (z >= 0)
@@ -22,6 +22,7 @@ static void	ft_free_alem(char **arr, int z)
 		z--;
 	}
 	free(arr);
+	return (NULL);
 }
 
 static	int	ft_countword(const char *str, const char c)
@@ -88,41 +89,38 @@ char **ft_split(char const *s, char c)
 	char	**arr;
 	int		i;
 	int		j;
-	int	passed;
 
 	i = 0;
 	j = 0;
-	arr = malloc(sizeof(char*) * ft_countword(s, c) + 1);
+	arr = malloc(sizeof(char *) * ft_countword(s, c) + 1);
 	if (arr == NULL)
 		return (NULL);
 	while (s[i])
 	{
-		passed = 0;
-		while (s[i] != c && s[i])
+		if (s[i] != c)
 		{
-			if (passed == 0 && s[i] != c)
+			arr[j] = ft_dup(&s[i], c);
+			if (arr[j] == NULL)
 			{
-				arr[j] = ft_dup(&s[i], c);
-				passed++;
+				return (ft_free_alem(arr, j));
 			}
-			i++;
+			i += ft_lenword(&s[i], c);
+			j++;
 		}
-		j++;
 		i++;
 	}
 	arr[j] = NULL;
 	return (arr);
 }
 
-int main(void)
-{
-	//char **arr;
-	char arr[] = "Split-quelle--fonction-de-con-lv";
-	//printf("%s ; %ld , %d\n", &arr[10], ft_lenword(&arr[10], '-'), ft_countword(&arr[10], '-'));
-	char **splited = ft_split(arr, '-');
-	for (int z = 0; splited[z]; z++)
-		printf("%s\n", splited[z]);
-
-//	ft_free_alem(splited, 6);
-	return (0);
-}
+// int main(void)
+// {
+// 	//char **arr;
+// 	//char arr[] = "Split-quelle-fonction-de-con-lv";
+// 	//printf("%s ; %ld , %d\n", &arr[10], ft_lenword(&arr[10], '-'), ft_countword(&arr[10], '-'));
+// 	char **splited = ft_split("42--split-this----str-", '-');
+// 	for (int z = 0; splited[z]; z++)
+// 		printf("%s\n", splited[z]);
+// 	ft_free_alem(splited, 4);
+// 	return (0);
+// }

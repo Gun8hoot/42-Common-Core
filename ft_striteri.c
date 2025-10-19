@@ -31,12 +31,12 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 	}
 }
 
-int	main(void)
-{
-	char *str;
+// int	main(void)
+// {
+// 	char *str;
 	
-	str = "Met Tous EN MAJ";
-	ft_striteri(str, ft_ft_toupper);
-	printf("%s\n", str);
-	return (0);
-}
+// 	str = "Met Tous EN MAJ";
+// 	ft_striteri(str, ft_ft_toupper);
+// 	printf("%s\n", str);
+// 	return (0);
+// }

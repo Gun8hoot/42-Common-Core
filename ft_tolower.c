@@ -17,14 +17,12 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-
 // #include <stdio.h>
 // int main(void)
 // {
 // 	char arr[] = "ASDSADS";
 // 	char aaa[255];
 // 	int	i;
-
 // 	i  = 0;
 // 	while (i < 18)
 // 	{
