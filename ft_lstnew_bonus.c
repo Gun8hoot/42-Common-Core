@@ -3,11 +3,12 @@
 
 t_list  *ft_lstnew(void *content)
 {
-    t_list lst;
-
-    lst.content = content;
-    lst.next    = NULL;
-    return (&lst);
+    t_list *lst;
+    
+    lst = malloc(sizeof(t_list));
+    lst->content = content;
+    lst->next    = NULL;
+    return (lst);
 }
 
 int main(void)

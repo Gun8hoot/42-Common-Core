@@ -11,6 +11,19 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <bsd/string.h>
+
+int	ft_islittle(const char *big, const char *little)
+{
+	size_t	i;
+
+	i = 0;
+	while (big[i] == little[i])
+		i++;
+	if (i == ft_strlen(little))
+		return (1);
+	return (0);
+}
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
@@ -23,7 +36,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	while (big[i] && i < len)
 	{
 		j = 0;
-		while (big[i + j] == little[j])
+		while (big[i + j] == little[j] && i + j < len)
 		{
 			if (j == ft_strlen(little) - 1)
 				return ((char *)&big[i]);
@@ -33,9 +46,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	}
 	return (NULL);
 }
-// int main(void)
-// {
-// 	char fi[256] = "anticonstitutionnellement";
-// 	printf("%s ;\n", ft_strnstr(arr, fi, 30));
-// 	return (0);
-// }
+int main(void)
+{
+	int nb = 40;
+	printf("%s ;\n", ft_strnstr("Trouve le mots \"anticonstitutionnellement\" dans cette phrase", "anticonstitutionnellement", nb));
+	printf("%s ;\n", strnstr("Trouve le mots \"anticonstitutionnellement\" dans cette phrase", "anticonstitutionnellement", nb));
+	return (0);
+}
