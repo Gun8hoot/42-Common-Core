@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:30:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 16:41:31 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 17:02:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	ft_isset(const char s, const char *set)
 {
 	int	i;
-	int goofy;
+	int	goofy;
 
 	i = 0;
 	goofy = 0;
@@ -33,7 +33,7 @@ static int	ft_isset(const char s, const char *set)
 	return (0);
 }
 
-char *ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*arr;
 	size_t	i;
@@ -49,26 +49,16 @@ char *ft_strtrim(char const *s1, char const *set)
 		i++;
 	while (ft_isset(s1[k - 1], set) != 0)
 		k--;
-	arr = malloc(sizeof(char) * (k - i) + 1);
-	if (!arr)
-		return (NULL);
-	k--;
-	while (j < k - i +1)
-	{
-		arr[j] = s1[i + j];
-		j++;
-	}
-	arr[j] = '\0';
+	arr = ft_substr(s1, i, k - i);
 	return (arr);
 }
 
 // int	main(void)
 // {
-// 	char *arr = "";
-// 	char *set = "";
+// 	char *s1 = "  \t \t \n   \n\n\n\t";
+//  	char *str = ft_strtrim(s1, " \n\t");
 // 	// char *arr = "sdsg";
 // 	// char *set = "g";
-// 	char *str = ft_strtrim(arr, set);
 // 	printf("%s\n", str);
 // 	free(str);
 // //	free(str);

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:49:48 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 12:49:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:10:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 // 	elem = NULL;
 // }
 
-void ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)
-		return;
+		return ;
 	del(lst->content);
 	free(lst);
 }
@@ -32,21 +32,16 @@ void ft_lstdelone(t_list *lst, void (*del)(void *))
 // 	t_list	*bbb;
 // 	t_list	*ccc;
 // 	t_list	*ddd;
-
 // 	aaa = ft_lstnew("aaa");
 // 	bbb = ft_lstnew("bbb");
 // 	ccc = ft_lstnew("ccc");
 // 	ddd = ft_lstnew("ddd");
-
 // 	aaa->next = bbb;
 // 	bbb->next = ccc;
 // 	ccc->next = ddd;
 // 	ddd->next = NULL;
-
 // 	ft_lstdelone(ccc, &del);
-
 // 	printf("%s\n", (char *)ccc);
-	
 // 	for (int i = 0;aaa;i++)
 // 	{
 // 		printf("%s\n", (char *)aaa);

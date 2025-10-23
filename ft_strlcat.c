@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 08:29:12 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:21:49 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	size_t	len;
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	j = 0;
 	len = ft_strlen(dst);

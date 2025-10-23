@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 11:05:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 10:56:53 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:10:44 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstadd_front(t_list **lst, t_list *new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!lst || !new)
 	{

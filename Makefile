@@ -1,9 +1,10 @@
 NAME = libft.a
 
 CC = cc
-RM = rm -f
+RM		=	rm -f
+CFLAGS  =	-Wall -Wextra -Werror
 
-SOURCES =    ft_atoi.c\
+SOURCES =   ft_atoi.c\
             ft_bzero.c\
             ft_calloc.c\
             ft_isalnum.c\
@@ -58,7 +59,7 @@ $(NAME):  $(OBJETS)
 	ar rc $@ $^
 
 %.o: %.c 
-	$(CC) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 bonus: $(OBJS_BONUS) $(OBJETS)
 	ar rc $(NAME) $(OBJS_BONUS) $(OBJETS)

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 12:29:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 12:50:01 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:45:41 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,10 @@ char	**ft_split(char const *s, char c)
 
 // int main(void)
 // {
-// 	char	*str = "Hello! World !";
+// 	char	*str = "             Hello! World !                                            ";
 // 	char sep = ' ';
 // 	char **splited = ft_split(str, sep);
-// 	for (int z = 0; splited[z] != NULL; z++)
+// 	for (int z = 0; splited[z]; z++)
 // 		printf("%s\n", splited[z]);
 // 	ft_free_alem(splited, ft_countword(str, sep));
 // 	return (0);

@@ -6,20 +6,20 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:42:22 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 17:42:38 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:10:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)
 		return (NULL);
 	while (lst->next != NULL)
 	{
 		lst = lst->next;
-	}	
+	}
 	return (lst);
 }
 

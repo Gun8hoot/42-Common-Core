@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:21:02 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 13:21:51 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:28:58 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*nodes;
 	t_list	*cp_lst;
@@ -25,17 +25,17 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		if (!nodes)
 		{
 			del(cp_lst);
-			return ;
 		}
 		nodes = nodes->next;
 	}
+	return (lst);
 }
 
-int main(void)
-{
-	t_list	*aaa = ft_lstnew(ft_strdup("aaa"));
-	t_list	*bbb = ft_lstnew(ft_strdup("bbb"));
-	t_list	*ccc = ft_lstnew(ft_strdup("ccc"));
-	t_list	*ddd = ft_lstnew(ft_strdup("ddd"));
-	return (0);
-}
+// int main(void)
+// {
+// 	t_list	*aaa = ft_lstnew(ft_strdup("aaa"));
+// 	t_list	*bbb = ft_lstnew(ft_strdup("bbb"));
+// 	t_list	*ccc = ft_lstnew(ft_strdup("ccc"));
+// 	t_list	*ddd = ft_lstnew(ft_strdup("ddd"));
+// 	return (0);
+// }

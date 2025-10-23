@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:22:51 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/20 15:54:49 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:16:51 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@
 // 		*c = *c - 48;
 // }
 
-void ft_striteri(char *s, void (*f)(unsigned int, char*))
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int		i;
 
 	i = 0;
 	while (s[i])
 	{
-
 		f(i, &((char *)s)[i]);
 		i++;
 	}
@@ -34,7 +33,6 @@ void ft_striteri(char *s, void (*f)(unsigned int, char*))
 // int	main(void)
 // {
 // 	char *str;
-	
 // 	str = "Met Tous EN MAJ";
 // 	ft_striteri(str, ft_ft_toupper);
 // 	printf("%s\n", str);

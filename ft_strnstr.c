@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:39:37 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 16:46:05 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 15:47:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 // int main(void)
 // {
 // 	int nb = 40;
-// 	printf("%s ;\n", ft_strnstr("Trouve le mots \"anticonstitutionnellement\" dans cette phrase", "anticonstitutionnellement", nb));
-// 	printf("%s ;\n", strnstr("Trouve le mots \"anticonstitutionnellement\" dans cette phrase", "anticonstitutionnellement", nb));
+// 	printf("%s ;\n", ft_strnstr("", "anticonstitutionnellement", nb));
+// 	printf("%s ;\n", strnstr("", "anticonstitutionnellement", nb));
 // 	return (0);
 // }
