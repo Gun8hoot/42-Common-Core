@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 17:50:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 12:35:37 by nclavel          ###   ########.fr       */
+/*   Created: 2025/10/21 15:21:02 by nclavel           #+#    #+#             */
+/*   Updated: 2025/10/23 13:21:51 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <string.h>
 
-char	*ft_strrchr(const char *s, int c)
+t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	int	i;
+	t_list	*nodes;
+	t_list	*cp_lst;
 
-	i = ft_strlen(s);
-	while (!(i < 0))
+	nodes = lst;
+	while (lst)
 	{
-		if ((unsigned char)s[i] == (unsigned char)c)
+		cp_lst = lst;
+		f(cp_lst);
+		if (!nodes)
 		{
-			return ((char *)&s[i]);
+			del(cp_lst);
+			return ;
 		}
-		i--;
+		nodes = nodes->next;
 	}
-	if ((unsigned char)c == '\0')
-		return ((char *)&s[i]);
-	return (NULL);
 }
 
-// int main()
-// {
-// 	char str[] = "String qui contient un mots particulier";
-
-// 	printf("%s\n", ft_strrchr(str, 'c'));
-//     return 0;
-// }
+int main(void)
+{
+	t_list	*aaa = ft_lstnew(ft_strdup("aaa"));
+	t_list	*bbb = ft_lstnew(ft_strdup("bbb"));
+	t_list	*ccc = ft_lstnew(ft_strdup("ccc"));
+	t_list	*ddd = ft_lstnew(ft_strdup("ddd"));
+	return (0);
+}

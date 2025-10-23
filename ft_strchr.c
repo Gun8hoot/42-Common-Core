@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 17:50:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 16:35:49 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/22 12:35:01 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
+		if ((unsigned char)s[i] == (unsigned char)c)
 		{
 			return ((char *)&s[i]);
 		}
 		i++;
 	}
+	if ((unsigned char)c == '\0')
+		return ((char *)&s[i]);
 	return (NULL);
 }
 
@@ -35,7 +37,7 @@ char	*ft_strchr(const char *s, int c)
 //     // define a string
 //     const char* str = "GeeksforGeeks";
 //     // define a char ch to be searched in str
-//     char ch = 's';
+//     char ch = '\0';
 
 //     // Use strchr to find the first occurrence of the
 //     // character 's'

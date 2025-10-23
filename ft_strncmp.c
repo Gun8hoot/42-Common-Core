@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 08:27:53 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/15 09:18:04 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/21 16:17:34 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i = 0;
 	while ((s1[i] || s2[i]) && i < n)
 	{
-		printf("%c / %c\n", s1[i], s2[i]);
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
 	return (0);
@@ -31,8 +30,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 // #include <string.h>
 // int	main(void)
 // {
-// 	char arr1[] = "sad";
-// 	char arr2[] = "STRASD";
-// 	printf("%d\n", ft_strncmp(arr1, arr2, 4));
-// 	printf("%d\n", strncmp(arr1, arr2, 4));
+// 	char arr1[] = "test\225";
+// 	char arr2[] = "test\0";
+// 	printf("%d\n", ft_strncmp(arr1, arr2, 6));
+// 	printf("%d\n", strncmp(arr1, arr2, 6));
 // }

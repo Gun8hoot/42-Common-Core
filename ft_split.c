@@ -6,20 +6,20 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 12:29:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 17:22:20 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 12:50:01 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "libft.h"
 
-static void	*ft_free_alem(char **arr, int z)
+static void	*ft_free_alem(char **arr, int j)
 {
-	z -= 1;
-	while (z >= 0)
+	j -= 1;
+	while (j >= 0)
 	{
-		free(arr[z]);
-		z--;
+		free(arr[j]);
+		j--;
 	}
 	free(arr);
 	return (NULL);
@@ -27,26 +27,28 @@ static void	*ft_free_alem(char **arr, int z)
 
 static	int	ft_countword(const char *str, const char c)
 {
-	int i;
-	int count;
+	int	i;
+	int	count;
 
 	i = 0;
 	count = 0;
+	while (str[i] && str[i] == c)
+		i++;
 	while (str[i])
 	{
-		while (str[i] && str[i] == c)
-			i++;
 		while (str[i] && str[i] != c)
 			i++;
 		count++;
+		while (str[i] && str[i] == c)
+			i++;
 	}
 	return (count);
 }
 
 static size_t	ft_lenword(const char *str, const char c)
 {
-	size_t i;
-	size_t count;
+	size_t	i;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -73,7 +75,8 @@ static	char	*ft_dup(const char *s, const char c)
 
 	i = 0;
 	len = ft_lenword(s, c);
-	if ((str = malloc(sizeof(char) * len + 1)) == NULL)
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
 	while (i < len)
 	{
@@ -84,7 +87,7 @@ static	char	*ft_dup(const char *s, const char c)
 	return (str);
 }
 
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 	int		i;
@@ -92,8 +95,8 @@ char **ft_split(char const *s, char c)
 
 	i = 0;
 	j = 0;
-	arr = malloc(sizeof(char *) * ft_countword(s, c) + 1);
-	if (arr == NULL)
+	arr = malloc(sizeof(char *) * (ft_countword(s, c) + 1));
+	if (!arr)
 		return (NULL);
 	while (s[i])
 	{
@@ -101,13 +104,12 @@ char **ft_split(char const *s, char c)
 		{
 			arr[j] = ft_dup(&s[i], c);
 			if (arr[j] == NULL)
-			{
 				return (ft_free_alem(arr, j));
-			}
 			i += ft_lenword(&s[i], c);
 			j++;
 		}
-		i++;
+		if (s[i] != '\0')
+			i++;
 	}
 	arr[j] = NULL;
 	return (arr);
@@ -115,12 +117,11 @@ char **ft_split(char const *s, char c)
 
 // int main(void)
 // {
-// 	//char **arr;
-// 	//char arr[] = "Split-quelle-fonction-de-con-lv";
-// 	//printf("%s ; %ld , %d\n", &arr[10], ft_lenword(&arr[10], '-'), ft_countword(&arr[10], '-'));
-// 	char **splited = ft_split("42--split-this----str-", '-');
-// 	for (int z = 0; splited[z]; z++)
+// 	char	*str = "Hello! World !";
+// 	char sep = ' ';
+// 	char **splited = ft_split(str, sep);
+// 	for (int z = 0; splited[z] != NULL; z++)
 // 		printf("%s\n", splited[z]);
-// 	ft_free_alem(splited, 4);
+// 	ft_free_alem(splited, ft_countword(str, sep));
 // 	return (0);
 // }

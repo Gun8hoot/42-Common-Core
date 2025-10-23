@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:42 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 16:05:02 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 07:55:59 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void	*arr;
 	size_t	i;
 
-	i = 0;
-	if (!size || !nmemb)
+	i = 0;	
+	arr = malloc(size * nmemb);
+	if (!arr)
 		return (NULL);
-	arr = malloc(nmemb * (size + 1));
-	if (arr == NULL)
-		return (NULL);
-	while (i < nmemb)
+	if (size == 0)
+		return(arr);
+	while (i < (size * nmemb))
 	{
 		((char *)arr)[i] = 0;
 		i++;
@@ -34,12 +34,16 @@ void	*ft_calloc(size_t nmemb, size_t size)
 // int main(void)
 // {
 // 	char *arr;
+// 	char *zzz;
 
-// 	arr = ft_calloc(25, sizeof(char));
+// 	arr = ft_calloc(8539, sizeof(int));
 // 	//ft_print_tab(arr, 10);
-// 	//for (int i = 0; i < 10; i++)
-// 	//	printf("%d\n", arr[i]);
-// 	printf("%s\n", arr);
+// 	for (int i = 0; i < 8539; i++)
+// 	{
+// 		if (arr[i] != 0)
+// 			printf("pb at %d\n", i);
+// 	}
+// 	//printf("%s\n", arr);
 // 	free(arr);
 // 	return (0);
 // }

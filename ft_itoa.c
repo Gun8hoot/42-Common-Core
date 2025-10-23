@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:32:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 15:36:46 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/21 17:42:09 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ char	*ft_itoa(int n)
 	arr = malloc(sizeof(char) * (len + 1));
 	if (arr == NULL)
 		return (NULL);
-	if (cp < 0)
+	arr[len] = '\0';
+	if (cp == 0)
+			arr[0] = '0';
+	else if (cp < 0)
 	{
 		arr[0] = '-';
 		cp = -cp;
 	}
-	if (cp == 0)
-		arr[len++] = '0';
-	arr[len] = '\0';
-	while (cp != 0)
+	while (cp > 0)
 	{
 		len--;
 		arr[len] = (cp % 10) + 48;
@@ -59,10 +59,10 @@ char	*ft_itoa(int n)
 	}
 	return (arr);
 }
-
+// #include <string.h>
 // int main(void)
 // {
-// 	int nb  = -2147483648;
-// 	printf("%s ; %s", ft_itoa(nb), ft_itoa(nb));
+// 	char *mine = ft_itoa(0);
+// 	printf("%s\n", mine);
 // 	return (0);
 // }

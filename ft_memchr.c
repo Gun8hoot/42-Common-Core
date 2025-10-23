@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:12:32 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 16:33:16 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/20 17:35:45 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (((unsigned char *)s)[i] == c)
-			return (&((unsigned char *)s)[i]);
+		if (((char *)s)[i] == c)
+			return (&((char *)s)[i]);
 		i++;
 	}
 	return (NULL);

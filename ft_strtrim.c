@@ -6,49 +6,31 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:30:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 12:51:10 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:41:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isset(const char *set, const char *s)
+static int	ft_isset(const char s, const char *set)
 {
 	int	i;
-	int	len;
+	int goofy;
 
 	i = 0;
-	len = ft_strlen(set);
-	printf("%s\n", s);
-	while (set[i] && s[i] == set[i])
+	goofy = 0;
+	while (set[i])
 	{
-		printf("%c ; %c\n", s[i], set[i]);
+		if (s == set[i])
+		{
+			goofy++;
+			break ;
+		}
 		i++;
 	}
-	if (i == len)
+	if (goofy > 0)
 		return (1);
 	return (0);
-}
-
-static int	ft_setontbegend(char const *s1, char const *set)
-{
-	size_t	len_set;
-	size_t	len_s1;
-	size_t	i;
-	size_t	c;
-
-	len_set = ft_strlen(set);
-	len_s1 = ft_strlen(s1);
-	i = 0;
-	c = 0;
-	while (s1[i])
-	{
-		if ((i == 0 || i == len_s1 - len_set) 
-			&& ft_isset(&((char *)s1)[i], set) == 1)
-			c++;
-		i++;
-	}
-	return (c);
 }
 
 char *ft_strtrim(char const *s1, char const *set)
@@ -56,24 +38,25 @@ char *ft_strtrim(char const *s1, char const *set)
 	char	*arr;
 	size_t	i;
 	size_t	j;
+	size_t	k;
 
 	i = 0;
 	j = 0;
-	arr = malloc(sizeof(char) * (ft_strlen(s1) - (ft_strlen(set) * ft_setontbegend(s1, set))) + 1);
-	if (arr == NULL)
+	k = ft_strlen(s1);
+	if (!s1 && !set)
 		return (NULL);
-	while (s1[i])
+	while (s1[i] && ft_isset(s1[i], set) != 0)
+		i++;
+	while (ft_isset(s1[k - 1], set) != 0)
+		k--;
+	arr = malloc(sizeof(char) * (k - i) + 1);
+	if (!arr)
+		return (NULL);
+	k--;
+	while (j < k - i +1)
 	{
-		if ((ft_isset(set, &((char*)s1)[i])) == 1)
-			i += ft_strlen(set);
-		while (s1[i])
-		{
-			if (ft_strlen(&((char*)s1)[i]) - ft_strlen(set) == 0)
-				break;
-			arr[j] = s1[i];
-			i++;
-			j++;
-		}
+		arr[j] = s1[i + j];
+		j++;
 	}
 	arr[j] = '\0';
 	return (arr);
@@ -81,11 +64,14 @@ char *ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	char *arr = "===STR To=== TRIM===";
-// 	char *set = "===";
+// 	char *arr = "";
+// 	char *set = "";
+// 	// char *arr = "sdsg";
+// 	// char *set = "g";
 // 	char *str = ft_strtrim(arr, set);
-// 		printf("%s\n", str);
+// 	printf("%s\n", str);
 // 	free(str);
+// //	free(str);
 // 	// char *str = "ashkdas===string";
 // 	// for (int i = 0; i < ft_strlen(str); i++)
 // 	// {

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:21:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 11:47:47 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/20 17:31:03 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	ft_putnbr_fd(int n, int fd)
 	{
 		write(fd, "-", 1);
 		write(fd, "2", 1);
-		ft_putnbr_fd (47483648, fd);
+		ft_putnbr_fd (147483648, fd);
 	}
 	else if (n < 0)
 	{
 		write(fd, "-", 1);
-		ft_putnbr_fd(--n, fd);
+		ft_putnbr_fd(-n, fd);
 	}
 	else if (n > 9)
 	{
@@ -39,5 +39,9 @@ void	ft_putnbr_fd(int n, int fd)
 // int main(void)
 // {
 // 	ft_putnbr_fd(2147483647, 1);
+// 	int n = 7;
+
+// 	n = -n;
+// 	printf("\n%d\n", n);
 // 	return (0);
 // }

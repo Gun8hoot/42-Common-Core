@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:06:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 14:59:35 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/20 16:20:18 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	lens2 = ft_strlen(s2);
 	i = 0;
 	j = 0;
-	str = malloc(sizeof(char) * lens1 + lens2 + 1);
+	str = malloc(sizeof(char) * (lens1 + lens2 + 1));
+	if (!str)
+		return (NULL);
 	while (i < lens1)
 	{
 		str[i] = s1[i];

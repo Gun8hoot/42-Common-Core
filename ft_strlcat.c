@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 16:38:15 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/22 08:29:12 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,34 @@
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
 	size_t	len;
+	size_t	i;
 	size_t	j;
-
-	len = ft_strlen(dst);
+	
+	i = 0;
 	j = 0;
-	while ((len + j) < size)
+	len = ft_strlen(dst);
+	while (dst[i] && i < size)
+		i++;
+	if (i == size)
+		return (size + ft_strlen(src));
+	while (src[j] && (i + (j + 1) < size))
 	{
-		dst[len + j] = src[j];
+		dst[i + j] = src[j];
 		j++;
 	}
-	if (ft_strlen(src) == len + j)
-		dst[len + j] = '\0';
-	else
-		dst[len + j - 1] = '\0';
+	dst[i + j] = '\0';
 	return (len + ft_strlen(src));
 }
 
 // #include <stdio.h>
 // #include <bsd/string.h>
-// int main(int argc, char	**argv)
+// int main(void)
 // {
-// 	char src[] = "Ajoute";
-// 	char dst[20] = "ashdsa";
-// 	char tmp[20] = "ashdsa";
-// 	int	jjj = 10;
-// 	printf("%d\n", jjj);
-// 	size_t aaa = ft_strlcat(dst, src, jjj);
-// 	size_t bbb = strlcat(tmp, src, jjj);
-// 	printf("%s;%ld\n%s;%ld", dst, aaa, tmp, bbb);
+// 	char	src[] = "lorem ipsum dolor sit amet";
+// 	char	tp[10]  = "a";
+// 	char	dst[10] = "a";
+// 	size_t aaa = ft_strlcat(dst, src, 9);
+// 	size_t bbb = strlcat(tp, src, 9);
+// 	printf("orig : %ld // %s\nmine : %ld // %s\n", bbb, tp, aaa, dst);
 // 	return (0);
 // }

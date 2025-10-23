@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 08:39:14 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/18 15:52:33 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:41:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = ft_strlen(s);
-	str = malloc(sizeof(char) * len);
-	if (str == NULL)
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (NULL);
 	while (i < len)
 	{
@@ -36,7 +36,6 @@ char	*ft_strdup(const char *s)
 // {
 // 	char *str1 = argv[1];
 // 	char *str2;
-
 // 	if (argc == 1)
 // 		return (1);
 // 	str2 = ft_strdup(str1);
