@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:21:49 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:54:22 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 // 	char	dst[10] = "a";
 // 	size_t aaa = ft_strlcat(dst, src, 9);
 // 	size_t bbb = strlcat(tp, src, 9);
-// 	printf("orig : %ld // %s\nmine : %ld // %s\n", bbb, tp, aaa, dst);
+// 	printf("orig\t:\t%ld\t%s\nft\t:\t%ld\t%s\n", bbb, tp, aaa, dst);
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 10:34:44 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/22 12:24:18 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:23:46 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 // int main(void)
 // {
 // 	int i;
-// 	char *s1 = "\xff\0\0\xaa\0\xde\xffMACOSX\xff";
-// 	char *s2 = "\xff\0\0\xaa\0\xde\x00MBS";
-// 	char	aaa[64];
-// 	char	bbb[64];
-// 	i = 0;
-// 	printf("%d ; %d\n", ft_memcmp(s1, s2, 9), memcmp(s1, s2, 9));
+// 	// char *s1 = "strbienlongueetbiendifferente";
+// 	char *s1 = "str2";
+// 	char *s2 = "str2";
+// 	i = 9;
+// 	printf("%d ; %d\n", ft_memcmp(s1, s2, i), memcmp(s1, s2, i));
 // }

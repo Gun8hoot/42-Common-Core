@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:21:02 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:28:58 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 16:58:36 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,62 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*nodes;
 	t_list	*cp_lst;
+	t_list	*nodes;
 
-	nodes = lst;
-	while (lst)
+	while (lst != NULL)
 	{
-		cp_lst = lst;
-		f(cp_lst);
+		nodes = ft_lstnew(f(lst->content));
 		if (!nodes)
 		{
-			del(cp_lst);
+			del(nodes);
+			ft_lstclear(&nodes, del);
+			return (NULL);
 		}
-		nodes = nodes->next;
+		cp_lst = nodes;
+		lst = lst->next;
 	}
-	return (lst);
+	cp_lst->next = NULL;
+	return (cp_lst);
 }
 
+// void *f(void *c)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (((char *)c)[i])
+// 	{
+// 		if (((char *)c)[i] >= 'a' && ((char *)c)[i] <= 'z')
+// 			((char *)c)[i] -= 32;
+// 		i++;
+// 	}
+// 	return (c);
+// }
+
+// void del(void *s)
+// {
+// 	(void)s;
+// }
 // int main(void)
 // {
-// 	t_list	*aaa = ft_lstnew(ft_strdup("aaa"));
-// 	t_list	*bbb = ft_lstnew(ft_strdup("bbb"));
-// 	t_list	*ccc = ft_lstnew(ft_strdup("ccc"));
-// 	t_list	*ddd = ft_lstnew(ft_strdup("ddd"));
+// 	int i = 1;
+// 	t_list	*aaa = ft_lstnew(ft_strdup("Content On the N0de n1"));
+// 	t_list	*bbb = ft_lstnew(ft_strdup("anotHER conTent"));
+// 	t_list	*ccc = ft_lstnew(ft_strdup("also content here"));
+// 	t_list	*ddd = ft_lstnew(ft_strdup("LasT CONTENT, PromISE"));
+// 	t_list	*lst = NULL;
+
+// 	ft_lstadd_back(&lst, aaa);
+// 	ft_lstadd_back(&lst, bbb);
+// 	ft_lstadd_back(&lst, ccc);
+// 	ft_lstadd_back(&lst, ddd);
+// 	t_list	*cp	 = ft_lstmap(lst, f, del);
+// 	while (lst)
+// 	{
+// 		printf("node n'%d :\t\"%s\"\n", i, (char *)lst->content);
+// 		lst = lst->next;
+// 		i++;
+// 	}
 // 	return (0);
 // }

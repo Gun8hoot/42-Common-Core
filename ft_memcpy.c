@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:40:51 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 17:08:57 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:30:18 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
+// #include <string.h>
 // int main()
 // {
-//     char arr[] = "Hellozww";
-//     const size_t goofy = ft_strlen(arr);
-// 	char arrr2[goofy];
-//     char *ret;
-// 	ret = malloc(1000000);
-//     int i = 0;
-//     ret = ft_memcpy("s", "asdas", 14);
-//     printf("%s\n", ret);
-// 	free(ret);
+//     char dest[] = "assjdnsakdbsahkdsbajd";
+//     char dest2[] = "assjdnsakdbsahkdsbajd";
+// 	char *src = "put in dst";
+// 	char *src2 = "put in dst";
+// 	int n = 11;
+// 	ft_memcpy(dest, src, n);
+// 	memcpy(dest2, src2, n);
+//     printf("%s\n%s\n", dest, dest2);
 //     return (0);
 // }

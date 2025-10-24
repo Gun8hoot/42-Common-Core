@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:31:48 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/17 13:15:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:36:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,11 @@ void	*ft_memset(void *s, int c, size_t n)
 
 // int main()
 // {
-//     char arr[] = "Hellozww";
+//     char str[] = "Set C on the area rh";
 //     char *ret;
 //     int i = 0;
-//     ret = ft_memset(arr, 'c', 5);
+//     ret = ft_memset(str, 'c', 10);
 //     //ret = memset(arr, 'c', sizeof(int) * 5);
-//     while (i < 8)
-//     {
-//         printf("%c\n", ret[i]);
-//         i++;
-//     }
+//     printf("%s\n", ret);
 //     return (0);
 // }

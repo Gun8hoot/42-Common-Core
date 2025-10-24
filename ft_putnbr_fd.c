@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:21:58 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/20 17:31:03 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 10:12:50 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ void	ft_putnbr_fd(int n, int fd)
 
 // int main(void)
 // {
-// 	ft_putnbr_fd(2147483647, 1);
-// 	int n = 7;
-
-// 	n = -n;
-// 	printf("\n%d\n", n);
+// 	ft_putnbr_fd(-2147483648, 1);
 // 	return (0);
 // }

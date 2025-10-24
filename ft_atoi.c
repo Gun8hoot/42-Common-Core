@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 16:02:26 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/20 14:44:24 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 16:03:35 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,3 +36,10 @@ int	ft_atoi(const char *nptr)
 	}
 	return (res * sign);
 }
+
+// int main(void)
+// {
+// 	printf("%d\n", atoi("\t654"));
+// 	printf("%d\n", ft_atoi("\t654"));
+// 	return (0);
+// }

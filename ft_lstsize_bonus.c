@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:11:03 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:12:19 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:15:34 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_lstsize(t_list *lst)
 // 	ccc = malloc(sizeof(t_list));
 // 	aaa->content = "zzz";
 // 	bbb->content = "bbb";
-// 	bbb->content = "iii";
+// 	ccc->content = "iii";
 // 	aaa->next = bbb;
 // 	bbb->next = ccc;
 // 	ccc->next = NULL;

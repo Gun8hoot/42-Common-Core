@@ -6,27 +6,27 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:32:36 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:42:29 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 07:53:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-static int	ft_countnb(int nb)
+static int	countnb(int nb)
 {
 	int	c;
-	int	tmp;
+	int	cp;
 
-	tmp = nb;
+	cp = nb;
 	c = 0;
 	if (nb == 0)
 		c++;
 	if (nb < 0)
 		c++;
-	while (tmp != 0)
+	while (cp != 0)
 	{
-		tmp /= 10;
+		cp /= 10;
 		c++;
 	}
 	return (c);
@@ -39,7 +39,7 @@ char	*ft_itoa(int n)
 	long	cp;
 
 	cp = (long)n;
-	len = ft_countnb(cp);
+	len = countnb(cp);
 	arr = malloc(sizeof(char) * (len + 1));
 	if (arr == NULL)
 		return (NULL);
@@ -54,15 +54,16 @@ char	*ft_itoa(int n)
 	while (cp > 0)
 	{
 		len--;
-		arr[len] = (cp % 10) + 48;
+		arr[len] = (cp % 10) + '0';
 		cp /= 10;
 	}
 	return (arr);
 }
+
 // #include <string.h>
 // int main(void)
 // {
-// 	char *mine = ft_itoa(0);
-// 	printf("%s\n", mine);
+// 	char *arr = ft_itoa(-2147483648);
+// 	printf("%s\n", arr);
 // 	return (0);
 // }

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:06:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/20 16:20:18 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 09:30:25 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 // {
 // 	char *str;
 
-// 	str = ft_strjoin("", "");
+// 	str = ft_strjoin("str1 to attach", "sandasdasdasdadadasdsa");
 // 	printf("\"%s\"\n", str);
 // 	free(str);
 // 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:12:40 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:43:32 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:18:52 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 // void del(void *content)
 // {
 // 	free(content);
-// }
-
+// // }
 // int main(void)
 // {
 // 	t_list	*aaa;

@@ -6,12 +6,11 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:00:28 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:24:20 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:16:57 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
@@ -32,12 +31,14 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (tmp_dest);
 }
 
+// #include <string.h>
 // int main(void)
 // {
-// 	char	src[] = "strsdsds";
-// 	char	dest[] = "aasdsasa";
-// 	char	goofy[] = "aasdsasa";
-// 	ft_memmove(dest, src, 9);
-// 	memmove(goofy, src, 9);
-// 	printf("%s ; \n%s", dest, goofy);
+// 	char	src[] = "kkhbfkahbd";
+// 	char	dest[] = "some str on the dest";
+// 	char	dest2[] = "some str on the dest";
+// 	int i = 8;
+// 	ft_memmove(dest, src, i);
+// 	memmove(dest2, src, i);
+// 	printf("%s ; \n%s", dest, dest2);
 // }

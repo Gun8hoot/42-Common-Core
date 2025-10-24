@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 10:30:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 17:02:31 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 09:10:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 static int	ft_isset(const char s, const char *set)
 {
 	int	i;
-	int	goofy;
+	int	charisset;
 
 	i = 0;
-	goofy = 0;
+	charisset = 0;
 	while (set[i])
 	{
 		if (s == set[i])
 		{
-			goofy++;
+			charisset++;
 			break ;
 		}
 		i++;
 	}
-	if (goofy > 0)
+	if (charisset > 0)
 		return (1);
 	return (0);
 }
@@ -37,11 +37,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*arr;
 	size_t	i;
-	size_t	j;
 	size_t	k;
 
 	i = 0;
-	j = 0;
 	k = ft_strlen(s1);
 	if (!s1 && !set)
 		return (NULL);
@@ -55,17 +53,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 // int	main(void)
 // {
-// 	char *s1 = "  \t \t \n   \n\n\n\t";
+// 	char *s1 = "\t               tri\tmed\t";
 //  	char *str = ft_strtrim(s1, " \n\t");
-// 	// char *arr = "sdsg";
-// 	// char *set = "g";
-// 	printf("%s\n", str);
+// 	printf("\"%s\"\n", str);
 // 	free(str);
-// //	free(str);
-// 	// char *str = "ashkdas===string";
-// 	// for (int i = 0; i < ft_strlen(str); i++)
-// 	// {
-// 	// 	printf("%d\n", ft_isset("===", &((char*)str)[i]));
-// 	// }
 // 	return (0);
 // }

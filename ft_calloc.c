@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:42 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:20:52 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 07:47:33 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*ft_calloc(size_t nmemb, size_t size)
 // {
 // 	char *arr;
 // 	char *zzz;
-
 // 	arr = ft_calloc(8539, sizeof(int));
 // 	//ft_print_tab(arr, 10);
 // 	for (int i = 0; i < 8539; i++)

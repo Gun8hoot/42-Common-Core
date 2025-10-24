@@ -6,17 +6,11 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:49:48 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:10:11 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:18:20 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-// void del(void *elem)
-// {
-// 	printf("asd\n");
-// 	elem = NULL;
-// }
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
@@ -26,6 +20,11 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	free(lst);
 }
 
+// void del(void *elem)
+// {
+// 	printf("asd\n");
+// 	elem = NULL;
+// }
 // int main(void)
 // {
 // 	t_list	*aaa;

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:44:52 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 17:18:01 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:12:07 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	j = 0;
 	if (start >= ft_strlen(s))
-		return(ft_strdup(""));
-	if (len > ft_strlen(s) - start)	
+		return (ft_strdup (""));
+	if (len > ft_strlen(s) - start)
 		len = ft_strlen(s) - start;
 	str = malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
@@ -37,50 +37,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 // #include <stdio.h>
 // #include <string.h>
 // int main() {    
-//     char *s = "01234";
 //     char *sub;
-
-// 	sub = ft_substr("hola", 4, 1);
+// 	sub = ft_substr("hola", 0, 4);
 //     printf("%s\n", sub);
 // 	free(sub);
-// 	// sub = ft_substr("hola", 0, -1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", -1, -1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 4);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 5);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 2, 4);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-// 	// sub = ft_substr("hola", 0, 1);
-//     // printf("%s\n", sub);
-// 	// free(sub);
-//     return (0);
 // }

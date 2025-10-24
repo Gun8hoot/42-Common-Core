@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 09:12:32 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 16:53:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 13:17:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t	i;
-	unsigned char *res;
+	unsigned char	*res;
 
 	res = (unsigned char *)s;
-
-	i = 0;
 	while (n > 0)
 	{
 		if (*res == (unsigned char)c)
@@ -36,8 +33,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 // #include <stdio.h>
 // int main()
 // {
-// 	char *src = "/|\x12\xff\x09\x42\2002\42|\\";
-//  	int size = 10;
-// 	char c = ft_memchr(src, '\200', size);
-// 	printf("%c\n", c);
+// 	char *src = "hsbdasdsbadjshabd";
+//  	int size = 47;
+// 	char *c = ft_memchr(src, '\0', size);
+// 	printf("%s\n", c);
 // }

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:45:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/23 15:10:48 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:04:26 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*back;
 
-	if (*lst == NULL)
+	if (!*lst)
 	{
 		*lst = new;
 		return ;
@@ -32,6 +32,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // 	t_list	*ccc;
 // 	t_list	*ddd;
 // 	t_list	*tmp;
+// 	t_list	*empty;
 
 // 	aaa = ft_lstnew("aaa");
 // 	bbb = ft_lstnew("bbb");
@@ -44,7 +45,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 // 	ccc->next = ddd;
 // 	ddd->next = NULL;
 
-// 	ft_lstadd_back(&ccc, tmp);
+// 	ft_lstadd_back(&aaa, tmp);
 
 // 	for (int i = 0;aaa;i++)
 // 	{

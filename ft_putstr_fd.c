@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 17:19:03 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/20 15:31:00 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/24 08:43:47 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,10 @@ void	ft_putstr_fd(char *s, int fd)
 		i++;
 	}
 }
+
+// int main(void)
+// {
+// 	ft_putstr_fd("str1", 1);
+// 	ft_putstr_fd("str2", 1);
+// 	return (0);
+// }
