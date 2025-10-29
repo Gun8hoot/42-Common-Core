@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 07:56:42 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 07:47:33 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/27 07:51:33 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		return (arr);
 	while (i < (size * nmemb))
 	{
-		((char *)arr)[i] = 0;
+		((char *)arr)[i] = '\0';
 		i++;
 	}
 	return (arr);

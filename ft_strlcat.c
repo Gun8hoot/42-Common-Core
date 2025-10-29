@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 08:54:22 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/29 14:59:45 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,39 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	len;
+	size_t	dlen;
+	size_t	slen;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	len = ft_strlen(dst);
-	while (dst[i] && i < size)
-		i++;
-	if (i == size)
-		return (size + ft_strlen(src));
-	while (src[j] && (i + (j + 1) < size))
+	dlen = ft_strlen(dst);
+	slen = ft_strlen(src);
+	j = dlen;
+	if (size == 0 || size <= dlen)
+		return (ft_strlen(src) + size);
+	while (src[i] && i < (size - dlen - 1))
 	{
-		dst[i + j] = src[j];
+		dst[j] = src[i];
+		i++;
 		j++;
 	}
-	dst[i + j] = '\0';
-	return (len + ft_strlen(src));
+	dst[j] = '\0';
+	return (dlen + slen);
 }
 
-// #include <stdio.h>
-// #include <bsd/string.h>
-// int main(void)
-// {
-// 	char	src[] = "lorem ipsum dolor sit amet";
-// 	char	tp[10]  = "a";
-// 	char	dst[10] = "a";
-// 	size_t aaa = ft_strlcat(dst, src, 9);
-// 	size_t bbb = strlcat(tp, src, 9);
-// 	printf("orig\t:\t%ld\t%s\nft\t:\t%ld\t%s\n", bbb, tp, aaa, dst);
-// 	return (0);
-// }
+#include <stdio.h>
+#include <bsd/string.h>
+int main(void)
+{
+	size_t nb = 50;
+	char	src[] =		"str qui est pas trop longuestr qui est pas trop longuestr qui est pas trop longue";
+	char	dst[] = 	"aasdlajhadksahbdjjajvhabsdjhabdshadshvbdashbdsjkabdnkjsabdkjass";
+	char	ssrc[] =	"str qui est pas trop longuestr qui est pas trop longuestr qui est pas trop longue";
+	char	odst[]  =	"aasdlajhadksahbdjjajvhabsdjhabdshadshvbdashbdsjkabdnkjsabdkjass";
+	size_t	bbb = ft_strlcat(dst, src, nb);
+	size_t	aaa = strlcat(odst, ssrc, nb);
+	printf("orig : %ld\t%s\nft   : %ld\t%s\n", aaa, odst, bbb, dst);
+	return (0);
+}	

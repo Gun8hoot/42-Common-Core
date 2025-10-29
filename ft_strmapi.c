@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:39:46 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 13:13:39 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/28 10:08:37 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
+
 // char	f(unsigned int i, char c)
 // {
 // 	(void)i;

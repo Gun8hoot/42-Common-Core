@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:21:02 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 16:58:36 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/28 10:02:24 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,25 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*cp_lst;
 	t_list	*nodes;
+	void	*content;
 
+	if (!lst || !f || !del)
+		return (NULL);
+	cp_lst = NULL;
 	while (lst != NULL)
 	{
-		nodes = ft_lstnew(f(lst->content));
+		content = f(lst->content);
+		if (!content)
+			return (ft_lstclear(&cp_lst, del), NULL);
+		nodes = ft_lstnew(content);
 		if (!nodes)
 		{
-			del(nodes);
-			ft_lstclear(&nodes, del);
-			return (NULL);
+			del(content);
+			return (ft_lstclear(&cp_lst, del), NULL);
 		}
-		cp_lst = nodes;
+		ft_lstadd_back(&cp_lst, nodes);
 		lst = lst->next;
 	}
-	cp_lst->next = NULL;
 	return (cp_lst);
 }
 

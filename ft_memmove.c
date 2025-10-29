@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:00:28 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 13:16:57 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/28 09:53:08 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,28 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned char	*tmp_src;
-	unsigned char	*tmp_dest;
+	size_t	i;
 
-	tmp_dest = (unsigned char *)dest;
-	tmp_src = (unsigned char *)src;
-	if (!dest && !src)
+	i = 0;
+	if ((char *)dest == NULL && (const char *)src == NULL)
 		return (NULL);
-	if (dest > src)
+	if ((const char *)src > (char *)dest)
 	{
-		while (n--)
-			tmp_dest[n] = tmp_src[n];
+		while (i < n)
+		{
+			((char *)dest)[i] = ((const char *)src)[i];
+			i++;
+		}
 	}
 	else
-		return (ft_memcpy(tmp_dest, tmp_src, n));
-	return (tmp_dest);
+	{
+		while (n > 0)
+		{
+			((char *)dest)[n - 1] = ((const char *)src)[n - 1];
+			n--;
+		}
+	}
+	return (dest);
 }
 
 // #include <string.h>

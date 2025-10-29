@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:15:40 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 13:18:01 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/27 07:43:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	}
 }
 
-void	f(void	*content)
-{
-	size_t	i;
+// void	f(void	*content)
+// {
+// 	size_t	i;
 
-	i = 0;
-	while (((char *)content)[i])
-	{
-		if (((char *)content)[i] >= 'a' && ((char *)content)[i] <= 'z')
-			((char *)content)[i] = ((char *)content)[i] - 32;
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (((char *)content)[i])
+// 	{
+// 		if (((char *)content)[i] >= 'a' && ((char *)content)[i] <= 'z')
+// 			((char *)content)[i] = ((char *)content)[i] - 32;
+// 		i++;
+// 	}
+// }
 // int main(void)
 // {
 // 	t_list	*lst1;
