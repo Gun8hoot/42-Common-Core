@@ -6,7 +6,7 @@ ARCH=$(uname -a)
 #CPU
 PHYSICAL_CPU=$(lscpu | grep "CPU(s)" | awk 'NR==1{print $2}')
 VIRTUAL_CPU=$(nproc)
-CPU_USAGE=$(vmstat | awk 'NR==3{printf ("%d\n", 100-$15)}')
+CPU_USAGE=$(top -bn1 | grep '^%Cpu' | cut -c 9- | xargs | awk '{printf("%.1f%%"), $1 + $3}')
 
 
 #MEMORY
@@ -21,8 +21,9 @@ TCP_ESTABLISHED=$(ss -taH state established | wc -l)
 
 #DISK
 IS_LVM=$(if [ $(lsblk |grep lvm | wc -l) -gt 0 ]; then echo "yes"; else echo "no"; fi)
-DISK_TOTAL=$(lsblk --output SIZE -n -d /dev/sda | awk '{print $1}')
-DISK_TOTAL_IN_MB=$(lsblk -b --output SIZE -n -d /dev/sda | awk '{print $1}')
+DISK_TOTAL=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{ft += $2} END {print ft}')
+DISK_USAGE=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} END {print ut}')
+DISK_POURCENT=$(df -Bm | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}')
 #DISK_POURCENT=$(($(lsblk --output SIZE -n -d /dev/sda | awk '{print $1}'))*100)
 
 #OTHER
@@ -30,7 +31,7 @@ LAST_REBOOT_DATE=$(last reboot | head -1 | awk '{printf ("%s %s %s %s\n", $5, $6
 SUDO_CMD=$(journalctl _COMM=sudo | grep COMMAND= | wc -l)
 NB_USER_LOG=$(w -h | wc -l)
 
-echo -e "+-----------------+
+echo "+-----------------+
 | ARCHITECTURE    : $ARCH
 +-----------------+ 
 | PHYSICAL CPU    : $PHYSICAL_CPU
@@ -39,9 +40,9 @@ echo -e "+-----------------+
 +-----------------+
 | MEMORY USAGE    : $MEMORY_USAGE_MB/${MEMORY_TOTAL}MB ($MEMORY_POURCENT)
 +-----------------+
-| DISK USAGE      : $DISK_TOTAL
+| DISK USAGE      : $DISK_USAGE/$DISK_TOTAL GB ($DISK_POURCENT%)
 +-----------------+
-| CPU USAGE       : %
+| CPU USAGE       : $CPU_USAGE
 +-----------------+
 | LAST BOOT       : $LAST_REBOOT_DATE
 +-----------------+
@@ -54,6 +55,4 @@ echo -e "+-----------------+
 | NETWORK         : $IP_ADDR ; $IP_MAC
 +-----------------+
 | SUDO            : $SUDO_CMD
-+-----------------+
-| TIME NOW        : $(date -R)
-+-----------------+\n"
++-----------------+"
