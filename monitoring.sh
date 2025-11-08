@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ARCHITECTURE
-ARCH=$(uname -a)
+ARCH=$(dpkg --print-architecture)
 
 #CPU
 PHYSICAL_CPU=$(lscpu | grep "CPU(s)" | awk 'NR==1{print $2}')
@@ -21,9 +21,9 @@ TCP_ESTABLISHED=$(ss -taH state established | wc -l)
 
 #DISK
 IS_LVM=$(if [ $(lsblk |grep lvm | wc -l) -gt 0 ]; then echo "yes"; else echo "no"; fi)
-DISK_TOTAL=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{ft += $2} END {print ft}')
-DISK_USAGE=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} END {print ut}')
-DISK_POURCENT=$(df -Bm | grep '^/dev/' | grep -v '/boot$' | awk '{ut += $3} {ft+= $2} END {printf("%d"), ut/ft*100}')
+DISK_TOTAL=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{total += $2} END {print total}')
+DISK_USAGE=$(df -Bg | grep '^/dev/' | grep -v '/boot$' | awk '{used += $3} END {print used}')
+DISK_POURCENT=$(df --output=used,size -x tmpfs -x devtmpfs | awk 'NR>1 {used+=$1; total+=$2} END {printf "%.1f", (used/total)*100}')
 #DISK_POURCENT=$(($(lsblk --output SIZE -n -d /dev/sda | awk '{print $1}'))*100)
 
 #OTHER
