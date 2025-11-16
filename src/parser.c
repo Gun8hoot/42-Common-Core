@@ -54,6 +54,8 @@ int	simplestring(char *av)
 		number[i] = av[i];
 		i++;
 	}
+	if (av[0] == '-' && av[1] == '\0')
+		return(EXIT_FAILURE);
 	printf("%s\n", number);
 	return (EXIT_SUCCESS);
 }
