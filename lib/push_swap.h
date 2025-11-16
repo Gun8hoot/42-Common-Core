@@ -15,5 +15,5 @@ typedef struct s_stacks
 	int	value;
 } t_stacks;
 
-int	argv2lst(t_stacks *stack_a, int ac, char **av);
+int	argv2lst(t_list *stack_a, int ac, char **av);
 #endif

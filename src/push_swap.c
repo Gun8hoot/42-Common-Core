@@ -2,7 +2,11 @@
 
 int main(int argc, char **argv)
 {
-	t_stacks *stack_a;
+	t_list *stack_a;
+	t_list *stack_b;
+
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc < 2)
 		return (EXIT_FAILURE);
 	if (argv2lst(stack_a, argc, argv) == 1)

@@ -7,11 +7,10 @@ void	del(void *content)
 	
 }
 
-int	complexstring(char *av)
+int	complexstring(char *av, t_list *head)
 {
 	size_t	i;
 	size_t	j;
-	t_list	*node;
 	char	number[11];
 
 	i = 0;
@@ -27,7 +26,8 @@ int	complexstring(char *av)
 		{
 			if (number[0] != '\0')
 			{
-				printf("%s\n", number);
+				//ft_lstadd_back(&head, ft_lstnew((int)ft_atoi(number)));
+				printf("%s\n");
 				ft_memset(number, 0, 11);
 				j = 0;
 			}
@@ -37,10 +37,11 @@ int	complexstring(char *av)
 	return (EXIT_SUCCESS);
 }
 
-int	simplestring(char *av)
+int	simplestring(char *av, t_list *head)
 {
 	size_t	i;
 	size_t	j;
+	int		*int_nb;
 	char	number[11];
 
 
@@ -56,11 +57,16 @@ int	simplestring(char *av)
 	}
 	if (av[0] == '-' && av[1] == '\0')
 		return(EXIT_FAILURE);
-	printf("%s\n", number);
+	int_nb = malloc(sizeof(int));
+	if (!int_nb)
+		return(EXIT_FAILURE);
+	*int_nb = ft_atoi(number);
+	ft_lstadd_back(&head, ft_lstnew(int_nb));
+	printf("%d\n", head->content);
 	return (EXIT_SUCCESS);
 }
 
-int	argv2lst(t_stacks *stack_a, int ac, char **av)
+int	argv2lst(t_list *stack_a, int ac, char **av)
 {
 	size_t	i;
 	size_t	j;
@@ -71,14 +77,13 @@ int	argv2lst(t_stacks *stack_a, int ac, char **av)
 	{
 		if (ft_strchr(av[i], ' '))
 		{
-			if (complexstring(av[i]) == 1)
+			if (complexstring(av[i], stack_a) == 1)
 				return (EXIT_FAILURE);
 		}
 		else
 		{
-			if (simplestring(av[i]) == 1)
+			if (simplestring(av[i], stack_a) == 1)
 				return (EXIT_FAILURE);
-
 		}
 		i++;
 	}
