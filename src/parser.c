@@ -46,11 +46,15 @@ int	simplestring(char *av)
 
 	i = 0;
 	j = 0;
+	ft_memset(number, 0, 11);
 	while (av[i])
 	{
-
+		if (ft_isdigit(av[i]) == 0 && av[i] != '-')
+			return (EXIT_FAILURE);
+		number[i] = av[i];
+		i++;
 	}
-
+	printf("%s\n", number);
 	return (EXIT_SUCCESS);
 }
 
