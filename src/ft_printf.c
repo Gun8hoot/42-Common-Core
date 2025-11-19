@@ -6,11 +6,11 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 07:46:18 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/31 16:08:53 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:54:39 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/printf.h"
+#include "lib/ft_printf.h"
 #include <stdio.h>
 
 int	argument(char c, va_list arg)
