@@ -2,8 +2,8 @@
 
 int main(int argc, char **argv)
 {
-	t_list *stack_a;
-	t_list *stack_b;
+	t_stacks *stack_a;
+	t_stacks *stack_b;
 
 	stack_a = NULL;
 	stack_b = NULL;

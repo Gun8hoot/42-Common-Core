@@ -6,15 +6,15 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:45:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 08:04:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_stack **lst, t_stack *new)
 {
-	t_list	*back;
+	t_stack	*back;
 
 	if (!*lst)
 	{
@@ -27,12 +27,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 // int main(void)
 // {
-// 	t_list	*aaa;
-// 	t_list	*bbb;
-// 	t_list	*ccc;
-// 	t_list	*ddd;
-// 	t_list	*tmp;
-// 	t_list	*empty;
+// 	t_stack	*aaa;
+// 	t_stack	*bbb;
+// 	t_stack	*ccc;
+// 	t_stack	*ddd;
+// 	t_stack	*tmp;
+// 	t_stack	*empty;
 
 // 	aaa = ft_lstnew("aaa");
 // 	bbb = ft_lstnew("bbb");

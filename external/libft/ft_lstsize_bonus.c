@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:11:03 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/24 08:15:34 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst)
+int	ft_lstsize(t_stack *lst)
 {
 	int	i;
 
@@ -27,12 +27,12 @@ int	ft_lstsize(t_list *lst)
 
 // int main(void)
 // {
-// 	t_list *aaa;
-// 	t_list *bbb;
-// 	t_list *ccc;
-// 	aaa = malloc(sizeof(t_list));
-// 	bbb = malloc(sizeof(t_list));
-// 	ccc = malloc(sizeof(t_list));
+// 	t_stack *aaa;
+// 	t_stack *bbb;
+// 	t_stack *ccc;
+// 	aaa = malloc(sizeof(t_stack));
+// 	bbb = malloc(sizeof(t_stack));
+// 	ccc = malloc(sizeof(t_stack));
 // 	aaa->content = "zzz";
 // 	bbb->content = "bbb";
 // 	ccc->content = "iii";

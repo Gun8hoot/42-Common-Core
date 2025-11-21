@@ -6,16 +6,16 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:21:02 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/28 10:02:24 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_stack	*ft_lstmap(t_stack *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*cp_lst;
-	t_list	*nodes;
+	t_stack	*cp_lst;
+	t_stack	*nodes;
 	void	*content;
 
 	if (!lst || !f || !del)
@@ -59,17 +59,17 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 // int main(void)
 // {
 // 	int i = 1;
-// 	t_list	*aaa = ft_lstnew(ft_strdup("Content On the N0de n1"));
-// 	t_list	*bbb = ft_lstnew(ft_strdup("anotHER conTent"));
-// 	t_list	*ccc = ft_lstnew(ft_strdup("also content here"));
-// 	t_list	*ddd = ft_lstnew(ft_strdup("LasT CONTENT, PromISE"));
-// 	t_list	*lst = NULL;
+// 	t_stack	*aaa = ft_lstnew(ft_strdup("Content On the N0de n1"));
+// 	t_stack	*bbb = ft_lstnew(ft_strdup("anotHER conTent"));
+// 	t_stack	*ccc = ft_lstnew(ft_strdup("also content here"));
+// 	t_stack	*ddd = ft_lstnew(ft_strdup("LasT CONTENT, PromISE"));
+// 	t_stack	*lst = NULL;
 
 // 	ft_lstadd_back(&lst, aaa);
 // 	ft_lstadd_back(&lst, bbb);
 // 	ft_lstadd_back(&lst, ccc);
 // 	ft_lstadd_back(&lst, ddd);
-// 	t_list	*cp	 = ft_lstmap(lst, f, del);
+// 	t_stack	*cp	 = ft_lstmap(lst, f, del);
 // 	while (lst)
 // 	{
 // 		printf("node n'%d :\t\"%s\"\n", i, (char *)lst->content);

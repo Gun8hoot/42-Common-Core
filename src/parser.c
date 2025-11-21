@@ -7,7 +7,7 @@ void	del(void *content)
 	
 }
 
-int	complexstring(char *av, t_list *head)
+int	complexstring(char *av, t_stack *head)
 {
 	size_t	i;
 	size_t	j;
@@ -37,7 +37,7 @@ int	complexstring(char *av, t_list *head)
 	return (EXIT_SUCCESS);
 }
 
-int	simplestring(char *av, t_list *head)
+int	simplestring(char *av, t_stack *head)
 {
 	size_t	i;
 	size_t	j;
@@ -66,26 +66,19 @@ int	simplestring(char *av, t_list *head)
 	return (EXIT_SUCCESS);
 }
 
-int	argv2lst(t_list *stack_a, int ac, char **av)
+int	argv2lst(t_stack *stack_a, int ac, char **av)
 {
 	size_t	i;
 	size_t	j;
+	char	**arr;
 
 	i = 1;
 	j = 0;
-	while (i < ac)
+	if (ac == 1)
+		return (1);
+	else if (ac == 2)
 	{
-		if (ft_strchr(av[i], ' '))
-		{
-			if (complexstring(av[i], stack_a) == 1)
-				return (EXIT_FAILURE);
-		}
-		else
-		{
-			if (simplestring(av[i], stack_a) == 1)
-				return (EXIT_FAILURE);
-		}
-		i++;
+
 	}
 	return (EXIT_SUCCESS);
 }
