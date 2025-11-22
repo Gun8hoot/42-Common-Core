@@ -6,15 +6,15 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:12:40 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/28 11:39:05 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_stack **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	t_stack	*elem;
+	t_list	*elem;
 
 	if (!lst || !del)
 		return ;
@@ -34,10 +34,10 @@ void	ft_lstclear(t_stack **lst, void (*del)(void *))
 // // }
 // int main(void)
 // {
-// 	t_stack	*aaa;
-// 	t_stack	*bbb;
-// 	t_stack	*ccc;
-// 	t_stack	*ddd;
+// 	t_list	*aaa;
+// 	t_list	*bbb;
+// 	t_list	*ccc;
+// 	t_list	*ddd;
 
 // 	aaa = ft_lstnew(ft_strdup("aaa"));
 // 	bbb = ft_lstnew(ft_strdup("aaa"));

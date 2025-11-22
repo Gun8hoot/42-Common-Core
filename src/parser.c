@@ -1,84 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nclavel <nclavel@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
+/*   Updated: 2025/11/22 19:23:56 by nclavel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib/push_swap.h"
 
-void	del(void *content)
+t_stack	*created_stack(int	*tab)
 {
-	if (content)
-		free(content);
-	
-}
-
-int	complexstring(char *av, t_stack *head)
-{
-	size_t	i;
-	size_t	j;
-	char	number[11];
+	t_stack	*stack;
+	t_stack	*node;
+	int		i;
 
 	i = 0;
-	j = 0;
-	ft_memset(number, 0, 11);
-	while (av[i])
+	stack = NULL;
+	while (tab[i])
 	{
-		if (ft_isdigit(av[i]) == 0 && (av[i] != ' ' && av[i] != '-'))
-			return(EXIT_FAILURE);
-		else if ((ft_isdigit(av[i]) == 1 || av[i] == '-') && av[i] != ' ')
-			number[j++] = av[i];
-		if (av[i] == ' ' || av[i + 1] == '\0')
-		{
-			if (number[0] != '\0')
-			{
-				//ft_lstadd_back(&head, ft_lstnew((int)ft_atoi(number)));
-				printf("%s\n");
-				ft_memset(number, 0, 11);
-				j = 0;
-			}
-		}
+		node = stack_new_node(tab[i]);
+		stack_add_back(&stack, node);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (stack);
 }
 
-int	simplestring(char *av, t_stack *head)
+void	free_tab(char **tab)
 {
-	size_t	i;
-	size_t	j;
-	int		*int_nb;
-	char	number[11];
-
+	int	i;
 
 	i = 0;
-	j = 0;
-	ft_memset(number, 0, 11);
-	while (av[i])
-	{
-		if (ft_isdigit(av[i]) == 0 && av[i] != '-')
-			return (EXIT_FAILURE);
-		number[i] = av[i];
-		i++;
-	}
-	if (av[0] == '-' && av[1] == '\0')
-		return(EXIT_FAILURE);
-	int_nb = malloc(sizeof(int));
-	if (!int_nb)
-		return(EXIT_FAILURE);
-	*int_nb = ft_atoi(number);
-	ft_lstadd_back(&head, ft_lstnew(int_nb));
-	printf("%d\n", head->content);
-	return (EXIT_SUCCESS);
+	while(tab[i])
+		free(tab[i++]);
 }
 
-int	argv2lst(t_stack *stack_a, int ac, char **av)
+t_stack	*parser(int argc, char **argv)
 {
-	size_t	i;
-	size_t	j;
 	char	**arr;
+	int		*tab;
+	t_stack *stack;
 
-	i = 1;
-	j = 0;
-	if (ac == 1)
-		return (1);
-	else if (ac == 2)
+	if (argc == 2)
 	{
-
+		arr = ft_split(argv[1], ' ');
+		if (!arr)
+			return (NULL);
 	}
-	return (EXIT_SUCCESS);
+	else
+		arr = &argv[1];
+	tab = check_all_n_convert(arr);
+	if (tab == NULL)
+		return (free_tab(arr), NULL);
+	stack = created_stack(tab);
+	free(tab);
+	free_tab(arr);
+	if (!stack)
+		return (NULL);
+	return (stack);
 }

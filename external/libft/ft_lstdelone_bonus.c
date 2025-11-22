@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 14:49:48 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/28 08:35:54 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_stack *lst, void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (!lst || !del)
 		return ;
@@ -27,10 +27,10 @@ void	ft_lstdelone(t_stack *lst, void (*del)(void *))
 // }
 // int main(void)
 // {
-// 	t_stack	*aaa;
-// 	t_stack	*bbb;
-// 	t_stack	*ccc;
-// 	t_stack	*ddd;
+// 	t_list	*aaa;
+// 	t_list	*bbb;
+// 	t_list	*ccc;
+// 	t_list	*ddd;
 // 	aaa = ft_lstnew("aaa");
 // 	bbb = ft_lstnew("bbb");
 // 	ccc = ft_lstnew("ccc");

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42lehavre.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 09:45:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/22 13:07:17 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_stack	*back;
+	t_list	*back;
 
 	if (!*lst)
 	{
@@ -27,12 +27,12 @@ void	ft_lstadd_back(t_stack **lst, t_stack *new)
 
 // int main(void)
 // {
-// 	t_stack	*aaa;
-// 	t_stack	*bbb;
-// 	t_stack	*ccc;
-// 	t_stack	*ddd;
-// 	t_stack	*tmp;
-// 	t_stack	*empty;
+// 	t_list	*aaa;
+// 	t_list	*bbb;
+// 	t_list	*ccc;
+// 	t_list	*ddd;
+// 	t_list	*tmp;
+// 	t_list	*empty;
 
 // 	aaa = ft_lstnew("aaa");
 // 	bbb = ft_lstnew("bbb");

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:59:43 by nclavel           #+#    #+#             */
-/*   Updated: 2025/10/29 14:59:45 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/29 14:44:29 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	return (dlen + slen);
 }
 
-#include <stdio.h>
-#include <bsd/string.h>
-int main(void)
-{
-	size_t nb = 50;
-	char	src[] =		"str qui est pas trop longuestr qui est pas trop longuestr qui est pas trop longue";
-	char	dst[] = 	"aasdlajhadksahbdjjajvhabsdjhabdshadshvbdashbdsjkabdnkjsabdkjass";
-	char	ssrc[] =	"str qui est pas trop longuestr qui est pas trop longuestr qui est pas trop longue";
-	char	odst[]  =	"aasdlajhadksahbdjjajvhabsdjhabdshadshvbdashbdsjkabdnkjsabdkjass";
-	size_t	bbb = ft_strlcat(dst, src, nb);
-	size_t	aaa = strlcat(odst, ssrc, nb);
-	printf("orig : %ld\t%s\nft   : %ld\t%s\n", aaa, odst, bbb, dst);
-	return (0);
-}	
+// #include <stdio.h>
+// #include <bsd/string.h>
+// int main(void)
+// {
+// 	size_t nb = 80;
+// 	char	src[] = "str qui est pas trop longue";
+// 	char	dst[] = "aasds";
+// 	char	ssrc[] = "str qui est pas trop longue";
+// 	char	odst[]  = "aasds";
+// 	size_t	bbb = ft_strlcat(dst, src, nb);
+// 	size_t	aaa = strlcat(odst, ssrc, nb);
+// 	printf("orig : %ld\t%s\nft   : %ld\t%s\n", aaa, odst, bbb, dst);
+// 	return (0);
+// }	

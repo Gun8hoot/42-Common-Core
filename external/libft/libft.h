@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 09:24:46 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/17 17:30:37 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/23 17:09:16 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
-
-typedef struct s_stack
-{
-	struct s_stack	*next;
-	void			*content;
-	void			*index;
-}	t_stack;
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -64,14 +57,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-t_stack	*ft_lstnew(void *content);
-void	ft_lstadd_front(t_stack **lst, t_stack *new);
-int		ft_lstsize(t_stack *lst);
-t_stack	*ft_lstlast(t_stack *lst);
-void	ft_lstadd_back(t_stack **lst, t_stack *new);
-void	ft_lstdelone(t_stack *lst, void (*del)(void *));
-void	ft_lstclear(t_stack **lst, void (*del)(void *));
-void	ft_lstiter(t_stack *lst, void (*f)(void *));
-t_stack	*ft_lstmap(t_stack *lst, void *(*f)(void *), void (*del)(void *));
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 #endif

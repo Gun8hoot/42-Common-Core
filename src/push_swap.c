@@ -2,16 +2,17 @@
 
 int main(int argc, char **argv)
 {
-	t_stacks *stack_a;
-	t_stacks *stack_b;
+	t_stack *stack_a;
+	t_stack *stack_b;
 
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc < 2)
-		return (EXIT_FAILURE);
-	if (argv2lst(stack_a, argc, argv) == 1)
+		return (1);
+	if (!parser(argc, argv) || argv[1][0] == '\0')
 	{
-		printf("Error\n");
-		return (EXIT_FAILURE);
+		ft_printf("Error\n");
+		return (1);
 	}
+	return (0);
 }

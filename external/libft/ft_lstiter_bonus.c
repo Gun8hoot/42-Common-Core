@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 15:15:40 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/17 17:25:14 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/10/27 07:43:11 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_stack *lst, void (*f)(void *))
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	if (!lst)
 		return ;
@@ -37,10 +37,10 @@ void	ft_lstiter(t_stack *lst, void (*f)(void *))
 // }
 // int main(void)
 // {
-// 	t_stack	*lst1;
-// 	t_stack	*lst2;
-// 	t_stack	*lst3;
-// 	t_stack	*lst4;
+// 	t_list	*lst1;
+// 	t_list	*lst2;
+// 	t_list	*lst3;
+// 	t_list	*lst4;
 // 	lst1 = ft_lstnew(ft_strdup("lst1"));
 // 	lst2 = ft_lstnew(ft_strdup("lst2"));
 // 	lst3 = ft_lstnew(ft_strdup("lst3"));
