@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/24 14:00:13 by nclavel           #+#    #+#             */
+/*   Updated: 2025/11/24 16:16:16 by nclavel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib/push_swap.h"
 
-long	ft_atol(char *number)
+long long	ft_atol(char *number)
 {
-	int		i;
-	long	res;
-	int		sign;
+	int			i;
+	long long	res;
+	int			sign;
 
 	i = 0;
 	res = 0;
@@ -27,9 +39,9 @@ long	ft_atol(char *number)
 
 int	check_int_overflow(char **tab)
 {
-	int		i;
-	int		j;
-	long	number;
+	int			i;
+	int			j;
+	long long	number;
 
 	i = 0;
 	j = 0;
@@ -47,8 +59,8 @@ int	check_number_only(char **tab)
 {
 	int	i;
 	int	j;
-	int sign;
-	int is_dig;
+	int	sign;
+	int	is_dig;
 
 	i = 0;
 	while (tab[i])
@@ -58,10 +70,14 @@ int	check_number_only(char **tab)
 		while (tab[i][j])
 		{
 			is_dig = ft_isdigit((tab[i][j]));
-			if ((!is_dig && sign == 1) || (!is_dig && (tab[i][j] != '-' && tab[i][j] != '+')))
+			if ((!is_dig && sign == 1) || (!is_dig && (tab[i][j] != '-'
+					&& tab[i][j] != '+')))
 				return (0);
 			if (tab[i][j] == '-' || tab[i][j] == '+')
 				sign = 1;
+			if ((tab[i][j] == '-' && !tab[i][j + 1])
+				|| (tab[i][j] == '+' && !tab[i][j + 1]))
+				return (0);
 			j++;
 		}
 		i++;
@@ -71,16 +87,16 @@ int	check_number_only(char **tab)
 
 int	check_duplicate(char **tab, int len)
 {
-	int i;
-	int j;
-	int skip_once;
+	int	i;
+	int	j;
+	int	skip_once;
 
 	i = 0;
 	while (tab[i])
 	{
 		skip_once = 0;
 		j = 0;
-		while(j < len)
+		while (j < len)
 		{
 			if ((ft_atoi(tab[i]) == ft_atoi(tab[j])) && skip_once == 1)
 				return (0);
@@ -96,17 +112,16 @@ int	check_duplicate(char **tab, int len)
 int	*check_all_n_convert(char **tab)
 {
 	int	*converted;
-	int len;
-	int i;
+	int	len;
+	int	i;
 
 	i = 0;
 	len = 0;
-	converted = NULL;
 	while (tab[len])
 		len++;
 	if (!check_number_only(tab) || !check_int_overflow(tab)
 		|| !check_duplicate(tab, len))
-			return (NULL);
+		return (NULL);
 	converted = ft_calloc(len, sizeof(int));
 	if (!converted)
 		return (NULL);

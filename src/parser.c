@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nclavel <nclavel@student.42lehavre.fr>     +#+  +:+       +#+        */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/22 22:58:21 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/24 16:47:02 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
 
-t_stack	*created_stack(int	*tab, size_t len)
+t_stack	*created_stack(int *tab, size_t len)
 {
 	t_stack	*stack;
 	t_stack	*node;
@@ -33,7 +33,7 @@ void	ft_free_alem(char **arr, int j)
 {
 	if (j == 0)
 	{
-		while(arr[j])
+		while (arr[j])
 			j++;
 	}
 	j -= 1;
@@ -45,38 +45,35 @@ void	ft_free_alem(char **arr, int j)
 	free(arr);
 }
 
-char **argv2arr(int argc, char **argv)
+char	**argv2arr(int argc, char **argv)
 {
 	char	**arr;
-	size_t	nb_tab;
+	size_t	i;
 	size_t	nb_char;
 
-	nb_tab = 0;
-	arr = malloc(sizeof(char *) * argc);
+	i = 0;
+	arr = ft_calloc(argc, sizeof(char *));
 	if (!arr)
-		return(NULL);
-	while ((nb_tab + 1) < argc)
+		return (NULL);
+	while (i < (argc - 1))
 	{
 		nb_char = 0;
-		arr = malloc(sizeof(char) * (ft_strlen(argv[nb_tab + 1]) + 1));
-		if (!arr)
-			return(ft_free_alem(arr, nb_tab), NULL);
-		while (argv[nb_tab + 1][nb_char])
-		{
-			arr[nb_tab][nb_char] = argv[nb_tab + 1][nb_char];			// SEGFAULT DE SES MORT ICI
-			nb_char++;
-		}
-		arr[nb_tab][nb_char] = '\0';
-		nb_tab++;
+		arr[i] = ft_calloc(ft_strlen(argv[i + 1]) + 1, sizeof(char));
+		if (arr[i] == NULL)
+			return (ft_free_alem(arr, i), NULL);
+		ft_strcpy(arr[i], argv[i + 1]);
+		i++;
 	}
-	arr[nb_tab] = NULL;
+	i = 0;
+	while (arr[i] != NULL)
+		i++;
 	return (arr);
 }
 
 t_stack	*parser(int argc, char **argv)
 {
 	char	**arr;
-	t_stack *stack;
+	t_stack	*stack;
 	int		*tab;
 	size_t	len;
 
@@ -86,7 +83,7 @@ t_stack	*parser(int argc, char **argv)
 	else
 		arr = argv2arr(argc, argv);
 	if (!arr)
-			return (NULL);
+		return (NULL);
 	tab = check_all_n_convert(arr);
 	if (tab == NULL)
 		return (ft_free_alem(arr, 0), NULL);
