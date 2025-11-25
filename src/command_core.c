@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   command_core.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 17:33:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 11:55:02 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:59:13 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	stack_swap(t_stack **head)
 {
 	t_stack	*save_addr_first;
 	t_stack	*save_addr_third;
- 
+
 	if (!head || !(*head)->next)
 		return ;
 	save_addr_first = *head;
@@ -40,8 +40,10 @@ void	stack_push(t_stack **head_src, t_stack **head_dst)
 void	stack_rotate(t_stack **head)
 {
 	t_stack	*save;
-	t_stack *tmp;
+	t_stack	*tmp;
 
+	if (!head)
+		return ;
 	save = *head;
 	*head = (*head)->next;
 	tmp = stack_list_last(*head);
@@ -52,13 +54,16 @@ void	stack_rotate(t_stack **head)
 
 void	stack_reverse_rotate(t_stack **head)
 {
-	t_stack	*save;
-	t_stack	*save2;
-	t_stack *tmp;
+	t_stack	*trunc;
+	t_stack	*last_node;
 
-	save2 = *head;
-	tmp = stack_list_last(*head);
-	save = tmp;
-	*head = save;
-	save->next = save2;
+	if (!head)
+		return ;
+	trunc = *head;
+	while (trunc->next->next != NULL)
+		trunc = trunc->next;
+	last_node = trunc->next;
+	trunc->next = NULL;
+	last_node->next = *head;
+	*head = last_node;
 }

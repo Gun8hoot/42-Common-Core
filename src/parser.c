@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 09:22:21 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:10:09 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ t_stack	*created_stack(int *tab, size_t len)
 {
 	t_stack	*stack;
 	t_stack	*node;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	stack = NULL;
 	while (i < len)
 	{
-		node = stack_new_node(stack, tab[i]);
+		node = stack_new_node(tab[i]);
 		stack_add_back(&stack, node);
 		i++;
 	}
@@ -48,7 +48,7 @@ void	ft_free_alem(char **arr, int j)
 char	**argv2arr(int argc, char **argv)
 {
 	char	**arr;
-	size_t	i;
+	int		i;
 	size_t	nb_char;
 
 	i = 0;

@@ -5,6 +5,7 @@ int main(int argc, char **argv)
 	t_stack *stack_a;
 	t_stack *stack_b;
 
+	stack_b = NULL;
 	if (argc < 2)
 		return (1);
 	stack_a = parser(argc, argv);

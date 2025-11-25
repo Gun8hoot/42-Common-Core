@@ -1,33 +1,31 @@
 NAME	=	push_swap
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -I. -c
+CFLAGS	=	-Wall -Wextra -Werror -I. -c -g3
 
 PRINTF_PATH	=	external/printf
 LIBFT_PATH	=	external/libft
 LIB_PATH	=	lib
 
 
-SRC			=	$(SRC_DIR)/parser.c\
-				$(SRC_DIR)/check.c\
-				$(SRC_DIR)/push_swap.c\
+SRC			=	$(SRC_DIR)/check.c\
+				$(SRC_DIR)/command_both.c\
+				$(SRC_DIR)/command_core.c\
 				$(SRC_DIR)/linked_list.c\
-				$(SRC_DIR)/mouvement_1.c\
-				$(SRC_DIR)/movement_2.c\
+				$(SRC_DIR)/parser.c\
+				$(SRC_DIR)/push_swap.c\
 				$(SRC_DIR)/sorting.c
 
 SRC_DIR		=	src
 
-OBJ_DIR		=	obj
-
 OBJ			= $(SRC:%.c=%.o)
 
-all:	$(NAME)
+all:	printf libft $(NAME)
 
-%.o: %.o
+%.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
-$(NAME): libft printf $(OBJ)
-	$(CC) $(OBJ) -o $@
+$(NAME): $(OBJ)
+	$(CC) $^ -o $@ lib/*.a
 
 libft:
 	make -C $(LIBFT_PATH)
@@ -40,8 +38,12 @@ printf:
 clean:
 	make -C $(LIBFT_PATH) clean
 	make -C $(PRINTF_PATH) clean
-	rm -f obj/*
+	rm -f src/*.o
 
 fclean:	clean
 	rm -f lib/*.a
 	rm $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:00:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 08:25:33 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 14:00:45 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	check_int_overflow(char **tab)
 {
 	int			i;
 	int			j;
-	long long	number;
 
 	i = 0;
 	j = 0;

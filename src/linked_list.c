@@ -6,18 +6,17 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:01:09 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 11:58:04 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:07:06 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
 
-t_stack	*stack_new_node(t_stack *stack, int nb)
+t_stack	*stack_new_node(int nb)
 {
 	t_stack	*list;
 
-	if (stack)
-		list->prev = stack;
+	list = NULL;
 	list = malloc(sizeof(t_stack));
 	if (!list)
 		return (NULL);
