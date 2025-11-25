@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:00:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/24 16:16:16 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 08:25:33 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	check_int_overflow(char **tab)
 	j = 0;
 	while (tab[i])
 	{
-		number = ft_atol(tab[i]);
-		if (number > INT_MAX || number < INT_MIN)
+		if (ft_strlen(tab[i]) > 11 || ft_atol(tab[i]) > INT_MAX
+			|| ft_atol(tab[i]) < INT_MIN)
 			return (0);
 		i++;
 	}
@@ -71,12 +71,12 @@ int	check_number_only(char **tab)
 		{
 			is_dig = ft_isdigit((tab[i][j]));
 			if ((!is_dig && sign == 1) || (!is_dig && (tab[i][j] != '-'
-					&& tab[i][j] != '+')))
+						&& tab[i][j] != '+')))
 				return (0);
 			if (tab[i][j] == '-' || tab[i][j] == '+')
 				sign = 1;
-			if ((tab[i][j] == '-' && !tab[i][j + 1])
-				|| (tab[i][j] == '+' && !tab[i][j + 1]))
+			if ((tab[i][j] == '-' && !tab[i][j + 1]) || (tab[i][j] == '+'
+					&& !tab[i][j + 1]))
 				return (0);
 			j++;
 		}

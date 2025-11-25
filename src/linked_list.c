@@ -6,16 +6,18 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:01:09 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/24 14:01:09 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 11:58:04 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
 
-t_stack	*stack_new_node(int nb)
+t_stack	*stack_new_node(t_stack *stack, int nb)
 {
 	t_stack	*list;
 
+	if (stack)
+		list->prev = stack;
 	list = malloc(sizeof(t_stack));
 	if (!list)
 		return (NULL);
@@ -47,16 +49,6 @@ t_stack	*stack_add_back(t_stack **head, t_stack *node)
 	return (*head);
 }
 
-t_stack	*linked_list(t_stack **head, int number)
-{
-	t_stack	*node;
-
-	node = stack_new_node(number);
-	if (!node)
-		return (NULL);
-	stack_add_back(head, node);
-	return (*head);
-}
 
 void	clear_stack(t_stack *head_a, t_stack *head_b)
 {
