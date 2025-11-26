@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:40:33 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 15:53:52 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/26 11:44:03 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,8 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef struct	s_info
-{
-	size_t	nb_elem_a;
-	size_t	nb_elem_b;
-}	t_info;
-
 t_stack	*parser(int argc, char **argv);
+void	*init_turk_sort(t_stack **stack_a, t_stack **stack_b, t_info **info);
 int		*check_all_n_convert(char **tab);
-
+int		algorithm(t_stack **stack_a);
 #endif

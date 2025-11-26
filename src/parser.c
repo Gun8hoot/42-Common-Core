@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 15:10:09 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/25 19:10:01 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_stack	*created_stack(int *tab, size_t len)
 	stack = NULL;
 	while (i < len)
 	{
-		node = stack_new_node(tab[i]);
+		node = stack_new_node(stack, tab[i]);
 		stack_add_back(&stack, node);
 		i++;
 	}

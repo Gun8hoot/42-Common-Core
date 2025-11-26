@@ -1,3 +1,4 @@
 *.o
 *.out
 push_swap
+.debug.c

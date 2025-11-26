@@ -1,11 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/25 17:33:51 by nclavel           #+#    #+#             */
+/*   Updated: 2025/11/26 11:28:44 by nclavel          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib/push_swap.h"
 
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
-	t_stack *stack_b;
 
-	stack_b = NULL;
 	if (argc < 2)
 		return (1);
 	stack_a = parser(argc, argv);
@@ -14,8 +24,7 @@ int main(int argc, char **argv)
 		ft_printf("Error\n");
 		return (1);
 	}
-	stack_reverse_rotate(&stack_a);
-	printf("%d ; %d ; %d\n", stack_a->value, stack_a->next->value, stack_a->next->next->value);
-	clear_stack(stack_a, stack_b);
-	return (0);
+	if (!algorithm(&stack_a))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
