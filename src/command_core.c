@@ -6,61 +6,81 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 17:33:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/26 10:22:15 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:17:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
 
-void	stack_swap(t_stack **head)
+int	stack_swap(t_stack **head, char c)
 {
 	t_stack	*save_addr_first;
 	t_stack	*save_addr_third;
- 
+
+	save_addr_third = NULL;
 	if (!head || !(*head)->next)
-		return ;
+		return (0);
 	save_addr_first = *head;
-	save_addr_third = (*head)->next->next;
+	if ((*head)->next->next)
+		save_addr_third = (*head)->next->next;
 	*head = (*head)->next;
 	(*head)->next = save_addr_first;
-	(*head)->next->next = save_addr_third;
+	if (save_addr_third)
+		(*head)->next->next = save_addr_third;
+	if (c == 'a')
+		write(1, "sa\n", 3);
+	else if (c == 'b')
+		write(1, "sb\n", 3);
+	return (1);
 }
 
-void	stack_push(t_stack **head_src, t_stack **head_dst)
+int	stack_push(t_stack **head_src, t_stack **head_dst, char c)
 {
 	t_stack	*save;
 
 	if (!head_src || !*head_src)
-		return ;
+		return (0);
 	save = *head_src;
 	*head_src = (*head_src)->next;
 	save->next = *head_dst;
+	if (!head_dst)
+		save->prev = NULL;
 	*head_dst = save;
+	if (c == 'a')
+		write(1, "pa\n", 3);
+	else if (c == 'b')
+		write(1, "pb\n", 3);
+	return (1);
 }
 
-void	stack_rotate(t_stack **head)
+int	stack_rotate(t_stack **head, char c)
 {
 	t_stack	*save;
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	if (!head)
-		return ;
+		return (0);
 	save = *head;
 	*head = (*head)->next;
 	tmp = stack_list_last(*head);
 	tmp->next = save;
 	tmp = tmp->next;
 	tmp->next = NULL;
+	if (c == 'a')
+		write(1, "ra\n", 3);
+	else if (c == 'b')
+		write(1, "rb\n", 3);
+	return (1);
 }
 
-void	stack_reverse_rotate(t_stack **head)
+int	stack_reverse_rotate(t_stack **head, char c)
 {
 	t_stack	*trunc;
 	t_stack	*last_node;
 
 	trunc = NULL;
 	if (!head)
-		return ;
+		return (0);
 	trunc = *head;
 	while (trunc->next->next != NULL)
 		trunc = trunc->next;
@@ -68,4 +88,9 @@ void	stack_reverse_rotate(t_stack **head)
 	trunc->next = NULL;
 	last_node->next = *head;
 	*head = last_node;
+	if (c == 'a')
+		write(1, "rra\n", 4);
+	else if (c == 'b')
+		write(1, "rrb\n", 4);
+	return (1);
 }

@@ -6,11 +6,31 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 19:10:01 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:40:52 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
+
+// int	*sort_tab(int *tab, size_t len)
+// {
+// 	int	*assign_tab;
+
+// 	assign_tab;
+// }
+
+// size_t elem_pos(int *tab, size_t len)
+// {
+// 	size_t	j;
+// 	size_t	i;
+// 	size_t	pos;
+
+// 	i = 0;
+// 	j = 0;
+// 	pos = 0;
+// 	while (i < len)
+// 	return (pos);
+// }
 
 t_stack	*created_stack(int *tab, size_t len)
 {
@@ -23,6 +43,7 @@ t_stack	*created_stack(int *tab, size_t len)
 	while (i < len)
 	{
 		node = stack_new_node(stack, tab[i]);
+		node->pos = i;
 		stack_add_back(&stack, node);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:00:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/25 14:00:45 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:13:27 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ long long	ft_atol(char *number)
 
 int	check_int_overflow(char **tab)
 {
-	int			i;
-	int			j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -59,7 +59,6 @@ int	check_number_only(char **tab)
 	int	i;
 	int	j;
 	int	sign;
-	int	is_dig;
 
 	i = 0;
 	while (tab[i])
@@ -68,9 +67,8 @@ int	check_number_only(char **tab)
 		sign = 0;
 		while (tab[i][j])
 		{
-			is_dig = ft_isdigit((tab[i][j]));
-			if ((!is_dig && sign == 1) || (!is_dig && (tab[i][j] != '-'
-						&& tab[i][j] != '+')))
+			if ((!ft_isdigit((tab[i][j])) && sign == 1) || (!ft_isdigit((tab[i][j]))
+				&& (tab[i][j] != '-' && tab[i][j] != '+')))
 				return (0);
 			if (tab[i][j] == '-' || tab[i][j] == '+')
 				sign = 1;

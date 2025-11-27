@@ -13,7 +13,8 @@ SRC			=	$(SRC_DIR)/check.c\
 				$(SRC_DIR)/linked_list.c\
 				$(SRC_DIR)/parser.c\
 				$(SRC_DIR)/push_swap.c\
-				$(SRC_DIR)/turk_sort.c\
+				$(SRC_DIR)/sort.c\
+				$(SRC_DIR)/finder.c\
 				$(SRC_DIR)/.debug.c
 
 SRC_DIR		=	src

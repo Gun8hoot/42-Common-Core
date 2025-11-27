@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 10:40:33 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/26 11:44:03 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/27 14:37:45 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@
 # include <unistd.h>
 
 t_stack	*parser(int argc, char **argv);
-void	*init_turk_sort(t_stack **stack_a, t_stack **stack_b, t_info **info);
 int		*check_all_n_convert(char **tab);
-int		algorithm(t_stack **stack_a);
+int		init_sort(t_stack **stack_a);
+size_t	find_max(t_stack *stack);
+size_t	find_pos(t_stack *stack, size_t index);
+size_t	find_min(t_stack *stack);
+
 #endif
