@@ -6,9 +6,12 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:33:51 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/28 09:03:28 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 10:36:30 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// RANDOM NUMBER GEN : 
+// https://stattrek.com/statistics/random-number-generator#table
 
 #include "lib/push_swap.h"
 

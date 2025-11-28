@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:01:09 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/26 11:43:24 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 10:15:43 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ size_t	stack_list(t_stack *stack)
 	return (number);
 }
 
-void	clear_stack(t_stack *head_a, t_stack *head_b, t_info *info)
+void	clear_stack(t_stack *head_a, t_stack *head_b)
 {
 	t_stack	*hold_addr;
 
@@ -90,6 +90,4 @@ void	clear_stack(t_stack *head_a, t_stack *head_b, t_info *info)
 		}
 		free(head_b);
 	}
-	if (info)
-		free(info);
 }

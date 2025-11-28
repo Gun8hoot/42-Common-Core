@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 14:29:28 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 08:33:04 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 10:15:32 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ size_t				stack_list(t_stack *stack);
 t_stack				*stack_list_last(t_stack *head);
 t_stack				*stack_new_node(t_stack *stack, int nb);
 t_stack				*stack_add_back(t_stack **head, t_stack *node);
-void				clear_stack(t_stack *head_a, t_stack *head_b, t_info *info);
+void				clear_stack(t_stack *head_a, t_stack *head_b);
 void				display_stack(t_stack *stack);
 void				display_stack_pos(t_stack *stack);
 // MOVEMENTS
