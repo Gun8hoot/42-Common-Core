@@ -1,19 +1,18 @@
 #	--- DEFINE VARS ---
 NAME		=	so_long
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -I. -O1
+CFLAGS		=	-Wall -Werror -Wextra -I. -O1 -g3
 SRCS		=	$(SRC_DIR)maps_verif.c\
 				$(SRC_DIR)maps.c\
 				$(SRC_DIR)safety_free.c\
 				$(SRC_DIR)so_long.c\
 				$(GNL_PATH)
+
 LIB			=	$(LIB_DIR)/libft.a\
 				$(LIB_DIR)/libprintf.a\
 				$(LIB_DIR)/libmlx.a\
 				$(LIB_DIR)/libmlx_Linux.a
 OBJ			=	$(SRC:%.c=%.o)
-%.o: %.c
-	$(CC) $(CFLAGS) -c -o $<
 
 #		--- PATH ---
 SRC_DIR			=	src/
@@ -29,9 +28,10 @@ GNL_PATH		=	external/get_next_line/
 # -------------------------------------
 
 #	--- MAKEFILE BASIC RULES ---
-all: $(NAME)
+all: external $(NAME)
 
-$(NAME): external
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $<
 
 clean:
 	@echo "\e[0;31mCleaning all .o files\e[0m"
@@ -62,7 +62,7 @@ external:
 	@mv $(LIBFT_PATH)*.a lib/
 
 #	--- COMPILATION RULES ---
-$(NAME): external
-	$(CC) $(OBJ) -o $@
+$(NAME): $(OBJ)
+	$(CC) $^ -o $@
 
 .PHONY: clean fclean re $(NAME)

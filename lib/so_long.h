@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/18 17:07:58 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 15:01:51 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@
 # include "external/printf/lib/ft_printf.h"
 # include "external/libft/libft.h"
 
+typedef struct s_game
+{
+	t_map	map;
+	void	*mlx_ptr;
+} t_game;
+
 typedef struct s_logic
 {
 	int	*pos_x;
@@ -32,8 +38,10 @@ typedef struct s_logic
 
 typedef struct s_map
 {
-	char	*map_path;
+	char	**flood_filled;
 	char	**grid;
+	char	*map_path;
+	int		*pos_escape;
 	int		collectible;
 	int		map_size_x;
 	int		map_size_y;
@@ -43,5 +51,6 @@ typedef struct s_map
 
 bool	maps2arr(t_map *maps, char *map_path);
 bool	maps_isvalid(t_map *map, char *map_path);
+void	safety_free_grid(t_map map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:30:16 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/18 17:25:28 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/27 13:06:37 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ size_t	countline(t_map *map)
 			i++;
 		}
 	}
-	free(line);
-	return (lb);
+	close(fd);
+	return (free(line), lb);
 }
 
 bool	maps2arr(t_map *maps, char *map_path)
@@ -48,15 +48,16 @@ bool	maps2arr(t_map *maps, char *map_path)
 
 	pos_y = 0;
 	maps->map_path = map_path;
-	maps->grid = malloc(sizeof(char *) * countline(maps));
-	if (!maps->grid)
-		return (false);
 	fd = open(maps->map_path, O_RDONLY);
 	if (fd < 0)
+		return (false);
+	maps->grid = ft_calloc(countline(maps) + 1, sizeof(char *));
+	if (!maps->grid)
 		return (false);
 	while ((maps->grid[pos_y] = get_next_line(fd)))
 		pos_y++;
 	maps->map_size_x = ft_strlen(maps->grid[0]);
 	maps->map_size_y = pos_y;
+	close(fd);
 	return (true);
 }

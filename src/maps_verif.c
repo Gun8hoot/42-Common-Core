@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/18 17:50:56 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 15:49:26 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,148 @@
 #include <stdbool.h>
 #include <stdio.h>
 
+bool	maps_check_char(t_map *map)
+{
+	int 	i;
+	int 	j;
+	char	c;
+
+	i = 0;
+	while ((map->grid[i] != NULL))
+	{
+		j = 0;
+		while (map->grid[i][j])
+		{
+			c = map->grid[i][j];
+			if (!ft_isdigit(c) && (c != '\n' && c != 'P' && c != 'E' && c != 'C'))
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
+
 bool	maps_squared(t_map *map)
 {
 	int		i;
 	size_t	len;
+	size_t	tmp_len;
 
-	i = 0;
-	printf("%d\n", map->map_size_y);
-	// while (map->grid[i] != NULL)
-	// {
-	// 	i++;
-	// }
-	printf("Good\n");
+	i = 1;
+	tmp_len = 0;
+	len = ft_strlen(map->grid[0]);
+	if (map->grid[0][len - 1] == '\n')
+		len--;
+	while (map->grid[i])
+	{
+		tmp_len = ft_strlen(map->grid[i]);
+		if (map->grid[i][tmp_len - 1] == '\n')
+			tmp_len--;
+		if (tmp_len != len)
+			return (false);
+		i++;
+	}
+	map->map_size_x = len;
 	return (true);
 }
 
-bool	countelem(t_map map)
+void	countelem(t_map *map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	
+	j = 0;
+	while (map->grid[i])
+	{
+		j = 0;
+		while (map->grid[i][j])
+		{
+			if (map->grid[i][j] == 'C')
+				map->collectible++;
+			if (map->grid[i][j] == 'E')
+				map->escape++;
+			if (map->grid[i][j] == 'P')
+				map->player++;
+			j++;
+		}
+		i++;
+	}
 }
 
 bool	maps_walls(t_map *map)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (map->grid[i])
+	{
+		j = 0;
+		if (i == 0 || i == (map->map_size_y - 1))
+		{
+			while(map->grid[i][j] && map->grid[i][j] != '\n')
+				j++;
+			if (map->map_size_x != j)
+				return (false);
+		}
+		else
+		{
+			if (map->grid[i][0] != '1' || map->grid[i][map->map_size_x - 1] != '1')
+				return (false);
+		}
+		i++;
+	}
+	return (true);
+}
+
+void	flood_fill(t_map *map, int pos_x, int pos_y)
+{
+	if (pos_x < 0 || pos_x > (map->map_size_x - 1) || pos_y < 0 || pos_y > (map->map_size_y - 1) || map->grid[pos_y][pos_x] == 'F')
+			return ;
+	map->grid[pos_x][pos_y] = 'F';
+	flood_fill(map, pos_x + 1, pos_y);
+	flood_fill(map, pos_x - 1, pos_y);
+	flood_fill(map, pos_x, pos_y + 1);
+	flood_fill(map, pos_x, pos_y - 1);
+}
+
+int	init_flood_fill(t_map *map, int pos_x, int pos_y)
+{
+	size_t	i;
+	int		fd;
+
+	i = 0;
+	fd = open(map->map_path, O_RDONLY);
+	if (fd < 0)
+		return (false);
+	while ((map->flood_filled[i] != NULL))
+	{
+		map->flood_filled[i] = get_next_line(fd);
+	}
+	flood_fill(map, map->pos_escape[0], map->pos_escape[1]);
 	return (true);
 }
 
 bool	maps_isvalid(t_map *map, char *map_path)
 {
-	maps2arr(map, map_path);
-	if (maps_squared(map) == false)
+	if (maps2arr(map, map_path) == false)
 		return (false);
-	else if (map->collectible < 1)
+	if (maps_squared(map) != true)
+		return (false);
+	if (maps_check_char(map) != true)
+		return (false);
+	countelem(map);
+	if (map->collectible < 1)
 		return (false);
 	else if (map->player != 1)
 		return (false);
 	else if (map->escape != 1)
 		return (false);
+	else if (maps_walls(map) != true)
+		return (false);
+	printf("map correct\n");
 	return (true);
 }
