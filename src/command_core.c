@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 17:33:45 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 15:17:31 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 09:19:25 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	stack_rotate(t_stack **head, char c)
 	t_stack	*save;
 	t_stack	*tmp;
 
-	if (!head)
+	if (!head || !*head || !(*head)->next)
 		return (0);
 	save = *head;
 	*head = (*head)->next;

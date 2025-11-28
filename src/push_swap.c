@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 17:33:51 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 14:53:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 09:03:28 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	stack_a = parser(argc, argv);
 	if (argv[1][0] == '\0' || !stack_a)
 	{
-		ft_printf("Error\n");
+		ft_putstr_fd("Error\n", 2);
 		return (EXIT_FAILURE);
 	}
 	if (init_sort(&stack_a))

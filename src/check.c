@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:00:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 15:13:27 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 08:33:35 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ int	check_number_only(char **tab)
 		sign = 0;
 		while (tab[i][j])
 		{
-			if ((!ft_isdigit((tab[i][j])) && sign == 1) || (!ft_isdigit((tab[i][j]))
-				&& (tab[i][j] != '-' && tab[i][j] != '+')))
+			if ((!ft_isdigit((tab[i][j])) && sign == 1)
+				|| (!ft_isdigit((tab[i][j])) && (tab[i][j] != '-' 
+						&& tab[i][j] != '+')))
 				return (0);
 			if (tab[i][j] == '-' || tab[i][j] == '+')
 				sign = 1;

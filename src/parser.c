@@ -6,48 +6,85 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 13:41:13 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 15:40:52 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/28 09:01:38 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/push_swap.h"
 
-// int	*sort_tab(int *tab, size_t len)
-// {
-// 	int	*assign_tab;
+void	assign_positions(t_stack *stack, int *sorted_tab, size_t len)
+{
+	t_stack	*tmp;
+	size_t	i;
 
-// 	assign_tab;
-// }
+	tmp = stack;
+	while (tmp)
+	{
+		i = 0;
+		while (i < len)
+		{
+			if (tmp->value == sorted_tab[i])
+			{
+				tmp->pos = i;
+				break ;
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
+}
 
-// size_t elem_pos(int *tab, size_t len)
-// {
-// 	size_t	j;
-// 	size_t	i;
-// 	size_t	pos;
+void	sort_tab(int *tab, size_t len)
+{
+	size_t	i;
+	size_t	j;
+	int		temp;
 
-// 	i = 0;
-// 	j = 0;
-// 	pos = 0;
-// 	while (i < len)
-// 	return (pos);
-// }
+	i = 0;
+	while (i < len - 1)
+	{
+		j = i + 1;
+		while (j < len)
+		{
+			if (tab[i] > tab[j])
+			{
+				temp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 t_stack	*created_stack(int *tab, size_t len)
 {
 	t_stack	*stack;
 	t_stack	*node;
 	size_t	i;
+	int		*sorted_tab;
 
-	i = 0;
 	stack = NULL;
+	sorted_tab = malloc(sizeof(int) * len);
+	if (!sorted_tab)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		sorted_tab[i] = tab[i];
+		i++;
+	}
+	sort_tab(sorted_tab, len);
+	i = 0;
 	while (i < len)
 	{
 		node = stack_new_node(stack, tab[i]);
-		node->pos = i;
 		stack_add_back(&stack, node);
 		i++;
 	}
-	return (stack);
+	assign_positions(stack, sorted_tab, len);
+	return (free(sorted_tab), stack);
 }
 
 void	ft_free_alem(char **arr, int j)
