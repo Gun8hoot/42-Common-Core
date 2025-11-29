@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 14:42:35 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 16:14:42 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,17 @@ typedef struct s_game
 {
 	void	*x;
 	void	*y;
+	void	*mlx_ptr;
 	t_map	map;
 }			t_game;
 
-bool		maps2arr(t_map *maps, char *map_path);
+bool		maps2arr(t_map *maps);
 bool		maps_isvalid(t_map *map, char *map_path);
 void		safety_free_grid(t_map map);
 void		get_pos(t_map *map);
 int			init_flood_fill(t_map *map);
+bool	check_ext(t_map *map, char *file_path);
+bool	render(t_game *game);
+
 
 #endif

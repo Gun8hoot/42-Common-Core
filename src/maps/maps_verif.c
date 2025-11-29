@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 14:41:19 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 14:49:40 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,9 @@ bool	maps_walls(t_map *map)
 
 bool	maps_isvalid(t_map *map, char *map_path)
 {
-	if (!maps2arr(map, map_path))
+	if (!check_ext(map, map_path))
+		return (false);
+	if (!maps2arr(map))
 		return (false);
 	if (maps_squared(map) != true)
 		return (false);
@@ -122,11 +124,11 @@ bool	maps_isvalid(t_map *map, char *map_path)
 	countelem(map);
 	if (map->collectible < 1)
 		return (false);
-	else if (map->player != 1)
+	if (map->player != 1)
 		return (false);
-	else if (map->escape != 1)
+	if (map->escape != 1)
 		return (false);
-	else if (maps_walls(map) != true)
+	if (maps_walls(map) != true)
 		return (false);
 	// else if (init_flood_fill(map) != true)
 		// return (false);

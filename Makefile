@@ -1,5 +1,6 @@
 NAME		=	so_long
-CFLAGS		=	-Wall -Wextra -Werror -I. -g3
+CFLAGS		=	-Wall -Wextra -Werror -I. -g3 -O3 -c
+MLX_FLAG	=	-L$(MLX_DIR) -lmlx -lm -lXext -lX11
 
 SRC			=	$(SRC_DIR)/maps/maps.c\
 				$(SRC_DIR)/maps/maps_verif.c\
@@ -12,6 +13,7 @@ OBJS		=	$(SRC:%.c=%.o)
 
 SRC_DIR		=	src
 LIB_DIR		=	lib
+MLX_DIR		=	external/minilibx-linux/
 
 %.c: %.o
 	$(CC) $(CFLAGS) $< -o $@
@@ -22,7 +24,7 @@ $(NAME): $(OBJS)
 	mv external/printf/*.a lib
 	make -C external/libft
 	mv external/libft/*.a lib
-	$(CC) $^ -o $@ lib/*.a $(GNL)
+	$(CC) $(GNL) $^ -o $@ lib/*.a $(MLX_FLAG) $(MLX_DIR)/libmlx.a
 
 clean:
 	rm -f $(OBJS)

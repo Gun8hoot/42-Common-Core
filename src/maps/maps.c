@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:30:16 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 14:12:35 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 14:48:04 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ size_t	countline(t_map *map)
 	return (free(line), lb);
 }
 
-bool	check_ext(char *file_path)
+bool	check_ext(t_map *map, char *file_path)
 {
 	int	len;
 
@@ -114,18 +114,16 @@ bool	check_ext(char *file_path)
 	}
 	if (strncmp(&file_path[len], ".ber", 4))
 		return (false);
+	map->map_path = file_path;
 	return (true);
 }
 
-bool	maps2arr(t_map *maps, char *map_path)
+bool	maps2arr(t_map *maps)
 {
 	int		pos_y;
 	int		fd;
 
 	pos_y = 0;
-	if (!check_ext(map_path))
-		return (false);
-	maps->map_path = map_path;
 	fd = open(maps->map_path, O_RDONLY);
 	if (fd < 0)
 		return (false);
