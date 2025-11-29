@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/28 15:49:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 14:41:19 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	maps_check_char(t_map *map)
 	char	c;
 
 	i = 0;
-	while ((map->grid[i] != NULL))
+	while ((map->grid[i]))
 	{
 		j = 0;
 		while (map->grid[i][j])
@@ -111,37 +111,9 @@ bool	maps_walls(t_map *map)
 	return (true);
 }
 
-void	flood_fill(t_map *map, int pos_x, int pos_y)
-{
-	if (pos_x < 0 || pos_x > (map->map_size_x - 1) || pos_y < 0 || pos_y > (map->map_size_y - 1) || map->grid[pos_y][pos_x] == 'F')
-			return ;
-	map->grid[pos_x][pos_y] = 'F';
-	flood_fill(map, pos_x + 1, pos_y);
-	flood_fill(map, pos_x - 1, pos_y);
-	flood_fill(map, pos_x, pos_y + 1);
-	flood_fill(map, pos_x, pos_y - 1);
-}
-
-int	init_flood_fill(t_map *map, int pos_x, int pos_y)
-{
-	size_t	i;
-	int		fd;
-
-	i = 0;
-	fd = open(map->map_path, O_RDONLY);
-	if (fd < 0)
-		return (false);
-	while ((map->flood_filled[i] != NULL))
-	{
-		map->flood_filled[i] = get_next_line(fd);
-	}
-	flood_fill(map, map->pos_escape[0], map->pos_escape[1]);
-	return (true);
-}
-
 bool	maps_isvalid(t_map *map, char *map_path)
 {
-	if (maps2arr(map, map_path) == false)
+	if (!maps2arr(map, map_path))
 		return (false);
 	if (maps_squared(map) != true)
 		return (false);
@@ -156,6 +128,8 @@ bool	maps_isvalid(t_map *map, char *map_path)
 		return (false);
 	else if (maps_walls(map) != true)
 		return (false);
+	// else if (init_flood_fill(map) != true)
+		// return (false);
 	printf("map correct\n");
 	return (true);
 }

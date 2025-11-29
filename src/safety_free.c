@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 10:45:31 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/27 13:05:39 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 12:48:24 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	safety_free_grid(t_map map)
 {
-	size_t	pos_y;
+	int	pos_y;
 
 	pos_y = 0;
 	if (map.grid)
@@ -26,13 +26,14 @@ void	safety_free_grid(t_map map)
 		}
 		free(map.grid);	
 	}
+	pos_y = 0;
 	if (map.flood_filled)
 	{
 		while (pos_y <= map.map_size_y - 1)
 			{
-				free(map.grid[pos_y]);
+				free(map.flood_filled[pos_y]);
 				pos_y++;
 			}
-			free(map.grid);	
+			free(map.flood_filled);	
 	}
 }
