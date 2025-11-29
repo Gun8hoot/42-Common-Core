@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 14:49:40 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/11/29 17:21:43 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,8 +130,8 @@ bool	maps_isvalid(t_map *map, char *map_path)
 		return (false);
 	if (maps_walls(map) != true)
 		return (false);
-	// else if (init_flood_fill(map) != true)
-		// return (false);
+	else if (init_flood_fill(map) != true)
+		return (false);
 	printf("map correct\n");
 	return (true);
 }
