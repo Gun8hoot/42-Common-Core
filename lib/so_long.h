@@ -6,12 +6,14 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 14:30:01 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/01 17:40:50 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+# define HEIGHT 64
+# define WIDTH 64
 
 # include "external/gnl/get_next_line.h"
 # include "external/libft/libft.h"
@@ -25,12 +27,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_image
+{
+	void			*ptr;
+	int				width;
+	int				height;
+}					t_image;
+
 typedef struct s_load_image
 {
-	t_img			player;
-	t_img			exit;
-	t_img			wall;
-	t_img			collectible;
+	t_image			pict;
 }					t_load_image;
 
 typedef struct s_map
@@ -46,8 +52,8 @@ typedef struct s_map
 	int				counter;
 	int				escape;
 	int				player;
-	int				*pos_x;
-	int				*pos_y;
+	int				pos_x;
+	int				pos_y;
 }					t_map;
 
 typedef struct s_game
@@ -65,6 +71,8 @@ void				get_pos(t_map *map);
 int					init_flood_fill(t_map *map);
 bool				check_ext(t_map *map, char *file_path);
 bool				render(t_game *game);
-int					safety_exit(t_game game);
+int					safety_exit_all(t_game game);
+int					keypress_action(int key, t_game *game);
+// bool				load_sprite(t_game *game, t_load_image *images, int x, int y, char c);
 
 #endif

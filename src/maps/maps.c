@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:30:16 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 14:24:39 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/01 15:02:46 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ bool	maps2arr(t_map *maps)
 	while ((maps->grid[pos_y] = get_next_line(fd)))
 		pos_y++;
 	maps->map_size_x = ft_strlen(maps->grid[0]);
+	// printf("%d\n", maps->map_size_x);
 	maps->map_size_y = pos_y;
 	close(fd);
 	return (true);

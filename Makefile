@@ -1,10 +1,11 @@
 NAME		=	so_long
-CFLAGS		=	-Wall -Wextra -Werror -I. -g3 -O3 -c
+CFLAGS		=	-Wall -Wextra -Werror -I. -g3 -O2 -c
 MLX_FLAG	=	-L$(MLX_DIR) -lm -lXext -lX11
 
 SRC			=	$(SRC_DIR)/maps/maps.c\
 				$(SRC_DIR)/maps/maps_verif.c\
 				$(SRC_DIR)/render/render.c\
+				$(SRC_DIR)/logic/logic.c\
 				$(SRC_DIR)/safety_free.c\
 				$(SRC_DIR)/so_long.c\
 				external/gnl/get_next_line.c\
@@ -31,7 +32,7 @@ LIBFT:
 MINILIBX:
 	rm -f minilibx-linux.tgz
 	wget https://cdn.intra.42.fr/document/document/39937/minilibx-linux.tgz
-	tar xvfz minilibx-linux.tgz
+	tar xvfz minilibx-linux.tgz -C external
 	make -C external/minilibx-linux
 	mv external/minilibx-linux/*.a lib/
 
@@ -48,5 +49,7 @@ clean:
 fclean: clean
 	rm -f lib/*.a
 	rm -f $(NAME)
+
+re: fclean all
 
 .PHONY: fclean clean re all

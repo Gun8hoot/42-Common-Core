@@ -6,34 +6,62 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:02:54 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 14:35:25 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/01 17:46:31 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/so_long.h"
 
-void	sprite4map(t_game *game)
+bool	load_sprite(t_game *game, t_load_image *images, int x, int y, char c)
 {
-	(void)game;
-		
+	if (c == 'P')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr, "textures/player.xpm", &images->pict.width, &images->pict.height);
+	else if (c == 'E')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr, "texture/exit.xpm", &images->pict.width, &images->pict.height);
+	else if (c == 'C')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr, "texture/collectible.xpm", &images->pict.width, &images->pict.height);
+	else if (c == '1')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr, "texture/wall.xpm", &images->pict.width, &images->pict.height);
+	else if (c == '0')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr, "texture/floor.xpm", &images->pict.width, &images->pict.height);
+	// printf("[DEB] img ptr : %p : %c", images->pict.ptr, c);
+	if (images->pict.ptr == NULL)
+		return (false);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, images->pict.ptr, x * WIDTH, y * HEIGHT);
+	return (true);
 }
 
-void	move_in_map(t_game *game)
+bool	gen_frame(t_game *game)
 {
-	(void)game;
-	// while(game->map[])
+	int *x;
+	int *y;
+
+	x = &game->map.pos_x;
+	y = &game->map.pos_y;
+	while (game->map.grid[*y])
+	{
+		while (game->map.grid[*y][*x])
+		{
+			if (!load_sprite(game, &game->image, *x, *y,  game->map.grid[*y][*x]))
+				return (false);
+			x++;
+		}
+		y++;
+	}
+	return (true);
 }
 
 bool	render(t_game *game)
 {
-	printf("%p\n", game->win_ptr);
-	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map.map_size_x * 64, game->map.map_size_y * 64, "Sooooo_longggg");
+	game->mlx_ptr = mlx_init();
+	if (!game->mlx_ptr)
+		return (false);
+	game->win_ptr = mlx_new_window(game->mlx_ptr, game->map.map_size_x * 64,
+		game->map.map_size_y * 64, "Sooooo_longggg");
 	if (!game->win_ptr)
 		return (false);
-	ft_memset(&game->image, 0, sizeof(t_img));
-	mlx_loop(game->mlx_ptr);
-	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
-	mlx_destroy_display(game->mlx_ptr);
-	free(game->mlx_ptr);
+	ft_memset(&game->image, 0, sizeof(t_load_image));
+
+	gen_frame(game);
 	return (true);
 }
