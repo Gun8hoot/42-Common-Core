@@ -1,34 +1,52 @@
 NAME		=	so_long
 CFLAGS		=	-Wall -Wextra -Werror -I. -g3 -O3 -c
-MLX_FLAG	=	-L$(MLX_DIR) -lmlx -lm -lXext -lX11
+MLX_FLAG	=	-L$(MLX_DIR) -lm -lXext -lX11
 
 SRC			=	$(SRC_DIR)/maps/maps.c\
 				$(SRC_DIR)/maps/maps_verif.c\
 				$(SRC_DIR)/render/render.c\
 				$(SRC_DIR)/safety_free.c\
-				$(SRC_DIR)/so_long.c
-GNL			=	external/gnl/get_next_line.c\
+				$(SRC_DIR)/so_long.c\
+				external/gnl/get_next_line.c\
 				external/gnl/get_next_line_utils.c
 OBJS		=	$(SRC:%.c=%.o)
 
 SRC_DIR		=	src
 LIB_DIR		=	lib
-MLX_DIR		=	external/minilibx-linux/
+MLX_DIR		=	external/minilibx-linux
+
+all: $(NAME)
 
 %.c: %.o
 	$(CC) $(CFLAGS) $< -o $@
 
-$(NAME): $(OBJS)
-	make -C external/minilibx-linux
+PRINTF:
 	make -C external/printf
-	mv external/printf/*.a lib
+	mv external/printf/*.a lib/
+
+LIBFT:
 	make -C external/libft
-	mv external/libft/*.a lib
-	$(CC) $(GNL) $^ -o $@ lib/*.a $(MLX_FLAG) $(MLX_DIR)/libmlx.a
+	mv external/libft/*.a lib/
+
+MINILIBX:
+	rm -f minilibx-linux.tgz
+	wget https://cdn.intra.42.fr/document/document/39937/minilibx-linux.tgz
+	tar xvfz minilibx-linux.tgz
+	make -C external/minilibx-linux
+	mv external/minilibx-linux/*.a lib/
+
+$(NAME): MINILIBX PRINTF LIBFT $(OBJS)
+	$(CC) $(GNL) $(OBJS) -o $@ lib/*.a $(MLX_FLAG)
 
 clean:
+	make -C external/printf clean
+	make -C external/minilibx-linux clean
+	make -C external/libft clean
 	rm -f $(OBJS)
+	rm -f minilibx-linux.tgz
 
 fclean: clean
 	rm -f lib/*.a
 	rm -f $(NAME)
+
+.PHONY: fclean clean re all

@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 11:30:16 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 17:32:04 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/01 14:24:39 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	init_flood_fill(t_map *map)
 	close(fd);
 	if (map->flood_filled[map->pos_escape[1]][map->pos_escape[0]] != 'F')
 		return (false);
-
+	close(fd);
 	return (true);
 }
 

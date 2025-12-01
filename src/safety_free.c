@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 10:45:31 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/29 12:48:24 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/01 11:47:43 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ void	safety_free_grid(t_map map)
 			}
 			free(map.flood_filled);	
 	}
+}
+
+int	safety_exit(t_game game)
+{
+	(void)game;
+	//safety_free_grid(game.map);
+	// mlx_destroy_window(game.mlx_ptr, game.win_ptr);
+	// mlx_destroy_display(game.mlx_ptr);
+	// free(game.mlx_ptr);
+	return (EXIT_SUCCESS);
 }
