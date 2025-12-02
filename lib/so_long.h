@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/02 11:47:24 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 17:21:20 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,22 @@ typedef struct s_game
 // --- PROTOTYPE ---
 bool				maps_isvalid(t_map *map, char *map_path);
 bool				check_ext(t_map *map, char *file_path);
+bool				dup_grid(t_map *map, char **grid);
 bool				init_map(t_map *maps);
 int					init_flood_fill(t_map *map);
 void				flood_fill(t_map *map, int pos_x, int pos_y);
 void				find_elem(t_map *map);
-bool				dup_grid(t_map *map, char **grid);
 
 // --- RENDER ---
+bool				gen_frame(t_game *game);
 bool				render(t_game *game);
 
 // --- LOGIC ---
 int					keypress_action(int key, t_game *game);
 
 // --- FREE ALL ---
-int					safety_exit_all(t_game *game);
 void				safety_free_grid(char **grid, char **flood_grid);
 void				free_picture(t_game game, t_load_image images);
+int					safety_exit_all(t_game *game);
 
 #endif
