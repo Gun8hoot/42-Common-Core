@@ -6,13 +6,13 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:11:20 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 17:40:06 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 10:49:33 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/so_long.h"
 
-int		keypress_action(int key, t_game *game)
+int	keypress_action(int key, t_game *game)
 {
 	if (key == ESC)
 		mlx_loop_end(game->mlx_ptr);

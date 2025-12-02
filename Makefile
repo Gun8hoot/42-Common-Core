@@ -8,6 +8,7 @@ SRC			=	$(SRC_DIR)/maps/maps.c\
 				$(SRC_DIR)/logic/logic.c\
 				$(SRC_DIR)/safety_free.c\
 				$(SRC_DIR)/so_long.c\
+				$(SRC_DIR)/utils.c\
 				external/gnl/get_next_line.c\
 				external/gnl/get_next_line_utils.c
 OBJS		=	$(SRC:%.c=%.o)
@@ -47,6 +48,7 @@ clean:
 	rm -f minilibx-linux.tgz
 
 fclean: clean
+	rm -rf external/minilibx-linux
 	rm -f lib/*.a
 	rm -f $(NAME)
 

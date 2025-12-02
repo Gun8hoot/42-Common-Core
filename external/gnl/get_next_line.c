@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:27:07 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/13 09:37:10 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 10:59:48 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free(static_vars);
+		static_vars = NULL;
 		return (NULL);
 	}
 	static_vars = ft_readnstock(fd, static_vars);
@@ -93,7 +94,8 @@ char	*get_next_line(int fd)
 	{
 		if (static_vars)
 			free(static_vars);
-		return (static_vars = NULL, NULL);
+		static_vars = NULL;
+		return (NULL);
 	}
 	line = ft_safe_dup(static_vars);
 	static_vars = ft_extract_next(static_vars);

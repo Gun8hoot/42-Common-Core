@@ -6,15 +6,15 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 17:40:50 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 11:47:24 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
 # define HEIGHT 64
 # define WIDTH 64
-
 # include "external/gnl/get_next_line.h"
 # include "external/libft/libft.h"
 # include "external/minilibx-linux/mlx.h"
@@ -27,6 +27,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+// --- STRUCTURE ---
 typedef struct s_image
 {
 	void			*ptr;
@@ -60,19 +61,29 @@ typedef struct s_game
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	bool			loop;
 	t_map			map;
 	t_load_image	image;
 }					t_game;
 
-bool				maps2arr(t_map *maps);
+// --- PROTOTYPE ---
 bool				maps_isvalid(t_map *map, char *map_path);
-void				safety_free_grid(t_map map);
-void				get_pos(t_map *map);
-int					init_flood_fill(t_map *map);
 bool				check_ext(t_map *map, char *file_path);
+bool				init_map(t_map *maps);
+int					init_flood_fill(t_map *map);
+void				flood_fill(t_map *map, int pos_x, int pos_y);
+void				find_elem(t_map *map);
+bool				dup_grid(t_map *map, char **grid);
+
+// --- RENDER ---
 bool				render(t_game *game);
-int					safety_exit_all(t_game game);
+
+// --- LOGIC ---
 int					keypress_action(int key, t_game *game);
-// bool				load_sprite(t_game *game, t_load_image *images, int x, int y, char c);
+
+// --- FREE ALL ---
+int					safety_exit_all(t_game *game);
+void				safety_free_grid(char **grid, char **flood_grid);
+void				free_picture(t_game game, t_load_image images);
 
 #endif

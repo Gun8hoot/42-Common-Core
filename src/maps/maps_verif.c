@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/01 16:57:26 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 12:37:00 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 bool	maps_check_char(t_map *map)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	char	c;
 
 	i = 0;
@@ -27,7 +27,8 @@ bool	maps_check_char(t_map *map)
 		while (map->grid[i][j])
 		{
 			c = map->grid[i][j];
-			if (!ft_isdigit(c) && (c != '\n' && c != 'P' && c != 'E' && c != 'C'))
+			if (!ft_isdigit(c) && (c != '\n' && c != 'P' && c != 'E'
+					&& c != 'C'))
 				return (false);
 			j++;
 		}
@@ -38,15 +39,15 @@ bool	maps_check_char(t_map *map)
 
 bool	maps_squared(t_map *map)
 {
-	int		i;
-	size_t	len;
 	size_t	tmp_len;
+	size_t	len;
+	int		i;
 
-	i = 1;
-	tmp_len = 0;
 	len = ft_strlen(map->grid[0]);
+	i = 1;
 	if (map->grid[0][len - 1] == '\n')
 		len--;
+
 	while (map->grid[i])
 	{
 		tmp_len = ft_strlen(map->grid[i]);
@@ -56,7 +57,7 @@ bool	maps_squared(t_map *map)
 			return (false);
 		i++;
 	}
-	map->map_size_x = len;
+
 	return (true);
 }
 
@@ -96,14 +97,15 @@ bool	maps_walls(t_map *map)
 		j = 0;
 		if (i == 0 || i == (map->map_size_y - 1))
 		{
-			while(map->grid[i][j] && map->grid[i][j] != '\n')
+			while (map->grid[i][j] && map->grid[i][j] != '\n')
 				j++;
 			if (map->map_size_x != j)
 				return (false);
 		}
 		else
 		{
-			if (map->grid[i][0] != '1' || map->grid[i][map->map_size_x - 1] != '1')
+			if (map->grid[i][0] != '1' || map->grid[i][map->map_size_x
+				- 1] != '1')
 				return (false);
 		}
 		i++;
@@ -113,25 +115,24 @@ bool	maps_walls(t_map *map)
 
 bool	maps_isvalid(t_map *map, char *map_path)
 {
+	ft_memset(map, 0, sizeof(t_map));
 	if (!check_ext(map, map_path))
 		return (false);
-	if (!maps2arr(map))
+	if (!init_map(map))
 		return (false);
 	if (maps_squared(map) != true)
 		return (false);
 	if (maps_check_char(map) != true)
 		return (false);
 	countelem(map);
-	if (map->collectible < 1)
-		return (false);
-	if (map->player != 1)
-		return (false);
-	if (map->escape != 1)
+	if (map->collectible < 1
+		|| map->player != 1
+		|| map->escape != 1)
 		return (false);
 	if (maps_walls(map) != true)
 		return (false);
 	else if (init_flood_fill(map) != true)
 		return (false);
-	printf("map correct\n");
+	ft_printf("map correct\n");
 	return (true);
 }

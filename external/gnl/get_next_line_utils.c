@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 12:25:30 by nclavel           #+#    #+#             */
-/*   Updated: 2025/11/14 07:45:07 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/02 09:50:42 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ char	*ft_gnl_strdup(const char *s)
 		str[i] = s[i];
 		i++;
 	}
-	if (s[i] == '\n')
-		str[i++] = '\n';
 	str[i] = '\0';
 	return (str);
 }
