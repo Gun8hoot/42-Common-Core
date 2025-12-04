@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 10:45:31 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/02 16:30:07 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/04 02:58:26 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,13 @@ void	safety_free_grid(char **grid, char **flood_grid)
 	}
 }
 
-// void	free_picture(t_game game, t_load_image images)
-// {
-// 	if (images.player.ptr)
-// 		mlx_destroy_image(game.mlx_ptr, images.player.ptr);
-// 	if (images.collectible.ptr)
-// 		mlx_destroy_image(game.mlx_ptr, images.collectible.ptr);
-// 	if (images.exit.ptr)
-// 		mlx_destroy_image(game.mlx_ptr, images.exit.ptr);
-// 	if (images.floor.ptr)
-// 		mlx_destroy_image(game.mlx_ptr, images.floor.ptr);
-// 	if (images.wall.ptr)
-// 		mlx_destroy_image(game.mlx_ptr, images.wall.ptr);
-// }
+int	safety_close(t_game *game)
+{
+	mlx_loop_end(game->mlx_ptr);
+	safety_exit_all(game);
+	exit(1);
+	return (0);
+}
 
 void	safety_kill_render(void *mlx_ptr, void *win_ptr, bool loop)
 {
@@ -65,11 +59,10 @@ void	safety_kill_render(void *mlx_ptr, void *win_ptr, bool loop)
 	}
 }
 
-int		safety_exit_all(t_game *game)
+int	safety_exit_all(t_game *game)
 {
 	safety_free_grid(game->map.grid, NULL);
 	safety_kill_render(game->mlx_ptr, game->win_ptr, game->loop);
-	// free_picture(game, game.image);
 	game->mlx_ptr = NULL;
 	return (EXIT_SUCCESS);
 }

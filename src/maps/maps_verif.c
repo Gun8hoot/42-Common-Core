@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:17:19 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/02 12:37:00 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/04 02:22:57 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ bool	maps_squared(t_map *map)
 	i = 1;
 	if (map->grid[0][len - 1] == '\n')
 		len--;
-
 	while (map->grid[i])
 	{
 		tmp_len = ft_strlen(map->grid[i]);
@@ -57,7 +56,6 @@ bool	maps_squared(t_map *map)
 			return (false);
 		i++;
 	}
-
 	return (true);
 }
 
@@ -133,6 +131,5 @@ bool	maps_isvalid(t_map *map, char *map_path)
 		return (false);
 	else if (init_flood_fill(map) != true)
 		return (false);
-	ft_printf("map correct\n");
 	return (true);
 }

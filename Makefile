@@ -4,11 +4,14 @@ MLX_FLAG	=	-L$(MLX_DIR) -lm -lXext -lX11
 
 SRC			=	$(SRC_DIR)/maps/maps.c\
 				$(SRC_DIR)/maps/maps_verif.c\
+				$(SRC_DIR)/maps/flood_fill.c\
 				$(SRC_DIR)/render/render.c\
 				$(SRC_DIR)/logic/logic.c\
+				$(SRC_DIR)/logic/event.c\
 				$(SRC_DIR)/safety_free.c\
 				$(SRC_DIR)/so_long.c\
 				$(SRC_DIR)/utils.c\
+				$(SRC_DIR)/.debug.c\
 				external/gnl/get_next_line.c\
 				external/gnl/get_next_line_utils.c
 OBJS		=	$(SRC:%.c=%.o)

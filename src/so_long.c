@@ -6,17 +6,16 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 10:54:20 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/02 17:14:12 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/04 02:42:27 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/so_long.h"
 
-int temp(t_game *game)
+int	temp(t_game *game)
 {
 	mlx_loop_end(game->mlx_ptr);
 	safety_exit_all(game);
-	ft_printf("EXIT\n");
 	exit(1);
 	return (0);
 }
@@ -30,7 +29,7 @@ int	main(int argc, char **argv)
 		return (printf("Missing arguments\n"), EXIT_FAILURE);
 	if (!maps_isvalid(&game.map, argv[1]))
 	{
-		ft_putstr_fd("Error w map\n", 2);
+		ft_putstr_fd("Error\n", 2);
 		return (safety_free_grid(game.map.grid, NULL), EXIT_FAILURE);
 	}
 	if (!render(&game))
