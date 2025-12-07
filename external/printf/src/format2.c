@@ -18,12 +18,6 @@ size_t	ft_hex(unsigned int nb, char *base)
 	size_t	i;
 
 	i = 0;
-	if (nb < 0)
-	{
-		write(1, "-", 1);
-		nb = -nb;
-		i += ft_hex(nb, base);
-	}
 	if (nb >= 16)
 	{
 		i += ft_hex(nb / 16, base);

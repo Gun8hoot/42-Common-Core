@@ -5,7 +5,7 @@ LIBFT_PATH =	external/libft/
 SRC_DIR		=	src/
 
 CC			=	cc
-CFLAGS		=	-Wall -Werror -Wextra -I. -O1
+CFLAGS		=	-Wall -Werror -Wextra -I. -O1 -g3
 
 SRCS		=	$(SRC_DIR)client.c\
 				$(SRC_DIR)server.c
@@ -34,7 +34,7 @@ fclean: clean
 	rm -f $(EXEC_NAME)
 
 re: fclean all
-	@echo "\e[0;32mRecreate everything\e[0m"
+	@echo "\e[0;32mHave recreate everything\e[0m"
 
 
 #	--- EXTERNAL COMPILATION RULES ---
@@ -55,7 +55,7 @@ client: printf libft
 	$(CC) $(CFLAGS) $(SRC_DIR)client.c -o $@ $(LIB)
 
 server: printf libft
-	@echo "\e[0;32mCompiling minitalk server\e[0m"
+	@echo -e "\e[0;32mCompiling minitalk server\e[0m"
 	$(CC) $(CFLAGS) $(SRC_DIR)server.c -o $@ $(LIB)
 
 

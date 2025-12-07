@@ -98,6 +98,6 @@ int	main(int argc, char **argv)
 		ft_printf("\x1b[0;31m[!] Failed to send the message\x1b[0m\n");
 		return (EXIT_FAILURE);
 	}
-	ft_printf("\x1b[0;32m[!] The message was succesfully send\x1b[0m\n");
+	ft_printf("\x1b[0;32m[!] The message has been succesfully send\x1b[0m\n");
 	return (EXIT_SUCCESS);
 }
