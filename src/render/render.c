@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:02:54 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/04 02:27:58 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 14:05:32 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,37 @@ void	display_sprite(t_game *game, int x, int y)
 		x * WIDTH, y * HEIGHT);
 }
 
+static void	player_sprite(t_game *game, t_load_image *images)
+{
+	if (game->looking_on == 0)
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+				"textures/player.xpm", &images->pict.width,
+				&images->pict.height);
+	else if (game->looking_on == 'd')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+				"textures/player_d.xpm", &images->pict.width,
+				&images->pict.height);
+	else if (game->looking_on == 'r')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+				"textures/player_l.xpm", &images->pict.width,
+				&images->pict.height);
+	else if (game->looking_on == 'l')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+			"textures/player_r.xpm", &images->pict.width,
+			&images->pict.height);
+	else if (game->looking_on == 't')
+		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+			"textures/player_t.xpm", &images->pict.width,
+			&images->pict.height);
+}
+
 bool	load_sprite(t_game *game, int x, int y, char c)
 {
 	t_load_image	*images;
 
 	images = &game->image;
 	if (c == 'P')
-		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
-				"textures/player.xpm", &images->pict.width,
-				&images->pict.height);
+		player_sprite(game, images);
 	else if (c == 'E' && game->map.show_escape)
 		images->pict.ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 				"textures/exit.xpm", &images->pict.width, &images->pict.height);

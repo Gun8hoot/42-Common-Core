@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 10:02:24 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/04 02:51:16 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 13:57:13 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_game
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	char			looking_on;
 	bool			loop;
 	t_map			map;
 	t_load_image	image;
@@ -86,7 +87,7 @@ bool				maps_isvalid(t_map *map, char *map_path);
 bool				check_ext(t_map *map, char *file_path);
 bool				dup_grid(t_map *map, char **grid);
 bool				init_map(t_map *maps);
-bool					init_flood_fill(t_map *map);
+bool				init_flood_fill(t_map *map);
 void				flood_fill(t_map *map, int pos_x, int pos_y, int *col);
 void				find_elem(t_map *map);
 

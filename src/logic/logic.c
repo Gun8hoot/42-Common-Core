@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 14:11:20 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/04 00:14:19 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 14:16:15 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,22 @@ int	keypress_action(int key, t_game *game)
 		mlx_loop_end(game->mlx_ptr);
 	if (key == KEY_W || key == KEY_UP)
 	{
+		game->looking_on = 't';
 		mouvement(game, 0, -1);
 	}
 	if (key == KEY_D || key == KEY_RIGHT)
 	{
+		game->looking_on = 'l';
 		mouvement(game, 1, 0);
 	}
 	if (key == KEY_S || key == KEY_DOWN)
 	{
+		game->looking_on = 'd';
 		mouvement(game, 0, +1);
 	}
 	if (key == KEY_A || key == KEY_LEFT)
 	{
+		game->looking_on = 'r';
 		mouvement(game, -1, 0);
 	}
 	return (0);

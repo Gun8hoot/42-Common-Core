@@ -45,7 +45,7 @@ $(NAME): MINILIBX PRINTF LIBFT $(OBJS)
 
 clean:
 	make -C external/printf clean
-	make -C external/minilibx-linux clean
+	@if [ -d external/minilibx-linux ]; then make -C external/minilibx-linux clean; fi
 	make -C external/libft clean
 	rm -f $(OBJS)
 	rm -f minilibx-linux.tgz
