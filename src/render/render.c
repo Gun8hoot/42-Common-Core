@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 15:02:54 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/11 14:05:32 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 15:41:35 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ bool	load_sprite(t_game *game, int x, int y, char c)
 
 bool	gen_frame(t_game *game)
 {
-	int	x;
-	int	y;
+	char	*alpha_counter;
+	int		x;
+	int		y;
 
 	y = 0;
 	while (game->map.grid[y])
@@ -90,6 +91,12 @@ bool	gen_frame(t_game *game)
 		}
 		y++;
 	}
+	alpha_counter = ft_itoa(game->map.counter);
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 16 ,
+		game->map.map_size_y * 64 - 16, 0xffffff, "MOVE : ");
+	mlx_string_put(game->mlx_ptr, game->win_ptr, 1 * 64 ,
+		game->map.map_size_y * 64 - 16, 0xffffff, alpha_counter);
+	free(alpha_counter);
 	return (true);
 }
 

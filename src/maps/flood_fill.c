@@ -6,7 +6,7 @@
 /*   By: nclavel <nclavel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 02:10:17 by nclavel           #+#    #+#             */
-/*   Updated: 2025/12/04 02:53:20 by nclavel          ###   ########.fr       */
+/*   Updated: 2025/12/11 15:23:28 by nclavel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 bool	init_flood_fill(t_map *map)
 {
-	size_t	i;
 	int		fd;
 	int		col;
 
-	i = 0;
 	col = 0;
 	fd = open(map->map_path, O_RDONLY);
 	if (fd < 0)
