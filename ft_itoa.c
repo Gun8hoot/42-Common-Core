@@ -16,17 +16,13 @@
 static int	countnb(int nb)
 {
 	int	c;
-	int	cp;
 
-	cp = nb;
 	c = 0;
-	if (nb == 0)
+	if (nb == 0 || nb < 0)
 		c++;
-	if (nb < 0)
-		c++;
-	while (cp != 0)
+	while (nb != 0)
 	{
-		cp /= 10;
+		nb /= 10;
 		c++;
 	}
 	return (c);
@@ -59,11 +55,11 @@ char	*ft_itoa(int n)
 	}
 	return (arr);
 }
-
-// #include <string.h>
-// int main(void)
-// {
-// 	char *arr = ft_itoa(-2147483648);
-// 	printf("%s\n", arr);
-// 	return (0);
-// }
+/*
+ #include <string.h>
+ int main(void)
+ {
+ 	char *arr = ft_itoa(2147483647);
+ 	printf("%s\n", arr);
+ 	return (0);
+ }*/
