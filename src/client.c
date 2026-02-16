@@ -12,7 +12,7 @@
 
 #include "lib/minitalk.h"
 
-volatile int	g_ack_status = 0;
+volatile sig_atomic_t	g_ack_status = 0;
 
 void	acknowledge(int signum, siginfo_t *info, void *nptr)
 {

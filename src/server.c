@@ -12,9 +12,9 @@
 
 #include "lib/minitalk.h"
 
-volatile int	g_number_bit = 0;
+volatile sig_atomic_t	g_number_bit = 0;
 
-char *fucking_arr(unsigned char character, char *old_arr)
+char *storage_arr(unsigned char character, char *old_arr)
 {
 	char *new_arr;
 
@@ -58,7 +58,7 @@ static void	bit2ascii(int signum, siginfo_t *info, void *nptr)
 			}
 			arr[0] = '\0';
 		}
-		arr = fucking_arr(character, arr);
+		arr = storage_arr(character, arr);
 		character = 0;
 		g_number_bit = 0;
 	}
