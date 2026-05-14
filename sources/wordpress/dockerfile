@@ -1,0 +1,6 @@
+FROM alpine:3.22
+WORKDIR /tmp
+RUN apk update && \
+	apk add lighttpd php fcgi php-cgi bash
+
+COPY ./install.sh /
