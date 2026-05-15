@@ -1,23 +1,24 @@
 services:
-    ftp:
-        build: ./sources/ftp
-        port:
-            - 20:21
-            - 4000-4100
-        volumes:
-          - db-ftp:/srv/ftp
-        secrets:
-            - ftps-certificate
-volumes:
-    db-ftp:
-      driver: local
-      driver_opts:
-        type: none
-        o: bind
-        device: /srv/ftp
+  ftp:
+    build: ./sources/ftp
+    ports:
+      - 0.0.0.0:20:20
+      - 0.0.0.0:21:21
+      - 4000-4100:4000-4100
+    volumes:
+      - /srv/ftp:/srv/ftp
+    secrets:
+      - ftps-cert
+      - ftps-key
 
 secrets:
-    ftps-certificate:
-        file: ./sources/ftp/.secret
-    https-certificate:
-        file: ./sources/nginx/.secret
+  ftps-cert:
+    file: ./sources/ftp/.secret/vsftpd.crt
+  ftps-key:
+    file: ./sources/ftp/.secret/vsftpd.key
+  https-certificate:
+    file: ./sources/nginx/.secret
+
+networks:
+  isolated:
+    driver: bridge
