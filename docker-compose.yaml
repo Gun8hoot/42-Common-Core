@@ -1,11 +1,23 @@
 services:
-  nginx:
-    build: ./sources/nginx
-    ports:
-      - "443:443"
-    restart: always
-
+    ftp:
+        build: ./sources/ftp
+        port:
+            - 20:21
+            - 4000-4100
+        volumes:
+          - db-ftp:/srv/ftp
+        secrets:
+            - ftps-certificate
 volumes:
-  db:
+    db-ftp:
+      driver: local
+      driver_opts:
+        type: none
+        o: bind
+        device: /srv/ftp
 
-  wp:
+secrets:
+    ftps-certificate:
+        file: ./sources/ftp/.secret
+    https-certificate:
+        file: ./sources/nginx/.secret
