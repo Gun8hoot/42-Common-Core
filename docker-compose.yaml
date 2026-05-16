@@ -12,6 +12,13 @@ services:
     secrets:
       - vsftpd.crt
       - vsftpd.key
+  mariadb:
+    build:
+      context: ./sources/mariadb
+    ports:
+      - 3306:3306
+    networks:
+      - internal-network
 
 secrets:
   vsftpd.crt:
@@ -21,6 +28,10 @@ secrets:
   https-certificate:
     file: ./sources/nginx/.secret
 
+volumes:
+  db:
+
 networks:
   isolated:
     driver: bridge
+  internal-network:
