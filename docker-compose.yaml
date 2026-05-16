@@ -1,20 +1,22 @@
 services:
   ftp:
-    build: ./sources/ftp
+    build:
+      context: ./sources/ftp
+      args:
+        - FTP_PASSWORD=${FTP_PASSWORD}
     ports:
-      - 0.0.0.0:20:20
-      - 0.0.0.0:21:21
-      - 4000-4100:4000-4100
+      - 0.0.0.0:20-21:20-21
+      - 0.0.0.0:40000-40100:40000-40100
     volumes:
       - /srv/ftp:/srv/ftp
     secrets:
-      - ftps-cert
-      - ftps-key
+      - vsftpd.crt
+      - vsftpd.key
 
 secrets:
-  ftps-cert:
+  vsftpd.crt:
     file: ./sources/ftp/.secret/vsftpd.crt
-  ftps-key:
+  vsftpd.key:
     file: ./sources/ftp/.secret/vsftpd.key
   https-certificate:
     file: ./sources/nginx/.secret
