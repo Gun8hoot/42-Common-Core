@@ -13,7 +13,8 @@ RUN echo "ftp:${FTP_PASSWORD}" | chpasswd && usermod -d /srv/ftp ftp
 RUN usermod -aG ftp_gr ftp
 RUN chown ftp:ftp_gr /srv/ftp/
 
-EXPOSE 20-21
+EXPOSE 20
+EXPOSE 21
 EXPOSE 40000-40100
 
 COPY ./entrypoint.sh /tmp/entrypoint.sh

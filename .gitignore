@@ -2,3 +2,4 @@
 .secret
 *.crt
 *.key
+latest.zip

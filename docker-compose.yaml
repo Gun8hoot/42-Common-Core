@@ -8,10 +8,16 @@ services:
       - 0.0.0.0:20-21:20-21
       - 0.0.0.0:40000-40100:40000-40100
     volumes:
-      - /srv/ftp:/srv/ftp
+      - $HOME/data/ftp:/srv/ftp
     secrets:
       - vsftpd.crt
       - vsftpd.key
+    restart: always
+  # nginx:
+  #   build:
+  #     context: ./sources/nginx
+  #   ports:
+  #     - 0.0.0.0:443:443
   # mariadb:
   #   build:
   #     context: ./sources/mariadb
@@ -19,6 +25,8 @@ services:
   #     - 3306:3306
   #   networks:
   #     - internal-network
+  #   volumes:
+  #     - /vat
 
 secrets:
   vsftpd.crt:
@@ -30,8 +38,10 @@ secrets:
 
 volumes:
   db:
+  wordpress_data:
 
 networks:
   isolated:
     driver: bridge
   internal-network:
+    driver: bridge
