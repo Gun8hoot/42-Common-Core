@@ -12,13 +12,13 @@ services:
     secrets:
       - vsftpd.crt
       - vsftpd.key
-  mariadb:
-    build:
-      context: ./sources/mariadb
-    ports:
-      - 3306:3306
-    networks:
-      - internal-network
+  # mariadb:
+  #   build:
+  #     context: ./sources/mariadb
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - internal-network
 
 secrets:
   vsftpd.crt:
