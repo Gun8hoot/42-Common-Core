@@ -24,19 +24,19 @@ services:
       - nginx.key
     restart: always
     network_mode: bridge
-  wordpress:
-    build:
-      context: ./sources/wordpress
-    depends_on: mariadb
-  mariadb:
-    build:
-      context: ./sources/mariadb
-    ports:
-      - 3306:3306
-    networks:
-      - internal-network
-    volumes:
-      - /vat
+  # wordpress:
+  #   build:
+  #     context: ./sources/wordpress
+  #   depends_on: mariadb
+  # mariadb:
+  #   build:
+  #     context: ./sources/mariadb
+  #   ports:
+  #     - 3306:3306
+  #   networks:
+  #     - internal-network
+  #   volumes:
+  #     - /vat
 
 secrets:
   vsftpd.crt:
