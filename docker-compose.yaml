@@ -1,60 +1,63 @@
 services:
-  ftp:
-    build:
-      context: ./sources/ftp
-      args:
-        - FTP_PASSWORD=${FTP_PASSWORD}
-    ports:
-      - 0.0.0.0:20-21:20-21
-      - 0.0.0.0:40000-40100:40000-40100
-    volumes:
-      - $HOME/data/ftp:/srv/ftp # NEED TO CHANGE, BIND MOUNT NOT ALLOW
-    secrets:
-      - vsftpd.crt
-      - vsftpd.key
-    restart: always
-  nginx:
-    build:
-      context: ./sources/nginx
-    ports:
-      - 0.0.0.0:443:443
-      - 0.0.0.0:80:80
-    secrets:
-      - nginx.crt
-      - nginx.key
-    restart: always
-    network_mode: bridge
-  # wordpress:
-  #   build:
-  #     context: ./sources/wordpress
-  #   depends_on: mariadb
-  # mariadb:
-  #   build:
-  #     context: ./sources/mariadb
-  #   ports:
-  #     - 3306:3306
-  #   networks:
-  #     - internal-network
-  #   volumes:
-  #     - /vat
+    ftp:
+        build:
+            context: ./sources/ftp
+            args:
+                - FTP_PASSWORD=${FTP_PASSWORD}
+        ports:
+            - 0.0.0.0:20-21:20-21
+            - 0.0.0.0:40000-40100:40000-40100
+        volumes:
+            - $HOME/data/ftp:/srv/ftp # NEED TO CHANGE, BIND MOUNT NOT ALLOW
+        secrets:
+            - vsftpd.crt
+            - vsftpd.key
+        restart: always
+    nginx:
+        build:
+            context: ./sources/nginx
+        ports:
+            - 0.0.0.0:80:80
+            - 0.0.0.0:443:443
+        secrets:
+            - nginx.crt
+            - nginx.key
+        restart: always
+        network_mode: bridge
+    # wordpress:
+    #   build:
+    #     context: ./sources/wordpress
+    #   depends_on: mariadb
+    mariadb:
+        build:
+            context: ./sources/mariadb
+        ports:
+            - 3306:3306
+        networks:
+            - internal-network
+        volumes:
+            - db:/var/lib/mysql
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
 
 secrets:
-  vsftpd.crt:
-    file: ./sources/ftp/.secret/vsftpd.crt
-  vsftpd.key:
-    file: ./sources/ftp/.secret/vsftpd.key
-  nginx.key:
-    file: ./sources/nginx/.secret/nginx.key
-  nginx.crt:
-    file: ./sources/nginx/.secret/nginx.crt
+    vsftpd.crt:
+        file: ./sources/ftp/.secret/vsftpd.crt
+    vsftpd.key:
+        file: ./sources/ftp/.secret/vsftpd.key
+    nginx.key:
+        file: ./sources/nginx/.secret/nginx.key
+    nginx.crt:
+        file: ./sources/nginx/.secret/nginx.crt
 
 volumes:
-  db:
+    db:
 
-  wordpress_data:
+    wordpress_data:
 
 networks:
-  isolated:
-    driver: bridge
-  internal-network:
-    driver: bridge
+    isolated:
+        driver: bridge
+    internal-network:
+        driver: bridge
