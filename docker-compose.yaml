@@ -33,13 +33,13 @@ services:
             context: ./sources/mariadb
         ports:
             - 3306:3306
-        networks:
-            - internal-network
+        network_mode: host
         volumes:
             - db:/var/lib/mysql
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
 
 secrets:
     vsftpd.crt:
@@ -53,11 +53,8 @@ secrets:
 
 volumes:
     db:
-
     wordpress_data:
 
 networks:
-    isolated:
-        driver: bridge
     internal-network:
-        driver: bridge
+        driver: none
