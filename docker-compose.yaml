@@ -13,6 +13,8 @@ services:
             - vsftpd.crt
             - vsftpd.key
         restart: always
+        networks:
+            - MainNet
     nginx:
         build:
             context: ./sources/nginx
@@ -25,15 +27,21 @@ services:
         restart: always
         network_mode: bridge
     # wordpress:
-    #   build:
-    #     context: ./sources/wordpress
-    #   depends_on: mariadb
+    #     build:
+    #         context: ./sources/wordpress
+    #     depends_on: mariadb
+    #     networks:
+    #         MainNet:
+    #             ipv4_address: 10.0.0.1
     mariadb:
         build:
             context: ./sources/mariadb
         ports:
             - 3306:3306
         network_mode: host
+        # networks:
+        #     MainNet:
+        #         ipv4_address: 10.0.0.3
         volumes:
             - db:/var/lib/mysql
         environment:
@@ -56,5 +64,10 @@ volumes:
     wordpress_data:
 
 networks:
-    internal-network:
-        driver: none
+    MainNet:
+        driver: bridge
+        driver_opts:
+            com.docker.network.bridge.name: inception_internal
+        ipam:
+            config:
+                - subnet: 10.0.0.0/28
