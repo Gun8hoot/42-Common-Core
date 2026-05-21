@@ -25,29 +25,38 @@ services:
             - nginx.crt
             - nginx.key
         restart: always
-        network_mode: bridge
-    # wordpress:
-    #     build:
-    #         context: ./sources/wordpress
-    #     depends_on: mariadb
-    #     networks:
-    #         MainNet:
-    #             ipv4_address: 10.0.0.1
+        networks:
+            - MainNet
+        volumes:
+            - wordpress_data:/srv/www/wordpress
+        depends_on:
+            - wordpress
     mariadb:
         build:
             context: ./sources/mariadb
-        ports:
-            - 3306:3306
-        network_mode: host
-        # networks:
-        #     MainNet:
-        #         ipv4_address: 10.0.0.3
+        networks:
+            - MainNet
+        restart: always
         volumes:
             - db:/var/lib/mysql
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
             - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+    wordpress:
+        build:
+            context: ./sources/wordpress
+        depends_on:
+            - mariadb
+        networks:
+            - MainNet
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+        restart: always
+        volumes:
+            - wordpress_data:/srv/www/wordpress
 
 secrets:
     vsftpd.crt:
@@ -62,13 +71,11 @@ secrets:
 volumes:
     db:
     wordpress_data:
-
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/wordpress
 networks:
     MainNet:
         driver: bridge
-        driver_opts:
-            com.docker.network.bridge.name: inception_internal
-        ipam:
-            config:
-                - subnet: 10.0.0.0/26
-                - gateway: 10.0.0.1

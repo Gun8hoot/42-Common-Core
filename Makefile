@@ -1,14 +1,17 @@
-DC = docker compose
+DC	= docker compose
+D	= docker
 
 all: up
 
 up:
 	@printf "\e[0;32m[?] Starting Inception services ...\e[0m\n"
 	@$(DC) up
+	@printf "\e[0;32m[+] Inception services have been launched ...\e[0m\n"
 
 down:
 	@printf "\e[0;33m[?] Stoping Inception services ...\e[0m\n"
 	@$(DC) down
+	@yes | $(D) network prune
 
 re:
 	@$(MAKE) down

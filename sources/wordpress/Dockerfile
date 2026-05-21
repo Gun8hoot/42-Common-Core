@@ -1,12 +1,25 @@
 FROM alpine:3.22
 WORKDIR /tmp
 RUN apk update && \
-	apk add	lighttpd unzip apache2 php
+	apk add	lighttpd unzip php-fpm php$phpverx-apache2 apache2-proxy\
+		php83-fpm \
+		php83 \
+		php83-mysqli \
+		php83-pdo \
+		php83-pdo_mysql \
+		php83-gd \
+		php83-xml \
+		php83-curl \
+		php83-json \
+		php83-opcache \
+		php83-zlib
 
-COPY ./latest.zip /tmp/latest.zip
+# wget https://wordpress.org/latest.tar.gz -O ./sources/wordpress/latest.tar.gz
+COPY ./latest.tar.gz /tmp/latest.tar.gz
 COPY ./install.sh /tmp/entrypoint.sh
+COPY ./www.conf /etc/php83/php-fpm.d/www.conf
 
-# TEST WITHOUT NGINX
-USER www-data
-EXPOSE 443
+RUN adduser -D -H -S -G www-data www-data
+EXPOSE 9000
 ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
+CMD [ "php-fpm83", "-F" ]

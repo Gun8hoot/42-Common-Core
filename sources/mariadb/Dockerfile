@@ -9,5 +9,6 @@ RUN mkdir -p /run/mysqld
 RUN chown mysql:mysql /run/mysqld
 RUN chmod 755 /run/mysqld
 
+EXPOSE 3306
 COPY ./entrypoint.sh /tmp/entrypoint.sh
 ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]

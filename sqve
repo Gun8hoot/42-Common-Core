@@ -1,31 +1,21 @@
-
-/ # mariadb-install-db --user=mysql --datadir=/var/lib/mysql
-Installing MariaDB/MySQL system tables in '/var/lib/mysql' ...
-OK
-
-To start mariadbd at boot time you have to copy
-support-files/mariadb.service to the right place for your system
-
-
-Two all-privilege accounts were created.
-One is root@localhost, it has no password, but you need to
-be system 'root' user to connect. Use, for example, sudo mariadb
-The second is mysql@localhost, it has no password either, but
-you need to be the system 'mysql' user to connect.
-After connecting you can set the password, if you would need to be
-able to connect as any of these users with a password and without sudo
-
-See the MariaDB Knowledgebase at https://mariadb.com/kb
-
-You can start the MariaDB daemon with:
-cd '/usr' ; /usr/bin/mariadbd-safe --datadir='/var/lib/mysql'
-
-You can test the MariaDB daemon with mariadb-test-run.pl
-cd '/usr/mariadb-test' ; perl mariadb-test-run.pl
-
-Please report any problems at https://mariadb.org/jira
-
-The latest information about MariaDB is available at https://mariadb.org/.
-
-Consider joining MariaDB's strong and vibrant community:
-https://mariadb.org/get-involved/
+2026/05/21 15:40:25 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
+Stack trace:
+#0 /srv/www/wordpress/wp-load.php(50): require_once()
+#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
+#2 /srv/www/wordpress/index.php(17): require('...')
+#3 {main}
+  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
+2026/05/21 15:40:40 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
+Stack trace:
+#0 /srv/www/wordpress/wp-load.php(50): require_once()
+#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
+#2 /srv/www/wordpress/index.php(17): require('...')
+#3 {main}
+  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
+2026/05/21 15:40:41 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
+Stack trace:
+#0 /srv/www/wordpress/wp-load.php(50): require_once()
+#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
+#2 /srv/www/wordpress/index.php(17): require('...')
+#3 {main}
+  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
