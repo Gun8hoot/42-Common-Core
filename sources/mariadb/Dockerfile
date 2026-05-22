@@ -8,7 +8,8 @@ RUN chown mysql:mysql /var/lib/mysql
 RUN mkdir -p /run/mysqld
 RUN chown mysql:mysql /run/mysqld
 RUN chmod 755 /run/mysqld
-COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
+RUN mkdir -p /etc/mysql/conf.d/
+COPY mariadb-server.cnf /etc/mysql/conf.d/mariadb.cnf
 
 EXPOSE 3306
 COPY ./entrypoint.sh /tmp/entrypoint.sh

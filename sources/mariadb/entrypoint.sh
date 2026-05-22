@@ -14,8 +14,9 @@ function check_file_exist()
 	return 0
 }
 
-# --- GOES INTO THE MARIADB DATABASE LOCATION ---
-cd /var/lib/mysql
+# ╔═══════════════════════════╗
+# ║           CHECK           ║
+# ╚═══════════════════════════╝
 
 # --- CHECK IF ENV VARS EXIST ---
 if [ "$MARIADB_USER" == "" ]; then
@@ -41,30 +42,37 @@ for passwd in $bad_password; do
 	fi
 done
 
+# ╔═════════════════════════╗
+# ║           MAIN          ║
+# ╚═════════════════════════╝
+
+cd /var/lib/mysql
+
 # --- INITIALIZED MARIADB ---
 printf "[+] Loading MariaDB\n" 1>&2
 check_file_exist "mysql.user"
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql 2>/dev/null
+if [ $? -eq 0 ]; then
+	mariadb-install-db --user=root --datadir=/var/lib/mysql 2>/dev/null
+else
+	mariadb-upgrade --user=root --datadir=/var/lib/mysql 2>/dev/null
+fi
 
 # --- STARTING MARIADB DAEMON ---
-printf "[+] Initialized MariaDB daemon\n" 1>&2
-/usr/bin/mariadbd-safe --datadir='/var/lib/mysql' &
+mariadbd --user=user --datadir='/var/lib/mysql' &
+deamon_pid=$!
 sleep 3
 
 # --- CONFIGURING THE DATABASE ---
-printf "[+] Checking for existant database ...\n" 1>&2
-check_file_exist "wordpress"
-if [ $? -eq 0 ]; then
-	cat > init.sql << EOF
-ALTER USER 'root'@'mariadb'IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+cat > init.sql << EOF
 CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 CREATE USER IF NOT EXISTS '$MARIADB_USER'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
+ALTER USER IF EXISTS 'user'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
 GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'mariadb';
 FLUSH PRIVILEGES;
 EOF
-	mariadb -u root < ./init.sql
-fi
+mariadb -u root --password=root < ./init.sql
 
 # --- WAITING UNTIL THE CONTAINER STOP (INFINITE LOOP) ---
 printf "[+] MariaDB successfully initialized\n" 1>&2
-wait
+# kill -SIGINT $deamon_pid
+mariadbd -u root
