@@ -58,16 +58,18 @@ else
 fi
 
 # --- STARTING MARIADB DAEMON ---
-mariadbd --user=user --datadir='/var/lib/mysql' &
+mariadbd --datadir='/var/lib/mysql' &
 deamon_pid=$!
-sleep 3
+until mariadb-admin ping -h mariadb --silent; do
+	sleep 1
+done
 
 # --- CONFIGURING THE DATABASE ---
 cat > init.sql << EOF
 CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 CREATE USER IF NOT EXISTS '$MARIADB_USER'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
-ALTER USER IF EXISTS 'user'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
 GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'mariadb';
+ALTER USER 'root'@'%' IDENTIFIED BY '$MARIADB_PASSWD';
 FLUSH PRIVILEGES;
 EOF
 mariadb -u root --password=root < ./init.sql
