@@ -15,6 +15,8 @@ down:
 
 re:
 	@$(MAKE) down
+	@printf "\e[0;33m[?] Deleting old volumes ...\e[0m\n"
+	@$(D) volume rm $(docker volume ls | awk '{print $2}' | tail -n+2) | true
 	@printf "\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
 	@$(DC) build
 	@$(MAKE) up

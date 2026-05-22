@@ -1,7 +1,7 @@
 FROM alpine:3.22
 WORKDIR /tmp
 RUN apk update && \
-	apk add	lighttpd unzip php-fpm php$phpverx-apache2 apache2-proxy\
+	apk add	lighttpd unzip\
 		php83-fpm \
 		php83 \
 		php83-mysqli \
@@ -12,7 +12,9 @@ RUN apk update && \
 		php83-curl \
 		php83-json \
 		php83-opcache \
-		php83-zlib
+		php83-zlib \
+		mariadb-client
+
 
 # wget https://wordpress.org/latest.tar.gz -O ./sources/wordpress/latest.tar.gz
 COPY ./latest.tar.gz /tmp/latest.tar.gz

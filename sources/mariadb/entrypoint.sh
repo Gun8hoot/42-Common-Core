@@ -56,9 +56,10 @@ printf "[+] Checking for existant database ...\n" 1>&2
 check_file_exist "wordpress"
 if [ $? -eq 0 ]; then
 	cat > init.sql << EOF
-CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER '$MARIADB_USER'@'0.0.0.0' IDENTIFIED BY '$MARIADB_PASSWD';
-GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'0.0.0.0';
+ALTER USER 'root'@'mariadb'IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE USER IF NOT EXISTS '$MARIADB_USER'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
+GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'mariadb';
 FLUSH PRIVILEGES;
 EOF
 	mariadb -u root < ./init.sql
