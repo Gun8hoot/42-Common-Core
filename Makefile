@@ -5,6 +5,7 @@ all: up
 
 up:
 	@printf "\e[0;32m[?] Starting Inception services ...\e[0m\n"
+	@mkdir -p ~/data
 	@$(DC) up
 	@printf "\e[0;32m[+] Inception services have been launched ...\e[0m\n"
 
