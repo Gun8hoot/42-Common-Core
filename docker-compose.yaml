@@ -71,6 +71,11 @@ secrets:
 
 volumes:
     db:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/mariadb
     wordpress_data:
         driver: local
         driver_opts:

@@ -2,10 +2,10 @@
 
 chown www-data: /srv/www
 
-until mariadb-admin ping -h mariadb --silent; do
-	echo "WAIT"
-	sleep 2
-done
+# until mariadb-admin ping -h mariadb --silent; do
+# 	echo "WAIT"
+# 	sleep 2
+# done
 
 if [ $(ls /srv/www/wordpress | wc -w) -eq 0 ]; then
 	mkdir -p /srv/www

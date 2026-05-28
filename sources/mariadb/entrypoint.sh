@@ -1,7 +1,7 @@
 #!/bin/sh
 
-bad_username="user usr root admin administrator mariadb maria db"
-bad_password="password 123456789 qwerty azerty pass"
+bad_username="user usr root admin administrator mariadb maria db azerty qwerty a"
+bad_password="password 123456789 qwerty azerty pass 123 a"
 
 function check_file_exist()
 {
@@ -52,29 +52,32 @@ cd /var/lib/mysql
 printf "[+] Loading MariaDB\n" 1>&2
 check_file_exist "mysql.user"
 if [ $? -eq 0 ]; then
-	mariadb-install-db --user=root --datadir=/var/lib/mysql 2>/dev/null
+	mariadb-install-db --user=mysql --datadir=/var/lib/mysql 2>/dev/null
 else
-	mariadb-upgrade --user=root --datadir=/var/lib/mysql 2>/dev/null
+	mariadb-upgrade --user=mysql --datadir=/var/lib/mysql 2>/dev/null
 fi
 
 # --- STARTING MARIADB DAEMON ---
-mariadbd --datadir='/var/lib/mysql' &
-deamon_pid=$!
-until mariadb-admin ping -h mariadb --silent; do
+mariadbd --user=mysql --datadir='/var/lib/mysql' &
+until mariadb-admin ping --silent; do
 	sleep 1
 done
 
+daemon_password=$(tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 128)
 # --- CONFIGURING THE DATABASE ---
 cat > init.sql << EOF
 CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
 CREATE USER IF NOT EXISTS '$MARIADB_USER'@'mariadb' IDENTIFIED BY '$MARIADB_PASSWD';
 GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'mariadb';
-ALTER USER 'root'@'%' IDENTIFIED BY '$MARIADB_PASSWD';
+ALTER USER IF EXISTS 'root'@'%' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
 FLUSH PRIVILEGES;
 EOF
-mariadb -u root --password=root < ./init.sql
+mariadb -u root --skip-password < ./init.sql
+
+mariadb-admin shutdown -h localhost
+sleep 2
 
 # --- WAITING UNTIL THE CONTAINER STOP (INFINITE LOOP) ---
 printf "[+] MariaDB successfully initialized\n" 1>&2
-# kill -SIGINT $deamon_pid
-mariadbd -u root
+exec mariadbd --user=mysql --datadir='/var/lib/mysql'

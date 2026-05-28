@@ -1,21 +1,4 @@
-2026/05/21 15:40:25 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
-Stack trace:
-#0 /srv/www/wordpress/wp-load.php(50): require_once()
-#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
-#2 /srv/www/wordpress/index.php(17): require('...')
-#3 {main}
-  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
-2026/05/21 15:40:40 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
-Stack trace:
-#0 /srv/www/wordpress/wp-load.php(50): require_once()
-#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
-#2 /srv/www/wordpress/index.php(17): require('...')
-#3 {main}
-  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
-2026/05/21 15:40:41 [error] 7#7: *1 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Uncaught Error: Undefined constant "wordpress" in /srv/www/wordpress/wp-config.php:23
-Stack trace:
-#0 /srv/www/wordpress/wp-load.php(50): require_once()
-#1 /srv/www/wordpress/wp-blog-header.php(13): require_once('...')
-#2 /srv/www/wordpress/index.php(17): require('...')
-#3 {main}
-  thrown in /srv/www/wordpress/wp-config.php on line 23" while reading response header from upstream, client: 172.18.0.1, server: xxxxxxxx, request: "GET /index.php HTTP/1.1", upstream: "fastcgi://172.18.0.4:9000", host: "xxxxxxxx"
+xxxxxx@arch ~/xx (main)> ls -lh ~/data/
+total 8.0K
+drwxrwxrwx 2 root xxxxxx 4.0K May 27 13:51 ftp/
+drwxr-x--- 7 root     101 4.0K May 27 13:51 mariadb/
