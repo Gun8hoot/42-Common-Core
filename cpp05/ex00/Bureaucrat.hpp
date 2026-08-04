@@ -1,0 +1,49 @@
+
+#pragma once
+
+#include <string>
+#include <ostream>
+#include <exception>
+
+#ifdef DEBUG
+# include <iostream>
+#endif // DEBUG
+
+class Bureaucrat
+{
+	private:
+		const std::string	_name;
+		int					_grade;
+	public:
+		class GradeTooHighException : public std::exception
+		{
+			const char *what(void) const throw()
+			{
+				return ("The grade is too high!");
+			};
+		};
+		class GradeTooLowException : public std::exception
+		{
+			const char *what(void) const throw()
+			{
+				return ("The grade is too low!");
+			};
+		};
+		~Bureaucrat(void);
+		Bureaucrat(const std::string name);
+		Bureaucrat(const Bureaucrat &cpy);
+        Bureaucrat &operator=(const Bureaucrat &cpy); // TODO
+
+		const std::string	getName(void);
+
+		int					getGrade(void);
+		void				setGrade(int newGrade);
+
+		Bureaucrat operator++(void);	// PRE INCREASE
+		Bureaucrat operator++(int);		// POST INCREASE
+		Bureaucrat operator--(void);	// PRE DECREASE
+		Bureaucrat operator--(int);		// PRE DECREASE
+
+};
+
+std::ostream &operator<<(std::ostream& os, const Bureaucrat& data);
