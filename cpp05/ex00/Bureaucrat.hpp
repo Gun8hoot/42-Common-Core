@@ -5,10 +5,6 @@
 #include <ostream>
 #include <exception>
 
-#ifdef DEBUG
-# include <iostream>
-#endif // DEBUG
-
 class Bureaucrat
 {
 	private:
@@ -17,14 +13,14 @@ class Bureaucrat
 	public:
 		class GradeTooHighException : public std::exception
 		{
-			const char *what(void) const throw()
+			virtual const char *what(void) const throw()
 			{
 				return ("The grade is too high!");
 			};
 		};
 		class GradeTooLowException : public std::exception
 		{
-			const char *what(void) const throw()
+			virtual const char *what(void) const throw()
 			{
 				return ("The grade is too low!");
 			};
@@ -32,7 +28,7 @@ class Bureaucrat
 		~Bureaucrat(void);
 		Bureaucrat(const std::string name);
 		Bureaucrat(const Bureaucrat &cpy);
-        Bureaucrat &operator=(const Bureaucrat &cpy); // TODO
+		Bureaucrat &operator=(const Bureaucrat &cpy);
 
 		const std::string	getName(void);
 
@@ -46,4 +42,4 @@ class Bureaucrat
 
 };
 
-std::ostream &operator<<(std::ostream& os, const Bureaucrat& data);
+std::ostream &operator<<(std::ostream& os, Bureaucrat& data);

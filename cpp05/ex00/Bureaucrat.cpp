@@ -1,5 +1,9 @@
 #include "Bureaucrat.hpp"
 
+#ifdef DEBUG
+# include <iostream>
+#endif // DEBUG
+
 // --- CONSTRUCTOR ---
 Bureaucrat::~Bureaucrat(void) { this->_grade = 0; }
 
@@ -21,21 +25,26 @@ int Bureaucrat::getGrade(void) { return (this->_grade); }
 
 void Bureaucrat::setGrade(int newGrade)
 {
+	#ifdef DEBUG
+	std::cout << "[-] DEBUG MODE : User " << this->_name << " want change his grade from " << this->_grade << " to " << newGrade << std::endl;
+	#endif // DEBUG
+
 	if (newGrade < 1)
 		throw (Bureaucrat::GradeTooLowException());
 	else if (newGrade > 150)
 		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade = newGrade;
+
 	#ifdef DEBUG
-	std::cout << "Grade changed to " << newGrade << std::endl;
+	std::cout << "[-] DEBUG MODE : " << this->_name << " change his grade to " << newGrade << std::endl;
 	#endif // DEBUG
 }
 
 // --- OPERATOR OVERIDE ---
 std::ostream &operator<<(std::ostream& os, Bureaucrat& data)
 {
-	os << data.getGrade();
+	os << data.getName() << ", bureaucrat grade " << data.getGrade() << std::endl;
 	return (os);
 };
 
@@ -47,7 +56,7 @@ Bureaucrat	Bureaucrat::operator++(void)
 	#ifdef DEBUG
 	std::cout <<	"Pre increase for " << this->_name <<
 					" from " << this->_grade - 1 <<
-					" to " << this->grade << std::endl;
+					" to " << this->_grade << std::endl;
 	#endif
 	return (*this);
 }
@@ -62,7 +71,7 @@ Bureaucrat	Bureaucrat::operator++(int)
 	#ifdef DEBUG
 	std::cout <<	"Post increase for " << this->_name <<
 					" from " << this->_grade - 1 <<
-					" to " << this->grade << std::endl;
+					" to " << this->_grade << std::endl;
 	#endif
 	return (tmp);
 }
@@ -74,8 +83,8 @@ Bureaucrat	Bureaucrat::operator--(void)
 	_grade--;
 	#ifdef DEBUG
 	std::cout <<	"Pre decrease for " << this->_name <<
-					" from " << this->_grade - 1 <<
-					" to " << this->grade << std::endl;
+					" from " << this->_grade + 1 <<
+					" to " << this->_grade << std::endl;
 	#endif
 	return (*this);
 }
@@ -89,8 +98,8 @@ Bureaucrat	Bureaucrat::operator--(int)
 	_grade--;
 	#ifdef DEBUG
 	std::cout <<	"Post decrease for " << this->_name <<
-					" from " << this->_grade - 1 <<
-					" to " << this->grade << std::endl;
+					" from " << this->_grade + 1 <<
+					" to " << this->_grade << std::endl;
 	#endif
 	return (tmp);
 }

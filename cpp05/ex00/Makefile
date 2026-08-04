@@ -7,25 +7,28 @@ ifdef DEBUG
 FLAGS		+= -DDEBUG -g3
 endif
 
+OBJECT_DIR	=	.objects
+
 SOURCES		=	$(wildcard *.cpp */*.cpp)
-OBJECTS		=	file.o
+OBJECTS		=	$(patsubst %.cpp,$(OBJECT_DIR)/%.o,$(SOURCES))
 
 all: $(NAME)
 
-%.cpp: %.o
+$(OBJECT_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
 	@printf "\x1b[0;32m[+] Compiling %s\x1b[0m\n" $@
-	$(COMPILER) $(FLAGS) $@ -o $<
+	@$(COMPILER) $(FLAGS) $< -o $@
 
-$(NAME):
+$(NAME): $(OBJECTS)
 	@printf "\x1b[0;32m[+] Linking %s\x1b[0m\n" $@
-	@$(COMPILER) $< -o $@
+	@$(COMPILER) $^ -o $@
 
 clean:
 	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(NAME)
-	@rm -f $(NAME)
+	@rm -f $(OBJECTS)
 
 fclean: clean
 	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(OBJECTS)
-	@rm -f $(OBJECTS)
+	@rm -f $(NAME)
 
 re: fclean $(NAME)
