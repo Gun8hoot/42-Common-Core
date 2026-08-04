@@ -1,13 +1,13 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-#ifdef DEBUG
+#include <exception>
 # include <iostream>
-#endif // DEBUG
 
 // --- CONSTRUCTOR ---
-Bureaucrat::~Bureaucrat(void) { this->_grade = 0; }
+Bureaucrat::~Bureaucrat(void) { this->_grade = 150; }
 
-Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(0) { ; }
+Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(150) { ; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &cpy)
     : _name(cpy._name), _grade(cpy._grade) { ; }
@@ -102,4 +102,17 @@ Bureaucrat	Bureaucrat::operator--(int)
 					" to " << this->_grade << std::endl;
 	#endif
 	return (tmp);
+}
+
+void				Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch (std::exception &except)
+	{
+		std::cout << this->_name << " couldn’t sign " << form.getName() << " because " << except.what() << ".";
+	}
 }
