@@ -1,6 +1,7 @@
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 #include <stdexcept>
 #include <iostream>
@@ -12,9 +13,9 @@ int main(void)
 		Bureaucrat user("user", 1);
 		Bureaucrat user2("user2", 75);
 
-		Form			form1("Super amazing form", 145, 145);
+		AForm		*form = new RobotomyRequestForm("form");
 
-		user.signForm(form1);
+		user.signForm(form);
 	}
 	catch (std::exception &ex)
 	{
