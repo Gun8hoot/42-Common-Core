@@ -4,12 +4,12 @@
 # include <string>
 # include "AForm.hpp"
 
-# define ROBOTOMY_SIGN_GRADE 72
-# define ROBOTOMY_EXEC_GRADE 45
+# define SHRUBBERY_SIGN_GRADE 145
+# define SHRUBBERY_EXEC_GRADE 137
 
 class Bureaucrat;
 
-class	RobotomyRequestForm : public AForm
+class	ShrubberyCreationForm : public AForm
 {
 	private:
 		const std::string	_name;
@@ -45,10 +45,10 @@ class	RobotomyRequestForm : public AForm
 		};
 
 		// -- CONSTRUCTOR --
-		RobotomyRequestForm(std::string name);
-		RobotomyRequestForm(const RobotomyRequestForm &cpy);
-		RobotomyRequestForm operator=(const RobotomyRequestForm &cpy);
-		~RobotomyRequestForm(void);
+		ShrubberyCreationForm(std::string name);
+		ShrubberyCreationForm(const ShrubberyCreationForm &cpy);
+		ShrubberyCreationForm operator=(const ShrubberyCreationForm &cpy);
+		~ShrubberyCreationForm(void);
 
 		// -- MEMBER FUNCTION --
 		void							execute(Bureaucrat const & executor) const;
