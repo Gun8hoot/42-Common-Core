@@ -25,7 +25,7 @@ $(NAME): $(OBJECTS)
 
 clean:
 	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(NAME)
-	@rm -rf $(OBJECT_DIR)
+	@rm -f $(OBJECTS)
 
 fclean: clean
 	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(OBJECTS)

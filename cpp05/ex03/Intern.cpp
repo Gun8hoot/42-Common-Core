@@ -5,7 +5,15 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 
+#include <cctype>
 #include <exception>
+#include <string>
+#include <iostream>
+
+const char	*Intern::InvalidFormType::what() const throw()
+{
+	return ("The form type you have enter is not valid");
+}
 
 Intern::Intern(void) { ; };
 
@@ -29,7 +37,7 @@ static	AForm	*createRobotomy(const std::string name)
 {
 	AForm	*frm = NULL;
 
-	frm = new PresidentialPardonForm(name);
+	frm = new RobotomyRequestForm(name);
 	if (!frm)
 		throw (std::bad_alloc());
 	return (frm);
@@ -39,21 +47,32 @@ static	AForm	*createShrubbery(const std::string name)
 {
 	AForm	*frm = NULL;
 
-	frm = new PresidentialPardonForm(name);
+	frm = new ShrubberyCreationForm(name);
 	if (!frm)
 		throw (std::bad_alloc());
 	return (frm);
 }
 
-AForm	*Intern::makeForm(const std::string name_of_form, std::string form_target) const
+AForm	*Intern::makeForm(std::string form_target, const std::string name_of_form) const
 {
-	AForm	*(func)
+	AForm	*ptr = NULL;
+	std::string	formType[3] = {"robotomy request", "presidential pardon" , "shrubbery creation"};
+	AForm				*(*func[3])(std::string) = {&createRobotomy, &createPresidential, &createShrubbery};
+
 	try
 	{
-
+		for (int i = 0; i < 3; i++)
+		{
+			if (form_target.compare(formType[i]) == 0)
+			{
+				ptr = (func[i])(name_of_form);
+				return (ptr);
+			}
+		}
 	}
 	catch (std::exception &ex)
 	{
-
+		std::cerr << ex.what() << std::endl;
 	}
+	throw (Intern::InvalidFormType());
 }

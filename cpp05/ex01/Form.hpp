@@ -9,9 +9,9 @@ class	Form
 {
 	private:
 		const std::string	_name;
-		bool				_is_signed;
-		int					_sign_minimal_grade;
-		int					_execute_minimal_grade;
+		bool							_is_signed;
+		int								_sign_minimal_grade;
+		int								_execute_minimal_grade;
 
 	public:
 		// -- CUSTOM EXCEPTIONS --
@@ -34,6 +34,7 @@ class	Form
 
 		// -- CONSTRUCTOR --
 		Form(const std::string name, int _sign_grade, int _exec_grade);
+		Form(const std::string name);
 		Form(const Form &cpy);
 		Form &operator=(const Form &cpy);
 		~Form(void);

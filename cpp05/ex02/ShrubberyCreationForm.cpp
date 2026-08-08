@@ -49,8 +49,14 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		throw (ShrubberyCreationForm::GradeTooLowException());
 
 	file.exceptions(std::fstream::badbit | std::fstream::failbit);
-	file.open("aaaa", std::ios::out | std::ios::trunc);
-	file << "ASCII trees" << std::endl;
+	file.open((executor.getName() + "_shrubbery").c_str(), std::ios::out | std::ios::trunc);
+	file	<< "       ###\n"
+				<< "      #o###\n"
+				<< "    #####o###\n"
+				<< "   #o#\\#|#/###\n"
+				<< "    ###\\|/#o#\n"
+				<< "     # }|{  #\n"
+				<< "       }|{\n";
 	file.close();
 	std::cout << "Tree " << this->_name << " have been planted..." << std::endl;
 }

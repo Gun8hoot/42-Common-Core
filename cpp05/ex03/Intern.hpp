@@ -2,10 +2,16 @@
 # pragma once
 
 #include "AForm.hpp"
+#include <exception>
 
 class	Intern
 {
 	public:
+		class	InvalidFormType : public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
 		// -- CONSTRUCTOR --
 		Intern(void);
 		Intern(const Intern &cpy);
@@ -13,5 +19,5 @@ class	Intern
 		~Intern(void);
 
 		// -- MEMBER FUNCTION --
-		AForm	&makeForm(const std::string name_of_form, std::string form_target) const;
+		AForm	*makeForm(std::string form_target, const std::string name_of_form) const;
 };

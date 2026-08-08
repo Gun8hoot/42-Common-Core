@@ -10,7 +10,7 @@ int main(void)
 	Bureaucrat user2("user2");
 
 	{
-		std::cout << "\x1b[1mIf the grade is assign to a too high value : \n\x1b[0m\x1b[0m";
+		std::cout << "\x1b[1mIf the grade overflow the lowest value : \n\x1b[0m\x1b[0m";
 		try
 		{
 			user.setGrade(152);
@@ -51,7 +51,7 @@ int main(void)
 	}
 
 	{
-		std::cout << "\n\x1b[1mIf the grade is assign to a too low value : \n\x1b[0m";
+		std::cout << "\n\x1b[1mIf the grade overflow the highest value : \n\x1b[0m";
 		try
 		{
 			user2.setGrade(-5);
@@ -92,7 +92,7 @@ int main(void)
 	}
 
 	{
-		std::cout << "\n\x1b[1mDecrease an invalid grade : \n\x1b[0m";
+		std::cout << "\n\x1b[1mTrying to decrease the highest value grade : \n\x1b[0m";
 		try
 		{
 			user2.setGrade(1);

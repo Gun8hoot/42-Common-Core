@@ -3,6 +3,9 @@
 #include "Bureaucrat.hpp"
 
 // -- CONSTRUCTOR --
+
+Form::Form(const std::string name) : _name(name), _is_signed(false), _sign_minimal_grade(150), _execute_minimal_grade(150) { ; }
+
 Form::Form(const std::string name, int _sign_grade, int _exec_grade) : _name(name)
 {
 	if (_sign_grade < 1 || _exec_grade < 1)

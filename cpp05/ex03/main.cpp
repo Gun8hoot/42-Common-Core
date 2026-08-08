@@ -1,6 +1,7 @@
 
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
+#include "Intern.hpp"
 # include "PresidentialPardonForm.hpp"
 # include "RobotomyRequestForm.hpp"
 # include "ShrubberyCreationForm.hpp"
@@ -17,31 +18,17 @@ int main(void)
 {
 	std::cout << __GREEN__ << __BOLD__ << "/// VALID TEST \\\\\\\\" << std::endl;
 	{
-		std::cout << __RED__ << "//// ROBOTOMY REQUEST FORM \\\\\\\\" << __RESET__ << std::endl;
+		std::cout << __RED__ << "//// INTERN CREATE ROBOTOMY REQUEST FORM \\\\\\\\" << __RESET__ << std::endl;
 		try
 		{
 			Bureaucrat	user("user", 1);
-			RobotomyRequestForm	form("Super form");
-			RobotomyRequestForm test(form);
+			Intern	intern;
+			AForm		*form;
 
-			user.signForm(test);
-			user.executeForm(test);
-		}
-		catch (std::exception &ex)
-		{
-			std::cerr << ex.what() << std::endl;
-		}
-	}
-	{
-		std::cout << __RED__ << "//// SHRUBBERY CREATION FORM \\\\\\\\" << __RESET__ << std::endl;
-		try
-		{
-			Bureaucrat	user("user", 1);
-			ShrubberyCreationForm	form("sapin");
-			ShrubberyCreationForm test(form);
+			form = intern.makeForm("robotomy request", "form");
 
-			user.signForm(test);
-			user.executeForm(test);
+			user.signForm(*form);
+			user.executeForm(*form);
 		}
 		catch (std::exception &ex)
 		{
@@ -50,15 +37,56 @@ int main(void)
 	}
 
 	{
-		std::cout << __RED__ << "//// PRESIDENTIAL PARDON FORM \\\\\\\\" << __RESET__ << std::endl;
+		std::cout << __RED__ << "//// INTERN CREATE PRESIDENTIAL PARDON FORM \\\\\\\\" << __RESET__ << std::endl;
 		try
 		{
-			Bureaucrat	user("user", 26);
-			PresidentialPardonForm	form("welcome to nsa");
-			PresidentialPardonForm test(form);
+			Bureaucrat	user("user", 1);
+			Intern	intern;
+			AForm		*form;
 
-			user.signForm(test);
-			user.executeForm(test);
+			form = intern.makeForm("presidential pardon", "form");
+
+			user.signForm(*form);
+			user.executeForm(*form);
+		}
+		catch (std::exception &ex)
+		{
+			std::cerr << ex.what() << std::endl;
+		}
+	}
+
+	{
+		std::cout << __RED__ << "//// INTERN CREATE SHRUBBERY CREATION FORM \\\\\\\\" << __RESET__ << std::endl;
+		try
+		{
+			Bureaucrat	user("user", 1);
+			Intern	intern;
+			AForm		*form;
+
+			form = intern.makeForm("shrubbery creation", "form");
+
+			user.signForm(*form);
+			user.executeForm(*form);
+		}
+		catch (std::exception &ex)
+		{
+			std::cerr << ex.what() << std::endl;
+		}
+	}
+
+	std::cout << __GREEN__ << __BOLD__ << "/// INVALID TEST \\\\\\\\" << __RESET__ << std::endl;
+	{
+		std::cout << __RED__ << "//// INTERN CREATE DONOTEXIST FORM \\\\\\\\" << __RESET__ << std::endl;
+		try
+		{
+			Bureaucrat	user("user", 1);
+			Intern	intern;
+			AForm		*form;
+
+			form = intern.makeForm("DONOTEXIST", "form");
+
+			user.signForm(*form);
+			user.executeForm(*form);
 		}
 		catch (std::exception &ex)
 		{
