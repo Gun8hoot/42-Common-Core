@@ -5,7 +5,7 @@
 
 class ScalarConverter
 {
-	private:
+	public:
 		// -- CONSTRUCTOR --
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter &cpy);

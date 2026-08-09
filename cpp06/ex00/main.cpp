@@ -1,6 +1,7 @@
 
 #include <cstring>
 #include <iostream>
+#include "ScalarConverter.hpp"
 
 int	main(int argc, char **argv)
 {
@@ -9,4 +10,5 @@ int	main(int argc, char **argv)
 		std::cerr << "[!] Usage : " << basename(argv[0]) << " {number}" << std::endl;
 		return (1);
 	}
+	ScalarConverter::convert(argv[1]);
 }
