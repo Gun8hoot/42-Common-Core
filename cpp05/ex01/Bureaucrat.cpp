@@ -112,6 +112,7 @@ Bureaucrat	Bureaucrat::operator--(int)
 	return (tmp);
 }
 
+// -- METHODE --
 void				Bureaucrat::signForm(Form &form)
 {
 	try
@@ -124,3 +125,14 @@ void				Bureaucrat::signForm(Form &form)
 		std::cout << this->_name << " couldn’t sign " << form.getName() << " because " << except.what() << ".";
 	}
 }
+
+// -- EXCEPTION --
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return ("The grade is too high!");
+};
+
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return ("The grade is too low!");
+};

@@ -55,24 +55,17 @@ static	AForm	*createShrubbery(const std::string name)
 
 AForm	*Intern::makeForm(std::string form_target, const std::string name_of_form) const
 {
-	AForm	*ptr = NULL;
+	AForm		*ptr = NULL;
 	std::string	formType[3] = {"robotomy request", "presidential pardon" , "shrubbery creation"};
-	AForm				*(*func[3])(std::string) = {&createRobotomy, &createPresidential, &createShrubbery};
+	AForm		*(*func[3])(std::string) = {&createRobotomy, &createPresidential, &createShrubbery};
 
-	try
+	for (int i = 0; i < 3; i++)
 	{
-		for (int i = 0; i < 3; i++)
+		if (form_target.compare(formType[i]) == 0)
 		{
-			if (form_target.compare(formType[i]) == 0)
-			{
-				ptr = (func[i])(name_of_form);
-				return (ptr);
-			}
+			ptr = (func[i])(name_of_form);
+			return (ptr);
 		}
-	}
-	catch (std::exception &ex)
-	{
-		std::cerr << ex.what() << std::endl;
 	}
 	throw (Intern::InvalidFormType());
 }

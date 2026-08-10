@@ -103,3 +103,13 @@ Bureaucrat	Bureaucrat::operator--(int)
 	#endif
 	return (tmp);
 }
+
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return ("The grade is too high!");
+};
+
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return ("The grade is too low!");
+};
