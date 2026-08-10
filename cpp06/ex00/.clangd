@@ -4,4 +4,4 @@ CompileFlags:
     - -Wall
     - -Wextra
     - -Werror
-    - -I/home/gun8hoot/Documents/modules_cpp/cpp06/ex00
+    - -I${workspaceFolder}
