@@ -21,7 +21,7 @@ template <typename T> class Array {
 		{
 			try
 			{
-				_ptr = new T;
+				_ptr = new T[0];
 			}
 			catch (std::bad_alloc &ex)
 			{
@@ -70,14 +70,14 @@ template <typename T> class Array {
 		};
 		const T &operator[](std::size_t i) const
 		{
-			if (i > this->_nb_element)
+			if (i >= this->_nb_element)
 				throw (std::out_of_range("You are going out of bound of the array"));
 			return (this->_ptr[i]);;
 		}
 
 		T &operator[](std::size_t i)
 		{
-			if (i > this->_nb_element)
+			if (i >= this->_nb_element)
 				throw (std::out_of_range("You are going out of bound of the array"));
 			return (this->_ptr[i]);;
 		}

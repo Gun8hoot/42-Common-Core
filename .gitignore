@@ -1,1 +1,3 @@
 **.o
+.objects
+.clangd

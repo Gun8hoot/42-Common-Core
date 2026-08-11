@@ -1,7 +1,8 @@
-NAME		=	ex00
+NAME		=	a.out
 
 COMPILER	=	c++
-FLAGS		=	-Wall -Wextra -Werror -std=c++98 -I. -c
+FLAGS		=	-Wall -Wextra -Werror -std=c++98 -I. -c $(GCC_FLAGS)
+GCC_FLAGS	=	-Wno-alloc-size
 
 ifdef DEBUG
 FLAGS		+= -DDEBUG -g3
