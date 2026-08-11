@@ -23,6 +23,8 @@ int main(void)
 		}
 	}
 
+  std::cout << std::endl;
+
 	{
 		std::cout << "\x1b[1mUser grade is too low to sign a form : \n\x1b[0m\x1b[0m";
 		try

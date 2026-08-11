@@ -4,6 +4,10 @@
 #include <sys/types.h>
 #include <typeinfo>
 
+#define GREEN "\x1b[32m";
+#define RED "\x1b[31m";
+#define RESET "\x1b[0m";
+
 template <typename T> void	show_array(Array<T> &arr) throw ()
 {
 	std::size_t	sz = arr.size();
@@ -20,43 +24,43 @@ template <typename T> void	show_array(Array<T> &arr) throw ()
 
 int main(void)
 {
+	std::cout << std::endl <<  "\x1b[32m//// FIRST TESTS \\\\\\\\\x1b[0m" << std::endl;
 	{
-		std::cout << std::endl <<  "//// CREATING AN ARRAY WITH 5 ELEMENT \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// CREATING AN ARRAY WITH 5 ELEMENT \\\\\\\\\x1b[0m" << std::endl;
 		Array<int> arr(5);
 
-		std::cout << std::endl <<  "//// DISPLAY THE ARRAY \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// DISPLAY THE ARRAY \\\\\\\\\x1b[0m" << std::endl;
 		show_array(arr);
 
-		std::cout << std::endl <<  "//// ASSIGN 2 AT 0 AND 3 AT 1 \\\\\\\\" << std::endl;
 		arr[0] = 2;
 		arr[1] = 3;
 
-		std::cout << std::endl <<  "//// DISPLAY THE ARRAY \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// DISPLAY THE ARRAY \\\\\\\\\x1b[0m" << std::endl;
 		show_array(arr);
 
-		std::cout << std::endl <<  "//// TRYING TO GO OUT OF BOUND \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// TRYING TO GO OUT OF BOUND \\\\\\\\\x1b[0m" << std::endl;
 		try
 		{
 			std::cout << arr[25];
 		}
 		catch (std::exception &ex)
 		{
-			std::cout << "Err : " << ex.what() << std::endl;
+			std::cout << "\x1b[31mErr : " << ex.what() << "\x1b[0m" <<  std::endl;
 		}
 
-		std::cout << std::endl <<  "//// TRYING TO ASSIGN VALUE AT AN OUT OF BOUND POS \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// TRYING TO ASSIGN VALUE AT AN OUT OF BOUND POS \\\\\\\\\x1b[0m" << std::endl;
 		try
 		{
 			arr[444] = 0xff;
 		}
 		catch (std::exception &ex)
 		{
-			std::cout << "Err : " << ex.what() << std::endl;
+			std::cout << "\x1b[31mErr : " << ex.what() << "\x1b[0m" <<  std::endl;
 		}
 	}
 
 	{
-		std::cout << std::endl <<  "//// NO PARAMETER CONSTRUCTOR \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// NO PARAMETER CONSTRUCTOR \\\\\\\\\x1b[0m" << std::endl;
 		Array<char>	c(0);
 
 		try
@@ -66,13 +70,13 @@ int main(void)
 		}
 		catch (std::exception &ex)
 		{
-			std::cout << "Err : " << ex.what() << std::endl;
+			std::cout << "\x1b[31mErr : " << ex.what() << "\x1b[0m" <<  std::endl;
 		}
 		show_array(c);
 	}
 
 	{
-		std::cout << std::endl <<  "//// COPY & ASSIGNEMENT CONSTRUCTOR \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// COPY & ASSIGNEMENT CONSTRUCTOR \\\\\\\\\x1b[0m" << std::endl;
 		Array<char>	c(5);
 
 		c[0] = 'a';
@@ -84,13 +88,16 @@ int main(void)
 		Array<char> ptr1 = c;
 		Array<char> ptr2(c);
 
-		std::cout << std::endl <<  "//// SHOW INITIAL ARRAY \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// SHOW INITIAL ARRAY \\\\\\\\\x1b[0m" << std::endl;
 		show_array(c);
+		std::cout << &c << std::endl;
 
-		std::cout << std::endl <<  "//// SHOW THE ASSIGNEMENT CONSTRUCTOR ARRAY \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// SHOW THE ASSIGNEMENT CONSTRUCTOR ARRAY \\\\\\\\\x1b[0m" << std::endl;
 		show_array(ptr1);
+		std::cout << &ptr1 << std::endl;
 
-		std::cout << std::endl <<  "//// SHOW THE COPY CONSTRUCTOR ARRAY \\\\\\\\" << std::endl;
+		std::cout << std::endl <<  "\x1b[32m//// SHOW THE COPY CONSTRUCTOR ARRAY \\\\\\\\\x1b[0m" << std::endl;
 		show_array(ptr2);
+		std::cout << &ptr2 << std::endl;
 	}
 }

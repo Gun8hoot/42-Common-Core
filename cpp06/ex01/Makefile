@@ -1,4 +1,4 @@
-NAME		=	ex01
+NAME		=	a.out
 
 COMPILER	=	c++
 FLAGS		=	-Wall -Wextra -Werror -std=c++98 -I. -c

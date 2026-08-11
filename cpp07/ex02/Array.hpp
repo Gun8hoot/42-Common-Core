@@ -6,11 +6,13 @@
 #include <iostream>
 #include <cstring>
 
-template <typename T> class Array {
+template <typename T>
+class Array {
 	private:
 		std::size_t	_nb_element;
 		T			*_ptr;
 	public:
+		// -- CONSTRUCTOR --
 		~Array(void)
 		{
 			if (this->_ptr != NULL)
@@ -21,7 +23,7 @@ template <typename T> class Array {
 		{
 			try
 			{
-				_ptr = new T[0];
+				_ptr = new T[0]; // Allocated an empty array, gcc = -Wno-alloc-size
 			}
 			catch (std::bad_alloc &ex)
 			{
@@ -68,6 +70,8 @@ template <typename T> class Array {
 			}
 			return (*this);
 		};
+
+		// -- OPERATOR OVERLOAD --
 		const T &operator[](std::size_t i) const
 		{
 			if (i >= this->_nb_element)
@@ -82,14 +86,9 @@ template <typename T> class Array {
 			return (this->_ptr[i]);;
 		}
 
+		// -- METHODE --
 		std::size_t	size(void)
 		{
 			return (this->_nb_element);
 		};
 };
-
-template <typename T> std::ostream &operator<<(std::ostream &os, const Array<T> &arr)
-{
-	os << arr[0];
-	return (os);
-}
