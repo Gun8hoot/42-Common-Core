@@ -9,14 +9,14 @@
 #include <fstream>
 
 // -- CONSTRUCTOR --
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string name) : AForm(name, SHRUBBERY_SIGN_GRADE, SHRUBBERY_EXEC_GRADE)
-		, _name(name)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) : AForm("Shrubbery", SHRUBBERY_SIGN_GRADE, SHRUBBERY_EXEC_GRADE)
+		, _target(target)
 		, _is_signed(false)
 		, _sign_minimal_grade(SHRUBBERY_SIGN_GRADE)
 		, _execute_minimal_grade(SHRUBBERY_EXEC_GRADE)
 		{;}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &cpy) : AForm(cpy), _name(cpy._name)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &cpy) : AForm(cpy), _target(cpy._target)
 {
 	if (this != &cpy)
 	{
@@ -49,14 +49,14 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		throw (ShrubberyCreationForm::GradeTooLowException());
 
 	file.exceptions(std::fstream::badbit | std::fstream::failbit);
-	file.open((executor.getName() + "_shrubbery").c_str(), std::ios::out | std::ios::trunc);
-	file	<< "       ###\n"
+	file.open((_target + "_shrubbery").c_str(), std::ios::out | std::ios::trunc);
+	file		<< "       ###\n"
 				<< "      #o###\n"
 				<< "    #####o###\n"
 				<< "   #o#\\#|#/###\n"
 				<< "    ###\\|/#o#\n"
-				<< "     # }|{  #\n"
-				<< "       }|{\n";
+				<< "      # }|{ #\n"
+				<< "        }|{\n";
 	file.close();
-	std::cout << "Tree " << this->_name << " have been planted..." << std::endl;
+	std::cout << "Tree \"" << this->_target << "\" have been planted..." << std::endl;
 }

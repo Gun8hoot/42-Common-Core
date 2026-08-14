@@ -12,7 +12,7 @@ class Bureaucrat;
 class	ShrubberyCreationForm : public AForm
 {
 	private:
-		const std::string	_name;
+		const std::string				_target;
 		bool							_is_signed;
 		int								_sign_minimal_grade;
 		int								_execute_minimal_grade;
@@ -45,7 +45,7 @@ class	ShrubberyCreationForm : public AForm
 		};
 
 		// -- CONSTRUCTOR --
-		ShrubberyCreationForm(std::string name);
+		ShrubberyCreationForm(std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &cpy);
 		ShrubberyCreationForm operator=(const ShrubberyCreationForm &cpy);
 		~ShrubberyCreationForm(void);

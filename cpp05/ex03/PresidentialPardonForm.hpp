@@ -12,7 +12,7 @@ class Bureaucrat;
 class	PresidentialPardonForm : public AForm
 {
 	private:
-		const std::string	_name;
+		const std::string				_target;
 		bool							_is_signed;
 		int								_sign_minimal_grade;
 		int								_execute_minimal_grade;
@@ -45,7 +45,7 @@ class	PresidentialPardonForm : public AForm
 		};
 
 		// -- CONSTRUCTOR --
-		PresidentialPardonForm(std::string name);
+		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm &cpy);
 		PresidentialPardonForm operator=(const PresidentialPardonForm &cpy);
 		~PresidentialPardonForm(void);

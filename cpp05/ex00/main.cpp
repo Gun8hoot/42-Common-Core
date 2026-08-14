@@ -124,5 +124,4 @@ int main(void)
 			std::cout << exc.what() << std::endl;
 		}
 	}
-
 }

@@ -43,6 +43,7 @@ class	Form
 		void							beSigned(Bureaucrat &signatory);		// Sign the form
 
 		// -- GETTER/SETTER --
+		const std::string				getName(void);
 		bool							getIs_Signed(void);
 		int								getSign_Minimal_Grade(void);
 		int								getExecute_Minimal_Grade(void);
@@ -50,6 +51,5 @@ class	Form
 		void							setSign_Minimal_Grade(int _new_grade);
 		void							setExecute_Minimal_Grade(int _new_grade);
 
-		const std::string	getName(void);
 
 };

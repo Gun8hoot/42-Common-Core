@@ -8,7 +8,7 @@ class Bureaucrat;
 class	AForm
 {
 	private:
-		const std::string	_name;
+		const std::string				_name;
 		bool							_is_signed;
 		int								_sign_minimal_grade;
 		int								_execute_minimal_grade;

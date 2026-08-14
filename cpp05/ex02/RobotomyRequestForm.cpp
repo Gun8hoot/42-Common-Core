@@ -7,8 +7,8 @@
 #include <iostream>
 
 // -- CONSTRUCTOR --
-RobotomyRequestForm::RobotomyRequestForm(const std::string name) : AForm(name, ROBOTOMY_SIGN_GRADE, ROBOTOMY_EXEC_GRADE)
-		, _name(name)
+RobotomyRequestForm::RobotomyRequestForm(const std::string target) : AForm("Robotomy", ROBOTOMY_SIGN_GRADE, ROBOTOMY_EXEC_GRADE)
+		, _target(target)
 		, _is_signed(false)
 		, _sign_minimal_grade(ROBOTOMY_SIGN_GRADE)
 		, _execute_minimal_grade(ROBOTOMY_EXEC_GRADE)
@@ -39,13 +39,17 @@ RobotomyRequestForm::~RobotomyRequestForm(void) { ; }
 // -- MEMBER FUNCTION --
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
+	srand(time(NULL));
+
 	if (this->getIs_Signed() == false)
 		throw (RobotomyRequestForm::NotSignedException());
 	if (executor.getGrade() > this->_execute_minimal_grade)
 		throw (RobotomyRequestForm::GradeTooLowException());
+
 	std::cout << ">>> drilling_noises.wav <<<" << std::endl;
-	if (time(NULL) % 2 == 0)
-		std::cout << executor.getName() << " has been robotomized!" << std::endl;
+
+	if (rand() % 2 == 0)
+		std::cout << this->_target << " has been robotomized!" << std::endl;
 	else
-		std::cout << executor.getName() << " failed to be robotomized!" << std::endl;
+		std::cout << this->_target << " failed to be robotomized!" << std::endl;
 }

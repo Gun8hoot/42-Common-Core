@@ -12,7 +12,7 @@ class Bureaucrat;
 class	RobotomyRequestForm : public AForm
 {
 	private:
-		const std::string	_name;
+		const std::string				_target;
 		bool							_is_signed;
 		int								_sign_minimal_grade;
 		int								_execute_minimal_grade;
@@ -45,7 +45,7 @@ class	RobotomyRequestForm : public AForm
 		};
 
 		// -- CONSTRUCTOR --
-		RobotomyRequestForm(std::string name);
+		RobotomyRequestForm(std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm &cpy);
 		RobotomyRequestForm operator=(const RobotomyRequestForm &cpy);
 		~RobotomyRequestForm(void);

@@ -25,7 +25,7 @@ int main(void)
 			Intern	intern;
 			AForm		*form;
 
-			form = intern.makeForm("robotomy request", "form");
+			form = intern.makeForm("robotomy request", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
@@ -44,7 +44,7 @@ int main(void)
 			Intern	intern;
 			AForm		*form;
 
-			form = intern.makeForm("presidential pardon", "form");
+			form = intern.makeForm("presidential pardon", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
@@ -63,7 +63,7 @@ int main(void)
 			Intern	intern;
 			AForm		*form;
 
-			form = intern.makeForm("shrubbery creation", "form");
+			form = intern.makeForm("shrubbery creation", "something");
 
 			user.signForm(*form);
 			user.executeForm(*form);

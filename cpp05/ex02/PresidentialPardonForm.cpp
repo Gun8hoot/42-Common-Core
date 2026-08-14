@@ -9,14 +9,14 @@
 #include <fstream>
 
 // -- CONSTRUCTOR --
-PresidentialPardonForm::PresidentialPardonForm(const std::string name) : AForm(name, PRESIDENTIAL_SIGN_GRADE, PRESIDENTIAL_EXEC_GRADE)
-		, _name(name)
+PresidentialPardonForm::PresidentialPardonForm(const std::string target) : AForm("Presidential", PRESIDENTIAL_SIGN_GRADE, PRESIDENTIAL_EXEC_GRADE)
+		, _target(target)
 		, _is_signed(false)
 		, _sign_minimal_grade(PRESIDENTIAL_SIGN_GRADE)
 		, _execute_minimal_grade(PRESIDENTIAL_EXEC_GRADE)
 		{;}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &cpy) : AForm(cpy), _name(cpy._name)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &cpy) : AForm(cpy), _target(cpy._target)
 {
 	if (this != &cpy)
 	{
@@ -45,5 +45,5 @@ void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 		throw (PresidentialPardonForm::NotSignedException());
 	if (executor.getGrade() > this->_execute_minimal_grade)
 		throw (PresidentialPardonForm::GradeTooLowException());
-	std::cout << executor.getName() << " have been pardoned by Zaphod Beeblebrox." << std::endl;
+	std::cout << this->_target << " have been pardoned by Zaphod Beeblebrox." << std::endl;
 }

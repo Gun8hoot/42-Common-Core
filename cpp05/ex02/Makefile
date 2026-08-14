@@ -24,11 +24,11 @@ $(NAME): $(OBJECTS)
 	@$(COMPILER) $^ -o $@
 
 clean:
-	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(NAME)
+	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(OBJECTS)
 	@rm -f $(OBJECTS)
 
 fclean: clean
-	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(OBJECTS)
+	@printf "\x1b[0;31m[+] Removing %s\x1b[0m\n" $(NAME)
 	@rm -f $(NAME)
 
 re: fclean $(NAME)
