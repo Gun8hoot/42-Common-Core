@@ -39,7 +39,12 @@ RobotomyRequestForm::~RobotomyRequestForm(void) { ; }
 // -- MEMBER FUNCTION --
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	srand(time(NULL));
+	static bool	srand_done = false;
+	if (srand_done == false)
+	{
+		srand(time(NULL));
+		srand_done = true;
+	}
 
 	if (this->getIs_Signed() == false)
 		throw (RobotomyRequestForm::NotSignedException());

@@ -4,19 +4,14 @@
 #include <exception>
 # include <iostream>
 
-// --- CONSTRUCTOR ---
+// --- CONSTRUCTOR / DESTRUCTOR ---
 Bureaucrat::~Bureaucrat(void) { ; }
+
+Bureaucrat::Bureaucrat(void) : _name("Unknown"), _grade(150) {;}
 
 Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(150) { ; }
 
-Bureaucrat::Bureaucrat(const std::string name, int new_grade) : _name(name)
-{
-	if (new_grade < 1)
-		throw (Bureaucrat::GradeTooHighException());
-	else if (new_grade > 150)
-		throw (Bureaucrat::GradeTooLowException());
-	_grade = new_grade;
-}
+Bureaucrat::Bureaucrat(const std::string name, const int grade) : _name(name), _grade(grade) { ; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &cpy)
     : _name(cpy._name), _grade(cpy._grade) { ; }
@@ -27,7 +22,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &cpy)
 	return (*this);
 }
 
-// --- GETTER/SETTER ---
+// --- GETTER / SETTER ---
 const std::string Bureaucrat::getName(void) { return (this->_name); }
 
 int Bureaucrat::getGrade(void) { return (this->_grade); }
@@ -42,7 +37,8 @@ void Bureaucrat::setGrade(int newGrade)
 		throw (Bureaucrat::GradeTooHighException());
 	else if (newGrade > 150)
 		throw (Bureaucrat::GradeTooLowException());
-	this->_grade = newGrade;
+	else
+		this->_grade = newGrade;
 
 	#ifdef DEBUG
 	std::cout << "[-] DEBUG MODE : " << this->_name << " change his grade to " << newGrade << std::endl;
@@ -112,7 +108,7 @@ Bureaucrat	Bureaucrat::operator--(int)
 	return (tmp);
 }
 
-// -- METHODE --
+// --- METHODE ---
 void				Bureaucrat::signForm(Form &form)
 {
 	try
@@ -126,7 +122,7 @@ void				Bureaucrat::signForm(Form &form)
 	}
 }
 
-// -- EXCEPTION --
+// --- EXCEPTION ---
 const char *Bureaucrat::GradeTooHighException::what(void) const throw()
 {
 	return ("The grade is too high!");

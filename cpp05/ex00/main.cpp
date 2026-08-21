@@ -6,8 +6,12 @@
 
 int main(void)
 {
-	Bureaucrat user("user");
-	Bureaucrat user2("user2");
+	Bureaucrat user;
+	Bureaucrat user2("user2", 44);
+  #ifdef DEBUG
+  std::cout << user.getName() << " " << user.getGrade() << std::endl;
+  std::cout << user2.getName() << " " << user2.getGrade() << std::endl;
+  #endif
 
 	{
 		std::cout << "\x1b[1m\x1b[0;32mIf the grade overflow the lowest value : \n\x1b[0m\x1b[0m";

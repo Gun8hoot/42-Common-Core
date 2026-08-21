@@ -14,7 +14,7 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string target) : AForm("Robo
 		, _execute_minimal_grade(ROBOTOMY_EXEC_GRADE)
 		{;}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &cpy) : AForm(cpy)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &cpy) : AForm(cpy), _target(cpy._target)
 {
 	if (this != &cpy)
 	{

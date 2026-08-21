@@ -8,48 +8,41 @@ class Bureaucrat;
 class	Form
 {
 	private:
-		const std::string	_name;
+		const std::string				_name;
+		const int						_sign_minimal_grade;
+		const int						_execute_minimal_grade;
 		bool							_is_signed;
-		int								_sign_minimal_grade;
-		int								_execute_minimal_grade;
 
 	public:
 		// -- CUSTOM EXCEPTIONS --
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char *what(void) const throw()
-				{
-					return ("his grade is too high");
-				};
+				virtual const char *what(void) const throw();
 		};
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char *what(void) const throw()
-				{
-					return ("his grade is too low");
-				};
+				virtual const char *what(void) const throw();
 		};
 
-		// -- CONSTRUCTOR --
-		Form(const std::string name, int _sign_grade, int _exec_grade);
+		// --- CONSTRUCTOR / DESTRUCTOR ---
+		Form(void);
 		Form(const std::string name);
+		Form(const std::string name, const int _sign_grade, const int _exec_grade);
 		Form(const Form &cpy);
 		Form &operator=(const Form &cpy);
 		~Form(void);
 
-		// -- MEMBER FUNCTION --
-		void							beSigned(Bureaucrat &signatory);		// Sign the form
+		// --- MEMBER FUNCTION ---
+		void							beSigned(Bureaucrat &bureaucrat);		// Sign the form
 
-		// -- GETTER/SETTER --
+		// --- GETTER ---
 		const std::string				getName(void);
 		bool							getIs_Signed(void);
 		int								getSign_Minimal_Grade(void);
 		int								getExecute_Minimal_Grade(void);
 
-		void							setSign_Minimal_Grade(int _new_grade);
-		void							setExecute_Minimal_Grade(int _new_grade);
-
-
 };
+
+std::ostream &operator<<(std::ostream& os, Form& data);

@@ -19,5 +19,5 @@ class	Intern
 		~Intern(void);
 
 		// -- MEMBER FUNCTION --
-		AForm	*makeForm(std::string form_target, const std::string target_of_form) const;
+		AForm	*makeForm(std::string form_type, const std::string target_of_form) const;
 };

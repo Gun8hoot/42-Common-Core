@@ -4,10 +4,14 @@
 # include <iostream>
 #endif // DEBUG
 
-// --- CONSTRUCTOR ---
-Bureaucrat::~Bureaucrat(void) { this->_grade = 0; }
+// --- CONSTRUCTOR / DESTRUCTOR ---
+Bureaucrat::~Bureaucrat(void) { ; }
 
-Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(0) { ; }
+Bureaucrat::Bureaucrat(void) : _name("Unknown"), _grade(150) {;}
+
+Bureaucrat::Bureaucrat(const std::string name) : _name(name), _grade(150) { ; }
+
+Bureaucrat::Bureaucrat(const std::string name, const int grade) : _name(name), _grade(grade) { ; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &cpy)
     : _name(cpy._name), _grade(cpy._grade) { ; }
@@ -18,7 +22,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &cpy)
 	return (*this);
 }
 
-// --- GETTER/SETTER ---
+// --- GETTER / SETTER ---
 const std::string Bureaucrat::getName(void) { return (this->_name); }
 
 int Bureaucrat::getGrade(void) { return (this->_grade); }

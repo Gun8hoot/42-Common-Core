@@ -5,6 +5,8 @@ FLAGS		=	-Wall -Wextra -Werror -std=c++98 -I. -c
 
 ifdef DEBUG
 FLAGS		+= -DDEBUG -g3
+else
+FLAGS		+= -O3
 endif
 
 OBJECT_DIR	=	.objects

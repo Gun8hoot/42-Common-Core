@@ -19,9 +19,11 @@ class Bureaucrat
 		{
 			virtual const char *what(void) const throw();
 		};
+    Bureaucrat(void);
 		~Bureaucrat(void);
 		Bureaucrat(const std::string name);
-		Bureaucrat(const Bureaucrat &cpy);
+    Bureaucrat(const std::string name, const int grade);
+    Bureaucrat(const Bureaucrat &cpy);
 		Bureaucrat &operator=(const Bureaucrat &cpy);
 
 		const std::string	getName(void);
@@ -32,7 +34,7 @@ class Bureaucrat
 		Bureaucrat operator++(void);	// PRE INCREASE
 		Bureaucrat operator++(int);		// POST INCREASE
 		Bureaucrat operator--(void);	// PRE DECREASE
-		Bureaucrat operator--(int);		// PRE DECREASE
+		Bureaucrat operator--(int);		// POST DECREASE
 
 };
 

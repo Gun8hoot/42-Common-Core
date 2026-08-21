@@ -52,4 +52,6 @@ class	RobotomyRequestForm : public AForm
 
 		// -- MEMBER FUNCTION --
 		void							execute(Bureaucrat const & executor) const;
+
+		const std::string getTarget(void) { return (this->_target); };
 };

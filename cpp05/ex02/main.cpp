@@ -22,7 +22,7 @@ int main(void)
 		try
 		{
 			Bureaucrat	user("user", 1);
-			RobotomyRequestForm	form("Super form");
+			RobotomyRequestForm	form("Somebody");
 			RobotomyRequestForm test(form);
 
 			user.signForm(test);
@@ -65,6 +65,11 @@ int main(void)
 		{
 			std::cerr << ex.what() << std::endl;
 		}
+	}
+	{
+		std::cout << __RED__ << "//// DISPLAY FORM DATA \\\\\\\\" << __RESET__ << std::endl;
+		PresidentialPardonForm aaa("name");
+		std::cout << aaa << std::endl;
 	}
 	std::cout << __GREEN__ << __BOLD__ << "/// INVALID TEST \\\\\\\\" << __RESET__ << std::endl;
 

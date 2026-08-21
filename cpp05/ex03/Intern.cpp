@@ -53,16 +53,17 @@ static	AForm	*createShrubbery(const std::string name)
 	return (frm);
 }
 
-AForm	*Intern::makeForm(std::string form_target, const std::string target_of_form) const
+AForm	*Intern::makeForm(std::string form_type, const std::string target_of_form) const
 {
 	AForm		*ptr = NULL;
-	std::string	formType[3] = {"robotomy request", "presidential pardon" , "shrubbery creation"};
+	std::string	type_available[3] = {"robotomy request", "presidential pardon" , "shrubbery creation"};
 	AForm		*(*func[3])(std::string) = {&createRobotomy, &createPresidential, &createShrubbery};
 
 	for (int i = 0; i < 3; i++)
 	{
-		if (form_target.compare(formType[i]) == 0)
+		if (form_type.compare(type_available[i]) == 0)
 		{
+			std::cout << "Intern creates " << form_type << std::endl;
 			ptr = (func[i])(target_of_form);
 			return (ptr);
 		}
