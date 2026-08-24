@@ -1,10 +1,11 @@
 
 #include "Serializer.hpp"
+#include <inttypes.h>
 
 uintptr_t	Serializer::serialize(Data *ptr)
 {
 	if (!ptr)
-		return (0);
+		return (static_cast<uintptr_t>(0));
 	return (reinterpret_cast<uintptr_t>(ptr));
 }
 

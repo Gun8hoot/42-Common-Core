@@ -77,11 +77,10 @@ int main(void)
 		std::cout << __RED__ << "//// TRY TO EXECUTE A NON-SIGNED FORM \\\\\\\\" << __RESET__ << std::endl;
 		try
 		{
-			Bureaucrat	user("user", 150);
+			Bureaucrat	user("user", 1);
 			ShrubberyCreationForm	form("sapin");
 			ShrubberyCreationForm test = form;
 
-			user.signForm(test);
 			user.executeForm(test);
 		}
 		catch (std::exception &ex)

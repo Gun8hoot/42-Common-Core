@@ -53,7 +53,6 @@ std::ostream &operator<<(std::ostream& os, Form& data)
 {
 	os	<< "The form \"" << data.getName() << "\" need at least a grade <= at "
 		<< data.getSign_Minimal_Grade() << " to be signed and "
-		<< data.getExecute_Minimal_Grade() << " to be executed."
-		<< std::endl;
+		<< data.getExecute_Minimal_Grade() << " to be executed.";
 	return (os);
 }

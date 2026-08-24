@@ -11,6 +11,7 @@ class Bureaucrat
 		const std::string	_name;
 		int					_grade;
 	public:
+		// -- EXCEPTIONS --
 		class GradeTooHighException : public std::exception
 		{
 			virtual const char *what(void) const throw();
@@ -19,22 +20,24 @@ class Bureaucrat
 		{
 			virtual const char *what(void) const throw();
 		};
-    Bureaucrat(void);
-		~Bureaucrat(void);
+
+		// -- CONSTRUCTOR --
+		Bureaucrat(void); // DEFAULT CONSTRUCTOR
+		Bureaucrat(const Bureaucrat &cpy); // COPY CONSTRUCTOR
+		Bureaucrat &operator=(const Bureaucrat &cpy); // COPY ASSIGNEMENTS CONSTRUCTOR
+		~Bureaucrat(void); // DESTRUCTOR
 		Bureaucrat(const std::string name);
-    Bureaucrat(const std::string name, const int grade);
-    Bureaucrat(const Bureaucrat &cpy);
-		Bureaucrat &operator=(const Bureaucrat &cpy);
+		Bureaucrat(const std::string name, const int grade);
 
 		const std::string	getName(void);
 
 		int					getGrade(void);
 		void				setGrade(int newGrade);
 
-		Bureaucrat operator++(void);	// PRE INCREASE
-		Bureaucrat operator++(int);		// POST INCREASE
 		Bureaucrat operator--(void);	// PRE DECREASE
 		Bureaucrat operator--(int);		// POST DECREASE
+		Bureaucrat operator++(void);	// PRE INCREASE
+		Bureaucrat operator++(int);		// POST INCREASE
 
 };
 

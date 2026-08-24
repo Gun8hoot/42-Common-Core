@@ -30,7 +30,7 @@ static void printChar(const std::string &literal)
 	{
 		std::cout << "Impossible" << std::endl;
 	}
-	else if (val <=0x1F)
+	else if (val < ' ')
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << "\'" << static_cast<char>(val) << "\'" << std::endl;

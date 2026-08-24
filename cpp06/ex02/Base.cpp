@@ -8,6 +8,7 @@
 #include <ctime>
 #include <exception>
 #include <iostream>
+#include <stdexcept>
 
 Base::~Base(void) { ; }
 
@@ -18,12 +19,23 @@ Base	*Base::generate(void)
 
 	try
 	{
-		if (rd == 0)
-			ptr = new A;
-		else if (rd == 1)
-			ptr = new B;
-		else
-			ptr = new C;
+		switch (rd)
+		{
+			case 0:
+				ptr = new A;
+				std::cout << "Generated class A at " << ptr << std::endl;
+				break;
+			case 1:
+				ptr = new B;
+				std::cout << "Generated class B at " << ptr << std::endl;
+				break;
+			case 2:
+				ptr = new C;
+				std::cout << "Generated class C at " << ptr << std::endl;
+				break;
+			default:
+				throw (std::runtime_error("Failed to generate valid random number"));
+		}
 	}
 	catch (std::bad_alloc &ex)
 	{
@@ -49,12 +61,5 @@ void	Base::identify(Base *p)
 
 void	Base::identify(Base &p)
 {
-	if (dynamic_cast<A *>(&p) != NULL)
-		std::cout << &p << " is a A struct" << std::endl;
-	else if (dynamic_cast<B *>(&p) != NULL)
-		std::cout << &p << " is a B struct" << std::endl;
-	else if (dynamic_cast<C *>(&p) != NULL)
-		std::cout << &p << " is a C struct" << std::endl;
-	else
-		std::cout << &p << " is not a A,B or C struct" << std::endl;
+	this->identify(&p);
 }

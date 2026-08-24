@@ -5,6 +5,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <unistd.h>
 
 // -- CONSTRUCTOR --
 RobotomyRequestForm::RobotomyRequestForm(const std::string target) : AForm("Robotomy", ROBOTOMY_SIGN_GRADE, ROBOTOMY_EXEC_GRADE)
@@ -39,7 +40,7 @@ RobotomyRequestForm::~RobotomyRequestForm(void) { ; }
 // -- MEMBER FUNCTION --
 void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	srand(time(NULL));
+	srand(time(NULL) % 1);
 
 	if (this->getIs_Signed() == false)
 		throw (RobotomyRequestForm::NotSignedException());

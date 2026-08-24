@@ -55,8 +55,8 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 				<< "    #####o###\n"
 				<< "   #o#\\#|#/###\n"
 				<< "    ###\\|/#o#\n"
-				<< "      # }|{ #\n"
-				<< "        }|{\n";
+				<< "     # }|{ #\n"
+				<< "       }|{\n";
 	file.close();
 	std::cout << "Tree \"" << this->_target << "\" have been planted..." << std::endl;
 }
