@@ -1,0 +1,87 @@
+services:
+    ftp:
+        build:
+            context: ./sources/ftp
+            args:
+                - FTP_PASSWORD=${FTP_PASSWORD}
+        ports:
+            - 0.0.0.0:20-21:20-21
+            - 0.0.0.0:40000-40100:40000-40100
+        volumes:
+            - $HOME/data/ftp:/srv/ftp # NEED TO CHANGE, BIND MOUNT NOT ALLOW
+        secrets:
+            - vsftpd.crt
+            - vsftpd.key
+        restart: always
+        networks:
+            - MainNet
+    nginx:
+        build:
+            context: ./sources/nginx
+        ports:
+            - 0.0.0.0:80:80
+            - 0.0.0.0:443:443
+        secrets:
+            - nginx.crt
+            - nginx.key
+        restart: always
+        networks:
+            - MainNet
+        volumes:
+            - wordpress_data:/srv/www/wordpress
+        depends_on:
+            - wordpress
+    mariadb:
+        build:
+            context: ./sources/mariadb
+        networks:
+            - MainNet
+        restart: always
+        volumes:
+            - db:/var/lib/mysql
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+            - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    wordpress:
+        build:
+            context: ./sources/wordpress
+        depends_on:
+            - mariadb
+        networks:
+            - MainNet
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+        restart: always
+        volumes:
+            - wordpress_data:/srv/www/wordpress
+
+secrets:
+    vsftpd.crt:
+        file: ./sources/ftp/.secret/vsftpd.crt
+    vsftpd.key:
+        file: ./sources/ftp/.secret/vsftpd.key
+    nginx.key:
+        file: ./sources/nginx/.secret/nginx.key
+    nginx.crt:
+        file: ./sources/nginx/.secret/nginx.crt
+
+volumes:
+    db:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/mariadb
+    wordpress_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/wordpress
+networks:
+    MainNet:
+        driver: bridge

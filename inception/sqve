@@ -1,0 +1,4 @@
+xxxxxx@arch ~/xx (main)> ls -lh ~/data/
+total 8.0K
+drwxrwxrwx 2 root xxxxxx 4.0K May 27 13:51 ftp/
+drwxr-x--- 7 root     101 4.0K May 27 13:51 mariadb/
