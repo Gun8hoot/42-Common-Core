@@ -1,0 +1,9 @@
+[submodule "minishell"]
+	path = minishell
+	url = https://github.com/thlibers/minishell.git
+[submodule "cube3d"]
+	path = cube3d
+	url = https://github.com/gun8hoot/cube3d.git
+[submodule "ft_transcendence"]
+	path = ft_transcendence
+	url = https://github.com/banne227/ft_transcendence.git
