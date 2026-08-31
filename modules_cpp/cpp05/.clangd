@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - -std=c++98
+    - -Wall
+    - -Wextra
+    - -Werror
+    - -I/home/gun8hoot/Documents/modules_cpp/cpp05/.

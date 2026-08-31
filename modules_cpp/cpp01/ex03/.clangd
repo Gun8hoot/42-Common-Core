@@ -1,0 +1,2 @@
+CompileFlags:
+	Add: [-xc, -Wall, -Wextra, -Werror, -I/home/nclavel/Documents/Modules_CPP/cpp01/ex03]

@@ -1,0 +1,5 @@
+CompileFlags:
+    Add:
+        - -Wall -Wextra -Werror
+        - -std=c++98
+        - -I/home/nclavel/Documents/Modules_CPP/cpp04
