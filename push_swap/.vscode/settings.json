@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"push_swap.h": "c",
+		"unistd.h": "c",
+		"libft.h": "c",
+		"ft_printf.h": "c",
+		"linked_list.h": "c",
+		"variant": "c",
+		"chrono": "c",
+		"bitset": "c",
+		"fstream": "c",
+		"ostream": "c"
+	}
+}
