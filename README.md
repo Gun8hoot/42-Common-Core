@@ -16,10 +16,10 @@ git clone --recursive -job 2 git@github.com:Gun8hoot/42-Common-Core.git
 </div>
 
 ### CERCLES 0 :
-- [libft](https://github.com/Gun8hoot/42-Common-Core/blob/main/libft/README.md) : On this project we have created a library called libft who contain our own version of many libc & openbsd function
+- [libft](https://github.com/Gun8hoot/42-Common-Core/blob/main/libft/README.md) : On this project we have created a library called libft who contain our own version of many libc & libbsd function
 ### CERCLES 1 :
-- [ft_printf](https://github.com/Gun8hoot/42-Common-Core/blob/main/printf/README.md) : Rewrite the function printf to write complex string on the terminal
-- [get_next_line](https://github.com/Gun8hoot/42-Common-Core/blob/main/get_next_line/README.md) : Read a file line by line with a customizable buffer or/andmultiple file descriptor
+- [ft_printf](https://github.com/Gun8hoot/42-Common-Core/blob/main/printf/README.md) : Rewrite the function printf to write formated string on the terminal
+- [get_next_line](https://github.com/Gun8hoot/42-Common-Core/blob/main/get_next_line/README.md) : Read a file line by line with a customizable buffer or/and from multiple file descriptor
 - [Born2beroot](https://github.com/Gun8hoot/42-Common-Core/blob/main/born2beroot/README.md) : Setup a virtual machine that will run a minimal version of Debian/Rocky Linux (new version of CentOS)
 ### CERCLES 2 :
 - [Minitalk](https://github.com/Gun8hoot/42-Common-Core/blob/main/minitalk/README.md) : A simple client/server program to discover IPC (Inter Process Communication), signal handling and bitwise operation
@@ -36,4 +36,4 @@ git clone --recursive -job 2 git@github.com:Gun8hoot/42-Common-Core.git
 - [Inception](https://github.com/Gun8hoot/42-Common-Core/blob/main/inception/README.md) : Setup a micro-services based infrastructure
 - [ft_irc](https://github.com/Gun8hoot/42-Common-Core/blob/main/libft/README.md) : A simple IRC server
 ### CERCLES 6 :
-- [ft_transcendence](https://github.com/banne227/ft_transcendence/blob/c4e54401e265373c71faaa1b3417e229b95432cd/README.md) : Website
+- [ft_transcendence](https://github.com/banne227/ft_transcendence/blob/c4e54401e265373c71faaa1b3417e229b95432cd/README.md) : A website with all his architecture and infrastructure
