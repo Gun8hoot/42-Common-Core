@@ -33,3 +33,10 @@ make fclean
 | Function | Purpose |
 | --------- | ------- |
 | char *get_next_line(int fd)        | Get the next line on the file descriptor (fd) |
+
+<div align="center">
+    <h2>SKILL GAINED :</h2>
+</div>
+
+- Learned about what is a file descriptor and how to use it
+- Learned about pre-processing rules (ifndef/define)

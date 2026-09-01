@@ -36,3 +36,8 @@ The purpose of this project is to setup a server on a virtual machine without us
 - The $PATH of sudo should be limited to /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 - Having a bash script that display when launching the server and every 10 minutes (WILL ONLY WORK ON THE VM SCREEN, SSH CONNECTION WILL NOT HAVE THE MESSAGE)
 
+<div align="center">
+    <h2>SKILL GAIN :</h2>
+</div>
+
+- Learned how to install and configure an Linux distribution

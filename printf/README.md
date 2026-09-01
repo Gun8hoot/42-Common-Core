@@ -30,6 +30,7 @@ make fclean
 <div align="center">
     <h2>FORMATING :</h2>
 </div>
+
 | Formating | Purpose |
 | --------- | ------- |
 | %c        | Print a character on the terminal |
@@ -41,3 +42,10 @@ make fclean
 | %x        | Print a number in hexadecimal (base 16) lowercase on the terminal |
 | %X        | Print a number in hexadecimal (base 16) uppercase on the terminal |
 | %%        | Print a percent sign on the terminal |
+
+<div align="center">
+    <h2>SKILL GAIN :</h2>
+</div>
+
+- Learning about variative list
+- Learn about number base conversion (10 -> 16)

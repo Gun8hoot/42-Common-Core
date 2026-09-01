@@ -35,7 +35,7 @@ LIBFT:
 
 MINILIBX:
 	rm -f minilibx-linux.tgz
-	wget https://cdn.intra.42.fr/document/document/39937/minilibx-linux.tgz
+	wget https://cdn.intra.42.fr/document/document/52025/minilibx-linux.tgz
 	tar xvfz minilibx-linux.tgz -C external
 	make -C external/minilibx-linux
 	mv external/minilibx-linux/*.a lib/

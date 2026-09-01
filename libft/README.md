@@ -77,3 +77,10 @@ make fclean
 | **ft_lstclear** | `void ft_lstclear(t_list **lst, void (*del)(void *))` | **Deletes and frees the given node and all successor nodes using the del function**; iterates through entire list freeing each node's content and the node itself; sets the list pointer to NULL; returns void; requires `free()` |
 | **ft_lstiter** | `void ft_lstiter(t_list *lst, void (*f)(void *))` | **Iterates through the list and applies function f to the content of each node**; f receives the node's content as parameter; does not create a new list; returns void; requires no external functions |
 | **ft_lstmap** | `t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))` | **Iterates through list lst, applies function f to each node's content, and creates a new list from the results**; f transforms each node's content; del is used to delete content if allocation fails; returns pointer to new list or NULL if allocation fails; requires `malloc()` and `free()` |
+
+<div align="center">
+    <h2>SKILL GAIN : </h2>
+</div>
+
+- Review and reinforced every C basis learn during the 42 piscine
+- Have learn what is a linked list and how to use it
