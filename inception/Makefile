@@ -4,10 +4,11 @@ D	= docker
 all: up
 
 up:
+	@bash ./scripts/check_env.sh
 	@printf "\e[0;32m[?] Starting Inception services ...\e[0m\n"
 	@mkdir -p ~/data/mariadb
 	@mkdir -p ~/data/wordpress
-	@$(DC) up
+	@$(DC) up -d
 	@printf "\e[0;32m[+] Inception services have been launched ...\e[0m\n"
 
 down:
@@ -22,7 +23,9 @@ re:
 	@printf "\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
 	@mkdir -p ~/data/mariadb
 	@mkdir -p ~/data/wordpress
-	@$(DC) build
+	@$(DC) build -q
 	@$(MAKE) up
 
+test:
+	@bash ./scripts/check_env.sh
 .PHONY: up down re

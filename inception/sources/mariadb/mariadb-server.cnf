@@ -1,9 +1,0 @@
-
-[mysql]
-port = 3306
-socket = /var/run/mysqld/mysqld.sock
-
-[mysqld]
-port=3306
-bind-address=0.0.0.0
-socket=/var/run/mysqld/mysqld.sock

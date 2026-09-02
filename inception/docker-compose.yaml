@@ -1,7 +1,65 @@
 services:
-    ftp:
+    # -- MENDATORY PART --
+    nginx:
+        container_name: nginx
         build:
-            context: ./sources/ftp
+            context: ./nginx
+            dockerfile: Dockerfile
+        ports:
+            - 0.0.0.0:80:80
+            - 0.0.0.0:443:443
+        secrets:
+            - nginx.crt
+            - nginx.key
+        restart: on-failure:5
+        networks:
+            - MainNet
+        volumes:
+            - wordpress_data:/srv/www/wordpress
+            - static_pages:/srv/www/wordpress/static
+            - adminer_data:/var/www/adminer/
+            - logs:/var/log/nginx
+        depends_on:
+            - wordpress
+            - adminer
+    mariadb:
+        container_name: database
+        build:
+            context: ./database
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        restart: on-failure:5
+        volumes:
+            - db:/var/lib/mysql
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+            - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+    wordpress:
+        container_name: wordpress
+        build:
+            context: ./wordpress
+            dockerfile: Dockerfile
+        depends_on:
+            - mariadb
+        networks:
+            - MainNet
+        environment:
+            - MARIADB_USER=${MARIADB_USERNAME}
+            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
+        restart: on-failure:5
+        volumes:
+            - wordpress_data:/srv/www/wordpress
+
+    # -- BONUS PART --
+    ftp:
+        container_name: ftp
+        build:
+            context: ./ftp
+            dockerfile: Dockerfile
             args:
                 - FTP_PASSWORD=${FTP_PASSWORD}
         ports:
@@ -12,62 +70,31 @@ services:
         secrets:
             - vsftpd.crt
             - vsftpd.key
-        restart: always
+        restart: on-failure:5
         networks:
             - MainNet
-    nginx:
+    adminer:
+        container_name: adminer
         build:
-            context: ./sources/nginx
-        ports:
-            - 0.0.0.0:80:80
-            - 0.0.0.0:443:443
-        secrets:
-            - nginx.crt
-            - nginx.key
-        restart: always
+            context: ./adminer
+            dockerfile: Dockerfile
+        volumes:
+            - adminer_data:/var/www/adminer/
+        restart: on-failure:5
         networks:
             - MainNet
-        volumes:
-            - wordpress_data:/srv/www/wordpress
-        depends_on:
-            - wordpress
-    mariadb:
-        build:
-            context: ./sources/mariadb
-        networks:
-            - MainNet
-        restart: always
-        volumes:
-            - db:/var/lib/mysql
-        environment:
-            - MARIADB_USER=${MARIADB_USERNAME}
-            - MARIADB_PASSWD=${MARIADB_PASSWORD}
-            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
-            - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
-    wordpress:
-        build:
-            context: ./sources/wordpress
-        depends_on:
-            - mariadb
-        networks:
-            - MainNet
-        environment:
-            - MARIADB_USER=${MARIADB_USERNAME}
-            - MARIADB_PASSWD=${MARIADB_PASSWORD}
-            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
-        restart: always
-        volumes:
-            - wordpress_data:/srv/www/wordpress
 
 secrets:
+    # -- FTP TLS KEYS --
     vsftpd.crt:
-        file: ./sources/ftp/.secret/vsftpd.crt
+        file: ./ftp/.secret/vsftpd.crt
     vsftpd.key:
-        file: ./sources/ftp/.secret/vsftpd.key
+        file: ./ftp/.secret/vsftpd.key
+    # -- HTTPS TLS KEYS --
     nginx.key:
-        file: ./sources/nginx/.secret/nginx.key
+        file: ./nginx/.secret/nginx.key
     nginx.crt:
-        file: ./sources/nginx/.secret/nginx.crt
+        file: ./nginx/.secret/nginx.crt
 
 volumes:
     db:
@@ -82,6 +109,24 @@ volumes:
             type: none
             o: bind
             device: $HOME/data/wordpress
+    adminer_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $PWD/adminer/frontend
+    static_pages:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $PWD/nginx/static
+    logs:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $PWD/logs
 networks:
     MainNet:
         driver: bridge
