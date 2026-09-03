@@ -1,13 +1,19 @@
 FROM alpine:3.22
 
 # -- INITIALIZE CONTAINER --
-RUN apk update && apk add php83-fpm php83-mysqli php83-mbstring wget
+RUN apk update
+RUN apk add --no-cache \
+    php83-fpm \
+    php83-mysqli \
+    php83-mbstring \
+    php83-session \
+    php83-openssl \
+    wget
 RUN mkdir -p /var/www/adminer
-RUN adduser -D -H -S -G www-data www-data
-RUN chown www-data: /var/www/adminer
+# RUN adduser -D -H -S -G nobody nobody
+RUN chown nobody: /var/www/adminer
 
 # -- COPY FILES --
-WORKDIR /var/www/adminer/
 COPY ./www.conf /etc/php83/php-fpm.d/www.conf
 
 # -- LAUNCH THE CONTAINER --

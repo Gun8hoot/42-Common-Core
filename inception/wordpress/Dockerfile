@@ -22,4 +22,3 @@ COPY ./www.conf /etc/php83/php-fpm.d/www.conf
 
 RUN adduser -D -H -S -G www-data www-data
 ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
-CMD [ "php-fpm83", "-F" ]

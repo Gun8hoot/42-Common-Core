@@ -2,12 +2,6 @@
 
 chown www-data: /srv/www
 
-if [ $(ls /srv/www/wordpress | wc -w) -eq 0 ]; then
-	mkdir -p /srv/www
-	tar -xf /tmp/latest.tar.gz -C /srv/www
-	wget https://wordpress.org/latest.tar.gz -O ./sources/wordpress/latest.tar.gz
-fi
-
 cat > /srv/www/wordpress/wp-config.php << EOF
 <?php
 /**
@@ -97,5 +91,4 @@ if (!defined('ABSPATH')) {
 require_once ABSPATH . 'wp-settings.php';
 EOF
 
-rm -f /tmp/latest.zip
 php-fpm83 -F

@@ -20,7 +20,7 @@ fi
 if [ ! -f $PWD/adminer/frontend/index.php ]; then
 	printf "\x1b[33m[!] Initialize adminer\n\x1b[0m" 1>&2
 	mkdir -p $PWD/adminer/frontend
-	wget --quiet https://github.com/vrana/adminer/releases/download/v6.0.1/adminer-6.0.1-mysql-en.php -O $PWD/adminer/frontend/index.php
+	wget --quiet https://github.com/vrana/adminer/releases/download/v6.0.1/adminer-6.0.1.php -O $PWD/adminer/frontend/index.php
 	if [ $? -ne 0 ]; then
 		printf "\x1b[31m[!] Failed to download adminer php file\n\x1b[0m" 1>&2
 		exit 1
