@@ -1,14 +1,12 @@
 #!/bin/bash
 
 function banner {
-	printf """\e[0;34m
-   ________  ________________ __ _____   ________   _______   ___    __
+	printf """\e[0;34m   ________  ________________ __ _____   ________   _______   ___    __
   / ____/ / / / ____/ ____/ //_//  _/ | / / ____/  / ____/ | / / |  / /
  / /   / /_/ / __/ / /   / ,<   / //  |/ / / __   / __/ /  |/ /| | / /
 / /___/ __  / /___/ /___/ /| |_/ // /|  / /_/ /  / /___/ /|  / | |/ /
 \____/_/ /_/_____/\____/_/ |_/___/_/ |_/\____/  /_____/_/ |_/  |___/
-
-\e[0m\n"""
+        --- CHECKING .ENV FILE ---\e[0m\n"""
 }
 
 function check_password {
@@ -67,11 +65,12 @@ function main {
 		line=$(echo "$line" | tr -d $'\'')
 		line=$(echo "$line" | tr -d $'\"')
 		line=$(echo "$line" | tr -d $'$"')
-		line=$(echo "$line" | cut -d'#' -f1 | xargs)
+		SAVE=$line
+		SAVE=$(echo "$SAVE" | cut -d'#' -f1 | xargs)
 
 		# // Split the env vars from the first = \\
-		key="${line%%=*}"
-		value="${line#*=}"
+		key="${SAVE%%=*}"
+		value="${SAVE#*=}"
 
 		# // If the variable is a password, check it
 		if [[ "$key" == *"PASSWORD"* ]] || [[ "$key" == *"password"* ]]; then
@@ -91,7 +90,7 @@ function main {
 				exit 1
 			fi
 		fi
-		# // Append the treated line on a temporary file
+		# // Append the treated SAVE on a temporary file
 		echo "$line" >> $TMP_FILEPATH
 	done < .env
 

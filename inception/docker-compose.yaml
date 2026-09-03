@@ -27,15 +27,17 @@ services:
         build:
             context: ./database
             dockerfile: Dockerfile
+        ports:
+            - 0.0.0.0:3306:3306
         networks:
             - MainNet
         restart: on-failure:5
         volumes:
             - db:/var/lib/mysql
+            - logs:/var/logs/mariadb
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
-            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
             - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     wordpress:
         container_name: wordpress
@@ -49,7 +51,6 @@ services:
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
-            - MARIADB_DOMAIN=${MARIADB_DOMAIN}
         restart: on-failure:5
         volumes:
             - wordpress_data:/srv/www/wordpress
@@ -85,16 +86,16 @@ services:
             - MainNet
 
 secrets:
-    # -- FTP TLS KEYS --
+    # -- FTP TLS CERTIFICATE --
     vsftpd.crt:
-        file: ./ftp/.secret/vsftpd.crt
+        file: ./.cert/vsftpd.crt
     vsftpd.key:
-        file: ./ftp/.secret/vsftpd.key
-    # -- HTTPS TLS KEYS --
+        file: ./.cert/vsftpd.key
+    # -- HTTPS TLS CERTIFICATE --
     nginx.key:
-        file: ./nginx/.secret/nginx.key
+        file: ./.cert/nginx.key
     nginx.crt:
-        file: ./nginx/.secret/nginx.crt
+        file: ./.cert/nginx.crt
 
 volumes:
     db:
@@ -119,7 +120,7 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            o: bind
+            o: bind, ro
             device: $PWD/nginx/static
     logs:
         driver: local

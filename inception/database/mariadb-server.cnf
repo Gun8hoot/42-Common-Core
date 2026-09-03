@@ -1,9 +1,8 @@
 
 [mysql]
 port = 3306
-socket = /var/run/mysqld/mysqld.sock
 
 [mysqld]
-port=3306
-bind-address=0.0.0.0
-socket= /var/run/mysqld/mysqld.sock
+port = 3306
+bind-address = 0.0.0.0
+log_error = /var/logs/mariadb/mariadb.log

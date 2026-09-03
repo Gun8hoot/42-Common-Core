@@ -1,7 +1,35 @@
 #!/bin/sh
 
-bad_username="user usr root admin administrator mariadb maria db azerty qwerty a"
-bad_password="password 123456789 qwerty azerty pass 123 a"
+DATABASE_LOCATION=/var/lib/mysql
+
+function ping_database
+{
+	TO=0
+	printf "Attempting to ping ...\n"
+	# Ping since the database is down
+	if [ "$1" == "down" ]; then
+		until ! mariadb-admin ping  -u root -p"$MARIADB_ROOT_PASSWORD" --silent ; do
+			if [ $TO -eq 15 ]; then # Timeout after 15s
+				printf "\x1b[33m[!] FATAL ERROR : DATABASE TIMEOUT\x1b[0m\n"
+				printf "$(date "+%Y-%m-%d %H:%M:%S") 0 [ERROR] Fatal error: Database initialization timeout\n" >> /var/logs/mariadb/mariadb.log
+				exit 1
+			fi
+			TO=$(($TO+1))
+			sleep 1
+		done
+	# Ping since the database is up
+	else
+		until mariadb-admin ping  -u root -p"$MARIADB_ROOT_PASSWORD" --silent ; do
+			if [ $TO -eq 15 ]; then # Timeout after 15s
+				printf "\x1b[33m[!] FATAL ERROR : DATABASE TIMEOUT\x1b[0m\n"
+				printf "$(date "+%Y-%m-%d %H:%M:%S") 0 [ERROR] Fatal error: Database initialization timeout\n" >> /var/logs/mariadb/mariadb.log
+				exit 1
+			fi
+			TO=$(($TO+1))
+			sleep 1
+		done
+	fi
+}
 
 function check_file_exist()
 {
@@ -14,72 +42,40 @@ function check_file_exist()
 	return 0
 }
 
-# ╔═══════════════════════════╗
-# ║           CHECK           ║
-# ╚═══════════════════════════╝
-
-# --- CHECK IF ENV VARS EXIST ---
-if [ "$MARIADB_USER" == "" ]; then
-	printf "\x1b[31m[!] Missing environment 'MARIADB_USER' variable detected\n\x1b[0m" 1>&2
-	exit 1
-elif [ "$MARIADB_PASSWD" == "" ]; then
-	printf "\x1b[31m[!] Missing environment 'MARIADB_PASSWD' variable detected\n\x1b[0m" 1>&2
-	exit 1
-elif [ "$MARIADB_DOMAIN" == "" ]; then
-	printf "\x1b[31m[!] Missing environment 'MARIADB_DOMAIN' variable detected\n\x1b[0m" 1>&2
-	exit 1
-fi
-
-# --- CHECK THE WEAKNESS OF THE USER AND PASSWORD ---
-for usr in $bad_username; do
-	if [ "$MARIADB_USER" == "$usr" ]; then
-		printf "\x1b[33m[!] The username '$usr' is common, this could lead to security issues\n\x1b[0m" 1>&2
+function main
+{
+	printf "--- START ---\n"
+	# --- INITIALIZED MARIADB ---
+	check_file_exist "$DATABASE_LOCATION/mysql.user"
+	echo "$?"
+	if [ $? -eq 1 ]; then
+		mariadb-upgrade --user=mysql --datadir=$DATABASE_LOCATION > /dev/null
+	else
+		mariadb-install-db --user=mysql --datadir=$DATABASE_LOCATION >/dev/null
 	fi
-done
-for passwd in $bad_password; do
-	if [ "$MARIADB_PASSWD" == "$passwd" ]; then
-		printf "\x1b[33m[!] The password '$passwd' for the user '$MARIADB_USER' is weak, this could lead to serious security issues\n\x1b[0m" 1>&2
+	if [ $? -eq 1 ]; then
+		printf "A probleme occurend during the initialization of the database\n"
+		exit 1
 	fi
-done
+	# --- STARTING MARIADB DAEMON ---
+	mariadbd --user=root --datadir="$DATABASE_LOCATION" &
+	ping_database
 
-# ╔═════════════════════════╗
-# ║           MAIN          ║
-# ╚═════════════════════════╝
-
-cd /var/lib/mysql
-
-# --- INITIALIZED MARIADB ---
-printf "[+] Loading MariaDB\n" 1>&2
-check_file_exist "mysql.user"
-if [ $? -eq 0 ]; then
-	mariadb-install-db --user=mysql --datadir=/var/lib/mysql 2>/dev/null
-else
-	mariadb-upgrade --user=mysql --datadir=/var/lib/mysql 2>/dev/null
-fi
-
-# --- STARTING MARIADB DAEMON ---
-mariadbd -h $MARIADB_DOMAIN --user=mysql --datadir='/var/lib/mysql' &
-until mariadb-admin ping --silent -h $MARIADB_DOMAIN; do
-	sleep 1
-done
-
-daemon_password=$(tr -dc 'a-zA-Z0-9' < /dev/urandom | head -c 128)
-# --- CONFIGURING THE DATABASE ---
-cat > init.sql << EOF
-CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER IF NOT EXISTS 'root'@'$MARIADB_DOMAIN' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
-CREATE USER IF NOT EXISTS '$MARIADB_USER'@'$MARIADB_DOMAIN' IDENTIFIED BY '$MARIADB_PASSWD';
-GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'$MARIADB_DOMAIN';
-ALTER USER IF EXISTS 'root'@'$MARIADB_DOMAIN' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
-FLUSH PRIVILEGES;
+	# --- CONFIGURING THE DATABASE ---
+	cat > init.sql << EOF
+	CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+	CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+	CREATE USER IF NOT EXISTS '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PASSWD';
+	GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'%';
+	ALTER USER IF EXISTS 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+	FLUSH PRIVILEGES;
 EOF
-echo "here"
-mariadb -h $MARIADB_DOMAIN -u root --skip-password < ./init.sql
-echo "not here"
+	mariadb -u root -p"$MARIADB_ROOT_PASSWORD" < ./init.sql
+	mariadb-admin shutdown -p"$MARIADB_ROOT_PASSWORD" -h localhost
+	ping_database down
+	mariadbd -h mariadb --user=root --console --datadir="$DATABASE_LOCATION"
+	printf "[+] MariaDB successfully initialized\n" 1>&2
+	printf "--- STOP ---\n"
+}
 
-mariadb-admin shutdown -h $MARIADB_DOMAIN
-sleep 2
-
-# --- WAITING UNTIL THE CONTAINER STOP (INFINITE LOOP) ---
-printf "[+] MariaDB successfully initialized\n" 1>&2
-exec mariadbd --user=mysql --datadir='/var/lib/mysql'
+main
