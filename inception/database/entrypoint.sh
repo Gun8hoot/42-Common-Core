@@ -73,9 +73,8 @@ EOF
 	mariadb -u root -p"$MARIADB_ROOT_PASSWORD" < ./init.sql
 	mariadb-admin shutdown -p"$MARIADB_ROOT_PASSWORD" -h localhost
 	ping_database down
+	echo "[+] MariaDB successfully initialized\n" 1>&2
 	mariadbd -h mariadb --user=root --console --datadir="$DATABASE_LOCATION"
-	printf "[+] MariaDB successfully initialized\n" 1>&2
-	printf "--- STOP ---\n"
 }
 
 main
