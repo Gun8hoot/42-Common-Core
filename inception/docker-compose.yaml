@@ -97,6 +97,8 @@ services:
             dockerfile: Dockerfile
         networks:
             - MainNet
+        ports:
+            - 0.0.0.0:3000:3000
         restart: on-failure:5
 
 secrets:

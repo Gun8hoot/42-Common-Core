@@ -19,6 +19,7 @@ down:
 
 re:
 	@$(MAKE) down
+	@yes | docker prune network || true
 	#@yes | $(D) system prune -a --volumes  || true
 	@printf "\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
 	@$(DC) build -q
