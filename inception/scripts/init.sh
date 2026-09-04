@@ -29,9 +29,14 @@ if [ ! -f $PWD/adminer/frontend/index.php ]; then
 
 fi
 # -- INITIALIZE VOLUMES DIRECTORY --
-if [ ! -d "$HOME/data/ftp" ] || [ ! -d "$HOME/data/mariadb" ] || [ ! -d "$HOME/data/wordpress" ]; then
+if [ ! -d "$HOME/data/ftp" ] \
+		|| [ ! -d "$HOME/data/mariadb" ] \
+		|| [ ! -d "$HOME/data/wordpress" ] \
+		|| [ ! -d "$HOME/data/postgres_gitea" ] \
+		|| [ ! -d "$HOME/data/kuma_db" ] \
+		|| [ ! -d "$HOME/data/logs" ]; then
 	printf "\x1b[33m[!] Initialize volumes\n\x1b[0m" 1>&2
-	mkdir -p $HOME/data/{ftp,mariadb,wordpress}
+	mkdir -p $HOME/data/{ftp,mariadb,wordpress,logs,postgres_gitea,kuma_db}
 	if [ $? -ne 0 ]; then
 		printf "\x1b[31m[!] Failed to create volumes directory\n\x1b[0m" 1>&2
 		exit 1

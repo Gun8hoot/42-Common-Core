@@ -1,0 +1,15 @@
+
+body:
+{
+  "username": "Kuma",
+  "content": "{{msg}}"
+}
+
+header:
+{
+  "Content-Type": "application/json"
+}
+
+Ignore TLS/SSL error
+
+docker exec -it nginx ip addr

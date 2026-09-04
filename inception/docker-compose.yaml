@@ -6,8 +6,8 @@ services:
             context: ./nginx
             dockerfile: Dockerfile
         ports:
-            - 0.0.0.0:80:80
-            - 0.0.0.0:443:443
+            - 80:80
+            - 443:443
         secrets:
             - nginx.crt
             - nginx.key
@@ -17,11 +17,12 @@ services:
         volumes:
             - wordpress_data:/srv/www/wordpress
             - static_pages:/srv/www/wordpress/static
-            - adminer_data:/var/www/adminer/
+            - adminer_page:/var/www/adminer/
             - logs:/var/log/nginx
         depends_on:
             - wordpress
             - adminer
+            - gitea
     mariadb:
         container_name: database
         build:
@@ -42,8 +43,6 @@ services:
         build:
             context: ./wordpress
             dockerfile: Dockerfile
-        depends_on:
-            - mariadb
         networks:
             - MainNet
         environment:
@@ -52,6 +51,8 @@ services:
         restart: on-failure:5
         volumes:
             - wordpress_data:/srv/www/wordpress
+        depends_on:
+            - mariadb
 
     # -- BONUS PART --
     ftp:
@@ -59,29 +60,33 @@ services:
         build:
             context: ./ftp
             dockerfile: Dockerfile
-            args:
-                - FTP_PASSWORD=${FTP_PASSWORD}
         ports:
-            - 0.0.0.0:20-21:20-21
-            - 0.0.0.0:40000-40100:40000-40100
+            - "21:21"
+            - "40000-40100:40000-40100"
         volumes:
             - $HOME/data/ftp:/srv/ftp
+        environment:
+            - FTP_PASSWORD=${FTP_PASSWORD}
         secrets:
             - vsftpd.crt
             - vsftpd.key
         restart: on-failure:5
         networks:
             - MainNet
+        depends_on:
+            - nginx
     adminer:
         container_name: adminer
         build:
             context: ./adminer
             dockerfile: Dockerfile
         volumes:
-            - adminer_data:/var/www/adminer/
+            - adminer_page:/var/www/adminer/
         restart: on-failure:5
         networks:
             - MainNet
+        depends_on:
+            - mariadb
     redis:
         container_name: redis
         build:
@@ -90,6 +95,36 @@ services:
         networks:
             - MainNet
         restart: on-failure:5
+        depends_on:
+            - wordpress
+    kuma:
+        container_name: kuma
+        build:
+            context: ./kuma
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        ports:
+            - 3001:3001
+        restart: on-failure:5
+        depends_on:
+            - wordpress
+    kuma-mariadb:
+        container_name: kumadb
+        build:
+            context: ./kuma/db
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        restart: on-failure:5
+        volumes:
+            - kuma_data:/var/lib/mysql
+            - logs:/var/logs/mariadb
+        environment:
+            - KUMA_USER=${KUMA_USERNAME}
+            - KUMA_PASSWD=${KUMA_PASSWORD}
+            - KUMA_ROOT_PASSWORD=${KUMA_ROOT_PASSWORD}
+    #     -- GITEA --
     gitea:
         container_name: gitea
         build:
@@ -98,8 +133,23 @@ services:
         networks:
             - MainNet
         ports:
-            - 0.0.0.0:3000:3000
+            - 3000:3000
         restart: on-failure:5
+        depends_on:
+            - mariadb
+    postgres_gitea:
+        container_name: postgres_gitea
+        build:
+            context: ./gitea/postgres
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        restart: on-failure:5
+        volumes:
+            - postgres_gitea:/srv/postgres
+        depends_on:
+            - gitea
+
 
 secrets:
     # -- FTP TLS CERTIFICATE --
@@ -126,7 +176,7 @@ volumes:
             type: none
             o: bind
             device: $HOME/data/wordpress
-    adminer_data:
+    adminer_page:
         driver: local
         driver_opts:
             type: none
@@ -143,7 +193,23 @@ volumes:
         driver_opts:
             type: none
             o: bind
-            device: $PWD/logs
+            device: $HOME/data/logs
+    postgres_gitea:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/postgres_gitea
+    kuma_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: $HOME/data/kuma_db
+
 networks:
     MainNet:
+        driver: bridge
+    KumaNetwork: {}
+    WPNetwork:
         driver: bridge

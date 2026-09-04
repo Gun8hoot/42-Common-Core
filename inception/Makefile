@@ -1,7 +1,8 @@
-DC	= docker compose
-D	= docker
+NAME = inception
 
-all: up
+$(NAME): up
+
+all: $(NAME)
 
 up:
 	@bash ./scripts/init.sh
@@ -9,20 +10,25 @@ up:
 	@printf "\e[0;32m[?] Starting Inception services ...\e[0m\n"
 	@mkdir -p ~/data/mariadb
 	@mkdir -p ~/data/wordpress
-	@$(DC) up -d
+	@docker compose up -d
 	@printf "\e[0;32m[+] Inception services have been launched ...\e[0m\n"
 
 down:
 	@printf "\e[0;33m[?] Stoping Inception services ...\e[0m\n"
-	@$(DC) down
-	@yes | $(D) network prune 1>/dev/null
+	@docker compose down
+	@yes | docker network prune 1>/dev/null
 
 re:
 	@$(MAKE) down
 	@yes | docker prune network || true
-	#@yes | $(D) system prune -a --volumes  || true
 	@printf "\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
-	@$(DC) build -q
+	@docker compose build -q
 	@$(MAKE) up
+
+reset:
+	@$(MAKE) down
+	@sudo rm -rf ~/data
+	@yes | docker compose  system prune -a --volumes  || true
+	@docker compose volumes prune -q || true
 
 .PHONY: up down re
