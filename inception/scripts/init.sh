@@ -26,17 +26,16 @@ if [ ! -f $PWD/adminer/frontend/index.php ]; then
 	else
 		printf "\x1b[32m[+] Downloaded adminer php file\n\x1b[0m" 1>&2
 	fi
-
 fi
+
 # -- INITIALIZE VOLUMES DIRECTORY --
 if [ ! -d "$HOME/data/ftp" ] \
 		|| [ ! -d "$HOME/data/mariadb" ] \
 		|| [ ! -d "$HOME/data/wordpress" ] \
-		|| [ ! -d "$HOME/data/postgres_gitea" ] \
 		|| [ ! -d "$HOME/data/kuma_db" ] \
 		|| [ ! -d "$HOME/data/logs" ]; then
 	printf "\x1b[33m[!] Initialize volumes\n\x1b[0m" 1>&2
-	mkdir -p $HOME/data/{ftp,mariadb,wordpress,logs,postgres_gitea,kuma_db}
+	mkdir -p $HOME/data/{ftp,mariadb,wordpress,logs,kuma_db}
 	if [ $? -ne 0 ]; then
 		printf "\x1b[31m[!] Failed to create volumes directory\n\x1b[0m" 1>&2
 		exit 1
@@ -44,6 +43,7 @@ if [ ! -d "$HOME/data/ftp" ] \
 		printf "\x1b[32m[+] Volume directory created in $HOME/data\n\x1b[0m" 1>&2
 	fi
 fi
+
 # -- INITIALIZE WORDPRESS --
 if [ ! -d "$HOME/data/wordpress" ] || [ $(ls $HOME/data/wordpress/ | wc -w) -eq 0 ]; then
 	printf "\x1b[33m[!] Initialize wordpress\n\x1b[0m" 1>&2
@@ -58,6 +58,7 @@ if [ ! -d "$HOME/data/wordpress" ] || [ $(ls $HOME/data/wordpress/ | wc -w) -eq 
 	fi
 	rm -f $HOME/data/wordpress/latest.tar.gz
 fi
+
 # -- INITIALIZE SELF-SIGNED CERTIFICATE --
 if [ ! -d $PWD/.cert ] || [ $(ls $PWD/.cert | wc -w) -ne 4 ]; then
 	printf "\x1b[33m[!] Creating new certificate\n\x1b[0m" 1>&2
@@ -74,6 +75,7 @@ if [ ! -d $PWD/.cert ] || [ $(ls $PWD/.cert | wc -w) -ne 4 ]; then
 	fi
 	printf "\x1b[32m[+] New certificate generated in $PWD/.cert\n\x1b[0m" 1>&2
 fi
+
 # -- INITIALIZE LOGGIN --
 if [ ! -d $PWD/logs ]; then
 	mkdir -p $PWD/logs
@@ -84,4 +86,13 @@ if [ ! -d $PWD/logs ]; then
 	fi
 	printf "\x1b[32m[+] Create a loggin directory in $PWD/logs\n\x1b[0m" 1>&2
 fi
+if [ ! -f $PWD/redis/ ]; then
+	wget https://downloads.wordpress.org/plugin/redis-cache.2.8.0.zip -O ./wordpress/redis-plugin.zip
+	if [ $? -ne 0 ]; then
+		printf "\x1b[31m[!] Failed to download "Redis Object Cache Plugin"\n\x1b[0m" 1>&2
+		exit 1
+	fi
+	printf "\x1b[32m[!] Download Redis Object Cache Plugin for wordpress complete\n\x1b[0m" 1>&2
+fi
+
 printf "\x1b[32m[+] Initialization complete !\n\x1b[0m" 1>&2

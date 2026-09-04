@@ -28,7 +28,6 @@ re:
 reset:
 	@$(MAKE) down
 	@sudo rm -rf ~/data
-	@yes | docker compose  system prune -a --volumes  || true
-	@docker compose volumes prune -q || true
+	@yes | docker system prune -a --volumes   || true
 
 .PHONY: up down re

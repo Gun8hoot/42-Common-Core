@@ -22,14 +22,13 @@ services:
         depends_on:
             - wordpress
             - adminer
-            - gitea
     mariadb:
         container_name: database
         build:
             context: ./database
             dockerfile: Dockerfile
         networks:
-            - MainNet
+            - WPNetwork
         restart: on-failure:5
         volumes:
             - db:/var/lib/mysql
@@ -45,6 +44,8 @@ services:
             dockerfile: Dockerfile
         networks:
             - MainNet
+            - WPNetwork
+            - RedisNetwork
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
@@ -85,6 +86,8 @@ services:
         restart: on-failure:5
         networks:
             - MainNet
+            - KumaNetwork
+            - WPNetwork
         depends_on:
             - mariadb
     redis:
@@ -93,7 +96,7 @@ services:
             context: ./redis
             dockerfile: Dockerfile
         networks:
-            - MainNet
+            - RedisNetwork
         restart: on-failure:5
         depends_on:
             - wordpress
@@ -104,8 +107,7 @@ services:
             dockerfile: Dockerfile
         networks:
             - MainNet
-        ports:
-            - 3001:3001
+            - KumaNetwork
         restart: on-failure:5
         depends_on:
             - wordpress
@@ -115,7 +117,7 @@ services:
             context: ./kuma/db
             dockerfile: Dockerfile
         networks:
-            - MainNet
+            - KumaNetwork
         restart: on-failure:5
         volumes:
             - kuma_data:/var/lib/mysql
@@ -124,32 +126,6 @@ services:
             - KUMA_USER=${KUMA_USERNAME}
             - KUMA_PASSWD=${KUMA_PASSWORD}
             - KUMA_ROOT_PASSWORD=${KUMA_ROOT_PASSWORD}
-    #     -- GITEA --
-    gitea:
-        container_name: gitea
-        build:
-            context: ./gitea
-            dockerfile: Dockerfile
-        networks:
-            - MainNet
-        ports:
-            - 3000:3000
-        restart: on-failure:5
-        depends_on:
-            - mariadb
-    postgres_gitea:
-        container_name: postgres_gitea
-        build:
-            context: ./gitea/postgres
-            dockerfile: Dockerfile
-        networks:
-            - MainNet
-        restart: on-failure:5
-        volumes:
-            - postgres_gitea:/srv/postgres
-        depends_on:
-            - gitea
-
 
 secrets:
     # -- FTP TLS CERTIFICATE --
@@ -180,7 +156,7 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            o: bind
+            o: bind, ro
             device: $PWD/adminer/frontend
     static_pages:
         driver: local
@@ -194,12 +170,6 @@ volumes:
             type: none
             o: bind
             device: $HOME/data/logs
-    postgres_gitea:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: $HOME/data/postgres_gitea
     kuma_data:
         driver: local
         driver_opts:
@@ -211,5 +181,5 @@ networks:
     MainNet:
         driver: bridge
     KumaNetwork: {}
-    WPNetwork:
-        driver: bridge
+    RedisNetwork: {}
+    WPNetwork: {}

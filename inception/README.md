@@ -58,4 +58,4 @@ make reset
 
 | [Docker compose documentation](https://docs.docker.com/reference/compose-file/) | [Docker documentation](https://docs.docker.com/reference/dockerfile/) | [Alpine package manager](https://pkgs.alpinelinux.org/packages) |
 | --- | --- | --- |
-| [Guide to use VSFTPD](https://dev.to/sahillearninglinux/ultimate-guide-to-vsftpd-configuration-files-commands-and-secure-sftp-migration-170m)
+| [Guide to use VSFTPD](https://dev.to/sahillearninglinux/ultimate-guide-to-vsftpd-configuration-files-commands-and-secure-sftp-migration-170m) | https://www.cloudways.com/blog/install-redis-cache-wordpress/ |

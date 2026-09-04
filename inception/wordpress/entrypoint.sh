@@ -82,6 +82,14 @@ define('WP_DEBUG', false);
 /* Add any custom values between this line and the "stop editing" line. */
 
 /* That's all, stop editing! Happy publishing. */
+define('WP_CACHE', true);
+define('WP_CACHE_KEY_SALT', 'nclavel.42.fr');
+
+define('WP_REDIS_HOST', 'redis');
+define('WP_REDIS_PORT', 6379);
+define('WP_REDIS_DATABASE', 0);
+define( 'WP_REDIS_TIMEOUT', 1 );
+define( 'WP_REDIS_READ_TIMEOUT', 1 );
 
 /** Absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
@@ -89,14 +97,7 @@ if (!defined('ABSPATH')) {
 }
 
 /** Sets up WordPress vars and included files. */
-require_once ABSPATH . 'wp-settings.php';
-
-define('WP_CACHE', true);
-define('WP_CACHE_KEY_SALT', 'nclavel.42.fr');
-
-define('WP_REDIS_HOST', 'redis');
-define('WP_REDIS_PORT', 6379);
-define('WP_REDIS_DATABASE', 1);
+require_once(ABSPATH . 'wp-settings.php');
 EOF
 
 php-fpm83 -F
