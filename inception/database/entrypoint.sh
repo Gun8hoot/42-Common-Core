@@ -47,7 +47,6 @@ function main
 	printf "--- START ---\n"
 	# --- INITIALIZED MARIADB ---
 	check_file_exist "$DATABASE_LOCATION/mysql.user"
-	echo "$?"
 	if [ $? -eq 1 ]; then
 		mariadb-upgrade --user=mysql --datadir=$DATABASE_LOCATION > /dev/null
 	else

@@ -2,8 +2,7 @@
 
 CERTIFICATE_INFO='/C=FR/ST=Normandie/L=LeHavre/CN=nclavel.42.fr'
 
-printf """\e[0;34m
-    ____      _ __         __
+printf """\e[0;34m    ____      _ __         __
    /  _/___  (_) /_  _____/ /_
    / // __ \/ / __/ / ___/ __ \\
  _/ // / / / / /__ (__  ) / / /

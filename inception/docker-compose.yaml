@@ -27,8 +27,6 @@ services:
         build:
             context: ./database
             dockerfile: Dockerfile
-        ports:
-            - 0.0.0.0:3306:3306
         networks:
             - MainNet
         restart: on-failure:5
@@ -84,6 +82,22 @@ services:
         restart: on-failure:5
         networks:
             - MainNet
+    redis:
+        container_name: redis
+        build:
+            context: ./redis
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        restart: on-failure:5
+    gitea:
+        container_name: gitea
+        build:
+            context: ./gitea
+            dockerfile: Dockerfile
+        networks:
+            - MainNet
+        restart: on-failure:5
 
 secrets:
     # -- FTP TLS CERTIFICATE --

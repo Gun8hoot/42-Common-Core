@@ -1,6 +1,7 @@
 #!/bin/bash
 
-chown www-data: /srv/www
+chown -R nobody: /srv/www
+chmod -R u+rw /srv/www
 
 cat > /srv/www/wordpress/wp-config.php << EOF
 <?php
@@ -89,6 +90,13 @@ if (!defined('ABSPATH')) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+
+define('WP_CACHE', true);
+define('WP_CACHE_KEY_SALT', 'nclavel.42.fr');
+
+define('WP_REDIS_HOST', 'redis');
+define('WP_REDIS_PORT', 6379);
+define('WP_REDIS_DATABASE', 1);
 EOF
 
 php-fpm83 -F

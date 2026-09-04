@@ -11,7 +11,7 @@ COPY ./vsftpd.conf /etc/
 RUN groupadd ftp_gr
 RUN echo "ftp:${FTP_PASSWORD}" | chpasswd && usermod -d /srv/ftp ftp
 RUN usermod -aG ftp_gr ftp
-RUN chown ftp:ftp_gr /srv/ftp/
+RUN chown -R ftp:ftp_gr /srv/ftp/
 
 COPY ./entrypoint.sh /tmp/entrypoint.sh
 RUN chmod +x /tmp/entrypoint.sh
