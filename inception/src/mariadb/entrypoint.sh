@@ -5,7 +5,7 @@ DATABASE_LOCATION=/var/lib/mysql
 function ping_database
 {
 	TO=0
-	printf "Attempting to ping ...\n"
+	printf "[?] Attempting to ping the mariadbd ...\n"
 	# Ping since the database is down
 	if [ "$1" == "down" ]; then
 		until ! mariadb-admin ping  -u root -p"$MARIADB_ROOT_PASSWORD" --silent ; do
@@ -44,12 +44,12 @@ function check_file_exist()
 
 function main
 {
-	printf "--- START ---\n"
 	# --- INITIALIZED MARIADB ---
 	check_file_exist "$DATABASE_LOCATION/mysql.user"
 	if [ $? -eq 1 ]; then
 		mariadb-upgrade --user=mysql --datadir=$DATABASE_LOCATION > /dev/null
 	else
+		printf "[!] Reinitialized the database"
 		mariadb-install-db --user=mysql --datadir=$DATABASE_LOCATION >/dev/null
 	fi
 	if [ $? -eq 1 ]; then
@@ -62,11 +62,23 @@ function main
 
 	# --- CONFIGURING THE DATABASE ---
 	cat > init.sql << EOF
+	-- Create every database if it doesnt exist
 	CREATE DATABASE IF NOT EXISTS wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-	CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+	CREATE DATABASE IF NOT EXISTS kuma DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+
+	-- Create every users if it doesnt exist
+	CREATE USER IF NOT EXISTS 'root'@'localhost';
 	CREATE USER IF NOT EXISTS '$MARIADB_USER'@'172.%.%.%' IDENTIFIED BY '$MARIADB_PASSWD';
+	CREATE USER IF NOT EXISTS '$KUMA_DB_USER'@'172.%.%.%' IDENTIFIED BY '$KUMA_DB_PASSWD';
+
+	-- Grant privileges to correct users
 	GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'172.%.%.%';
+	GRANT ALL PRIVILEGES ON kuma.* TO '$KUMA_DB_USER'@'172.%.%.%';
+
+	-- Modify the password of the root user (the default one)
 	ALTER USER IF EXISTS 'root'@'localhost' IDENTIFIED BY '$MARIADB_ROOT_PASSWORD';
+
+	-- Apply every privileges modify
 	FLUSH PRIVILEGES;
 EOF
 	mariadb -u root -p"$MARIADB_ROOT_PASSWORD" < ./init.sql
@@ -77,3 +89,5 @@ EOF
 }
 
 main
+
+# mariadb -P 3306 -u root -p -h localhost

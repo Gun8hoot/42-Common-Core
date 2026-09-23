@@ -1,0 +1,41 @@
+server {
+        listen 443 ssl default_server;
+
+        server_name nclavel.42.fr ;
+
+        root /srv/www/wordpress;
+        index index.php;
+
+        location = /static {
+            return 301 /static/;
+        }
+
+        location /static/ {
+            try_files $uri $uri/ =404;
+        }
+
+        location = /adminer {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME /var/www/adminer/index.php;
+            fastcgi_param SCRIPT_NAME /adminer;
+            fastcgi_pass adminer:4444;
+        }
+
+        location = /adminer/ {
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME /var/www/adminer/index.php;
+            fastcgi_param SCRIPT_NAME /adminer/;
+            fastcgi_pass adminer:4444;
+        }
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include fastcgi_params;
+            fastcgi_pass wordpress:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }

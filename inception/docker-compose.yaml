@@ -1,9 +1,9 @@
 services:
     # -- MENDATORY PART --
     nginx:
-        container_name: nginx
+        container_name: inception-nginx
         build:
-            context: ./nginx
+            context: ./src/nginx
             dockerfile: Dockerfile
         ports:
             - 80:80
@@ -23,12 +23,12 @@ services:
             - wordpress
             - adminer
     mariadb:
-        container_name: database
+        container_name: inception-mariadb
         build:
-            context: ./database
+            context: ./src/mariadb
             dockerfile: Dockerfile
         networks:
-            - WPNetwork
+            - DBNetwork
         restart: on-failure:5
         volumes:
             - db:/var/lib/mysql
@@ -36,15 +36,17 @@ services:
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
             - MARIADB_PASSWD=${MARIADB_PASSWORD}
+            - KUMA_DB_USER=${KUMA_DB_USER}
+            - KUMA_DB_PASSWD=${KUMA_DB_PASSWD}
             - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
     wordpress:
-        container_name: wordpress
+        container_name: inception-wordpress
         build:
-            context: ./wordpress
+            context: ./src/wordpress
             dockerfile: Dockerfile
         networks:
             - MainNet
-            - WPNetwork
+            - DBNetwork
             - RedisNetwork
         environment:
             - MARIADB_USER=${MARIADB_USERNAME}
@@ -53,14 +55,13 @@ services:
         volumes:
             - wordpress_data:/srv/www/wordpress
         depends_on:
-            - mariadb:
-                condition: service_started
+            - mariadb
 
     # -- BONUS PART --
     ftp:
-        container_name: ftp
+        container_name: inception-ftp
         build:
-            context: ./ftp
+            context: ./src/ftp
             dockerfile: Dockerfile
         ports:
             - "21:21"
@@ -75,26 +76,23 @@ services:
         restart: on-failure:5
         networks:
             - MainNet
-        depends_on:
-            - nginx
     adminer:
-        container_name: adminer
+        container_name: inception-adminer
         build:
-            context: ./adminer
+            context: ./src/adminer
             dockerfile: Dockerfile
         volumes:
             - adminer_page:/var/www/adminer/
         restart: on-failure:5
         networks:
             - MainNet
-            - KumaNetwork
-            - WPNetwork
+            - DBNetwork
         depends_on:
             - mariadb
     redis:
-        container_name: redis
+        container_name: inception-redis
         build:
-            context: ./redis
+            context: ./src/redis
             dockerfile: Dockerfile
         networks:
             - RedisNetwork
@@ -102,31 +100,16 @@ services:
         depends_on:
             - wordpress
     kuma:
-        container_name: kuma
+        container_name: inception-kuma
         build:
-            context: ./kuma
+            context: ./src/kuma
             dockerfile: Dockerfile
         networks:
             - MainNet
-            - KumaNetwork
+            - DBNetwork
         restart: on-failure:5
         depends_on:
             - wordpress
-    kuma-mariadb:
-        container_name: kumadb
-        build:
-            context: ./kuma/db
-            dockerfile: Dockerfile
-        networks:
-            - KumaNetwork
-        restart: on-failure:5
-        volumes:
-            - kuma_data:/var/lib/mysql
-            - logs:/var/logs/mariadb
-        environment:
-            - KUMA_USER=${KUMA_USERNAME}
-            - KUMA_PASSWD=${KUMA_PASSWORD}
-            - KUMA_ROOT_PASSWORD=${KUMA_ROOT_PASSWORD}
 
 secrets:
     # -- FTP TLS CERTIFICATE --
@@ -158,13 +141,13 @@ volumes:
         driver_opts:
             type: none
             o: bind, ro
-            device: $PWD/adminer/frontend
+            device: $HOME/data/adminer
     static_pages:
         driver: local
         driver_opts:
             type: none
             o: bind, ro
-            device: $PWD/nginx/static
+            device: $PWD/src/nginx/static
     logs:
         driver: local
         driver_opts:
@@ -181,6 +164,6 @@ volumes:
 networks:
     MainNet:
         driver: bridge
-    KumaNetwork: {}
-    RedisNetwork: {}
-    WPNetwork: {}
+    DBNetwork: {internal: true}
+    RedisNetwork: {internal: true}
+    WPNetwork: {internal: true}

@@ -1,13 +1,7 @@
 server {
-        listen 443 default_server;
+        listen 443 ssl;
+
         server_name kuma.nclavel.42.fr;
-
-        ssl_certificate /run/secrets/nginx.crt;
-        ssl_certificate_key /run/secrets/nginx.key;
-        ssl_protocols TLSv1.2 TLSv1.3;
-
-        access_log  /var/log/nginx/nginx_access.log;
-        error_log /var/log/nginx/nginx_error.log;
 
         location / {
             proxy_set_header   X-Real-IP $remote_addr;

@@ -1,5 +1,7 @@
 NAME = inception
 
+ROOT_STATUS := ${EUID}
+
 $(NAME): up
 
 all: $(NAME)
@@ -20,14 +22,15 @@ down:
 
 re:
 	@$(MAKE) down
-	@yes | docker prune network || true
-	@printf "\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
-	@docker compose build -q
+	@yes | docker network prune || true
+	@printf "\n\e[0;33m[?] Rebuilding Inception services ...\e[0m\n"
+	@docker compose build
 	@$(MAKE) up
 
 reset:
+	@echo "DEBUG $(ROOT_STATUS)"
 	@$(MAKE) down
 	@sudo rm -rf ~/data
-	@yes | docker system prune -a --volumes   || true
+	@yes | docker system prune -a --volumes || true
 
-.PHONY: up down re
+.PHONY: up down re reset

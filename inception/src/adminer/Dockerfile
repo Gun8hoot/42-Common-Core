@@ -17,5 +17,9 @@ RUN	mkdir -p /var/www/adminer \
 # -- COPY THE CONFIGURATION FILE --
 COPY ./www.conf /etc/php83/php-fpm.d/www.conf
 
+RUN if [ $(ls -l | wc -l) -eq 0 ]; then wget https://github.com/vrana/adminer/releases/download/v6.1.0/adminer-6.1.0.php /var/www/adminer; fi
+
+EXPOSE 4444
+
 # -- LAUNCH THE CONTAINER --
 CMD ["php-fpm83", "-F"]

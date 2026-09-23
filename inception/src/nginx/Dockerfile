@@ -10,13 +10,19 @@ RUN mkdir -p /etc/nginx/sites-enabled
 
 # Copy every config files
 COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./kuma.nclavel.42.fr /etc/nginx/sites-available/kuma.nclavel.42.fr
-COPY ./nclavel.42.fr /etc/nginx/sites-available/nclavel.42.fr
+COPY ./sites-available /etc/nginx/sites-available
+COPY ./static /var/www/static
+
 
 RUN rm -f /etc/nginx/sites-enabled/default
 
 # Create a symlink for every vhost
 RUN ln -s /etc/nginx/sites-available/kuma.nclavel.42.fr /etc/nginx/sites-enabled/kuma.nclavel.42.fr
 RUN ln -s /etc/nginx/sites-available/nclavel.42.fr /etc/nginx/sites-enabled/nclavel.42.fr
+RUN ln -s /etc/nginx/sites-available/static.nclavel.42.fr /etc/nginx/sites-enabled/static.nclavel.42.fr
+RUN ln -s /etc/nginx/sites-available/adminer.nclavel.42.fr /etc/nginx/sites-enabled/adminer.nclavel.42.fr
+
+# Port used by the container
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]

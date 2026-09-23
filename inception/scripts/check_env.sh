@@ -10,7 +10,7 @@ function banner {
 }
 
 function check_password {
-	bad_password="password 123456789 qwerty azerty pass 123 dev test"
+	bad_password="password mariadb wordpress kuma 123456789 qwerty azerty pass 123 dev test"
 	if [ ${#2} -lt 7 ]; then
 		printf "\x1b[33m[!] The size of your password for '$1' is short ${#2} character\n\x1b[0m" 1>&2
 	fi
@@ -25,7 +25,7 @@ function check_password {
 }
 
 function check_username {
-	bad_username="user usr root admin administrator mariadb maria db azerty qwerty a"
+	bad_username="user kuma wordpress usr root admin administrator mariadb maria db azerty qwerty a"
 
 	for usr in $bad_username; do
 		if [ "$2" == "$usr" ]; then

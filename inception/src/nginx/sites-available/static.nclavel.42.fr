@@ -1,0 +1,12 @@
+server {
+        listen 443 ssl;
+
+        server_name static.nclavel.42.fr ;
+
+        root /var/www/static;
+        index index.html;
+
+        location / {
+            try_files $uri $uri/ /index.html =404;
+        }
+    }

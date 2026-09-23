@@ -16,6 +16,8 @@ RUN useradd  -d /srv/ftp/ user
 RUN groupadd ftp_gr
 RUN usermod -aG ftp_gr user
 
+EXPOSE 20 40000-40100
+
 # -- ENTRYPOINT --
 COPY ./entrypoint.sh /tmp/entrypoint.sh
 ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]
