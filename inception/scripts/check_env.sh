@@ -45,7 +45,7 @@ function main {
 	banner
 
 	# // Check if the .env file exist
-	if [ ! -f ./.env ]; then
+	if [ ! -f ./srcs/.env ]; then
 		echo "Missing .env file"
 		exit 1
 	fi
@@ -92,7 +92,7 @@ function main {
 		fi
 		# // Append the treated SAVE on a temporary file
 		echo "$line" >> $TMP_FILEPATH
-	done < .env
+	done < ./srcs/.env
 
 	# // Write a message with the number of error found
 	if [ $ISSUE -gt 0 ]; then

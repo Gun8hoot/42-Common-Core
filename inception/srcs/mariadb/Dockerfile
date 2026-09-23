@@ -18,6 +18,8 @@ RUN chown -R mysql:mysql /var/lib/mysql \
 # -- COPY EVERY USEFULL FILES --
 COPY mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
+EXPOSE 3306
+
 # -- ENTRYPOINT --
 COPY ./entrypoint.sh /tmp/entrypoint.sh
 ENTRYPOINT [ "sh", "/tmp/entrypoint.sh" ]

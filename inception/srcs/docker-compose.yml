@@ -3,7 +3,7 @@ services:
     nginx:
         container_name: inception-nginx
         build:
-            context: ./src/nginx
+            context: ./nginx
             dockerfile: Dockerfile
         ports:
             - 80:80
@@ -16,16 +16,16 @@ services:
             - MainNet
         volumes:
             - wordpress_data:/srv/www/wordpress
-            - static_pages:/srv/www/wordpress/static
             - adminer_page:/var/www/adminer/
             - logs:/var/log/nginx
         depends_on:
             - wordpress
             - adminer
+            - kuma
     mariadb:
         container_name: inception-mariadb
         build:
-            context: ./src/mariadb
+            context: ./mariadb
             dockerfile: Dockerfile
         networks:
             - DBNetwork
@@ -42,7 +42,7 @@ services:
     wordpress:
         container_name: inception-wordpress
         build:
-            context: ./src/wordpress
+            context: ./wordpress
             dockerfile: Dockerfile
         networks:
             - MainNet
@@ -58,28 +58,30 @@ services:
             - mariadb
 
     # -- BONUS PART --
-    ftp:
-        container_name: inception-ftp
-        build:
-            context: ./src/ftp
-            dockerfile: Dockerfile
-        ports:
-            - "21:21"
-            - "40000-40100:40000-40100"
-        volumes:
-            - $HOME/data/ftp:/srv/ftp
-        environment:
-            - FTP_PASSWORD=${FTP_PASSWORD}
-        secrets:
-            - vsftpd.crt
-            - vsftpd.key
-        restart: on-failure:5
-        networks:
-            - MainNet
+    # ftp:
+    #     container_name: inception-ftp
+    #     build:
+    #         context: ./ftp
+    #         dockerfile: Dockerfile
+    #     ports:
+    #         - "21:21"
+    #         - "40000-40100:40000-40100"
+    #     volumes:
+    #         - wordpress_data:/srv/ftp
+    #     environment:
+    #         - FTP_PASSWORD=${FTP_PASSWORD}
+    #     secrets:
+    #         - vsftpd.crt
+    #         - vsftpd.key
+    #     restart: on-failure:5
+    #     networks:
+    #         - MainNet
+    #     depends_on:
+    #         - wordpress
     adminer:
         container_name: inception-adminer
         build:
-            context: ./src/adminer
+            context: ./adminer
             dockerfile: Dockerfile
         volumes:
             - adminer_page:/var/www/adminer/
@@ -92,7 +94,7 @@ services:
     redis:
         container_name: inception-redis
         build:
-            context: ./src/redis
+            context: ./redis
             dockerfile: Dockerfile
         networks:
             - RedisNetwork
@@ -102,7 +104,7 @@ services:
     kuma:
         container_name: inception-kuma
         build:
-            context: ./src/kuma
+            context: ./kuma
             dockerfile: Dockerfile
         networks:
             - MainNet
@@ -114,14 +116,14 @@ services:
 secrets:
     # -- FTP TLS CERTIFICATE --
     vsftpd.crt:
-        file: ./.cert/vsftpd.crt
+        file: ../secret/cert/vsftpd.crt
     vsftpd.key:
-        file: ./.cert/vsftpd.key
+        file: ../secret/cert/vsftpd.key
     # -- HTTPS TLS CERTIFICATE --
     nginx.key:
-        file: ./.cert/nginx.key
+        file: ../secret/cert/nginx.key
     nginx.crt:
-        file: ./.cert/nginx.crt
+        file: ../secret/cert/nginx.crt
 
 volumes:
     db:
@@ -134,7 +136,7 @@ volumes:
         driver: local
         driver_opts:
             type: none
-            o: bind
+            o: bind, ro
             device: $HOME/data/wordpress
     adminer_page:
         driver: local
@@ -142,24 +144,12 @@ volumes:
             type: none
             o: bind, ro
             device: $HOME/data/adminer
-    static_pages:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind, ro
-            device: $PWD/src/nginx/static
     logs:
         driver: local
         driver_opts:
             type: none
             o: bind
             device: $HOME/data/logs
-    kuma_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: $HOME/data/kuma_db
 
 networks:
     MainNet:

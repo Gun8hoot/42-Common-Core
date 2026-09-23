@@ -1,0 +1,19 @@
+server {
+        listen 443 ssl default_server;
+
+        server_name nclavel.42.fr ;
+
+        root /srv/www/wordpress;
+        index index.php;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args =404;
+        }
+
+        location ~ \.php$ {
+            try_files $uri =404;
+            include fastcgi_params;
+            fastcgi_pass wordpress:9000;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        }
+    }

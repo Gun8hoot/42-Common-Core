@@ -1,9 +1,8 @@
 .env
 logs
-.secret
+secret
 *.crt
 *.key
-latest.zip
 *.php
 *.log
 *.zip
