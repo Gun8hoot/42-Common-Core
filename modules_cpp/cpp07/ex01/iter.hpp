@@ -1,20 +1,13 @@
 
-# pragma once
+#pragma once
 
-#include <cstdlib>
+#include <cstddef>   // for std::size_t
 
-template <typename T, typename F> void	iter(T *ptr, const std::size_t len, F (&fun))
+template <typename T, typename F>
+void iter(T *array, std::size_t length, F func)
 {
-	if (ptr == NULL)
+	if (array == NULL)
 		return;
-	for (std::size_t i = 0; i < len ; i++)
-		fun(ptr[i]);
-}
-
-template <typename T, typename F> void	iter(T *ptr, const std::size_t len, const F (&fun))
-{
-	if (ptr == NULL)
-		return;
-	for (std::size_t i = 0; i < len ; i++)
-		fun(ptr[i]);
+	for (std::size_t i = 0; i < length; ++i)
+		func(array[i]);
 }

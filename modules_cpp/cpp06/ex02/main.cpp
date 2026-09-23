@@ -1,23 +1,26 @@
-
 #include "Base.hpp"
 
-#include <unistd.h>
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 
 int main(void)
 {
-	// Base	b2 = NULL;
+    std::srand(std::time(NULL));
 
-	std::cout << "Using reference to identify" << std::endl;
-	{
-		Base	*base = NULL;
+    for (int i = 0; i < 5; ++i)
+    {
+        Base *base = generate();
+        if (!base)
+            continue;
 
-		base = base->generate();
-		base->identify(base);
-		if (base != NULL)
-			delete base;
-	}
-	std::cout << std::endl;
-	std::cout << "Using ptr to identify" << std::endl;
+        std::cout << "identify(ptr): ";
+        identify(base);
+        std::cout << "identify(ref): ";
+        identify(*base);
 
+        delete base;
+        std::cout << std::endl;
+    }
+    return 0;
 }

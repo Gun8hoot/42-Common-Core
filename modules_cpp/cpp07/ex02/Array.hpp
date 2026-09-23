@@ -1,94 +1,79 @@
+#pragma once
 
-# pragma once
-
-#include <cstdlib>
-#include <exception>
-#include <iostream>
-#include <cstring>
+#include <cstddef>      // std::size_t
+#include <stdexcept>    // std::out_of_range
+#include <new>          // std::bad_alloc
 
 template <typename T>
-class Array {
-	private:
-		std::size_t	_nb_element;
-		T			*_ptr;
-	public:
-		// -- CONSTRUCTOR --
-		~Array(void)
-		{
-			if (this->_ptr != NULL)
-				delete [] this->_ptr;
-			this->_nb_element = 0;
-		}
-		Array(void) : _nb_element(0), _ptr(NULL)
-		{
-			try
-			{
-				_ptr = new T[0]; // Allocated an empty array, gcc = -Wno-alloc-size
-			}
-			catch (std::bad_alloc &ex)
-			{
-				std::cout << "Failed to allocated memory" << std::endl;
-			}
-		};
-		Array(unsigned int n) : _nb_element(n), _ptr(NULL)
-		{
-			try
-			{
-				_ptr = new T[n];
-				std::memset(_ptr, '\0', n * sizeof(T));
-			}
-			catch (std::bad_alloc &ex)
-			{
-				std::cout << "Failed to allocated memory" << std::endl;
-			}
-		};
-		Array(const Array &cpy) : _nb_element(cpy._nb_element) , _ptr(NULL)
-		{
-			try
-			{
-				if (this != &cpy)
-				{
-					if (this->_ptr != NULL)
-						delete[] this->_ptr;
-					this->_ptr = new T[cpy._nb_element];
-					std::memcpy(this->_ptr, cpy._ptr, cpy._nb_element * sizeof(T));
-				}
-			}
-			catch (std::bad_alloc &ex)
-			{
-				std::cout << "Failed to allocated memory" << std::endl;
-			}
-		};
-		Array &operator=(const Array &cpy)
-		{
-			if (this != &cpy)
-			{
-				if (this->_ptr != NULL)
-					delete[] this->_ptr;
-				this->_nb_element = cpy._nb_element;
-				this->_ptr = cpy._ptr;
-			}
-			return (*this);
-		};
+class Array
+{
+private:
+	std::size_t _size;
+	T          *_ptr;
 
-		// -- OPERATOR OVERLOAD --
-		const T &operator[](std::size_t i) const
-		{
-			if (i >= this->_nb_element)
-				throw (std::out_of_range("You are going out of bound of the array"));
-			return (this->_ptr[i]);;
-		}
+public:
+	// --- Orthodox Canonical Form ---
+	Array(void) : _size(0), _ptr(NULL) {}
 
-		T &operator[](std::size_t i)
-		{
-			if (i >= this->_nb_element)
-				throw (std::out_of_range("You are going out of bound of the array"));
-			return (this->_ptr[i]);;
-		}
+	Array(unsigned int n) : _size(n), _ptr(NULL)
+	{
+		if (_size > 0)
+			_ptr = new T[_size]();
+	}
 
-		// -- METHODE --
-		std::size_t	size(void)
+	Array(const Array &cpy) : _size(cpy._size), _ptr(NULL)
+	{
+		if (_size > 0)
 		{
-			return (this->_nb_element);
-		};
+			_ptr = new T[_size]();
+			for (std::size_t i = 0; i < _size; ++i)
+				_ptr[i] = cpy._ptr[i];
+		}
+	}
+
+	Array &operator=(const Array &cpy)
+	{
+		if (this != &cpy)
+		{
+			delete[] _ptr;
+			_size = cpy._size;
+			if (_size > 0)
+			{
+				_ptr = new T[_size]();
+				for (std::size_t i = 0; i < _size; ++i)
+					_ptr[i] = cpy._ptr[i];
+			}
+			else
+			{
+				_ptr = NULL;
+			}
+		}
+		return *this;
+	}
+
+	~Array(void)
+	{
+		delete[] _ptr;
+	}
+
+	// --- Element access ---
+	T &operator[](std::size_t i)
+	{
+		if (i >= _size)
+			throw std::out_of_range("Index out of bounds");
+		return _ptr[i];
+	}
+
+	const T &operator[](std::size_t i) const
+	{
+		if (i >= _size)
+			throw std::out_of_range("Index out of bounds");
+		return _ptr[i];
+	}
+
+	// --- Size ---
+	std::size_t size(void) const
+	{
+		return _size;
+	}
 };

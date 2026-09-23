@@ -1,169 +1,184 @@
 
-# include "ScalarConverter.hpp"
+#include "ScalarConverter.hpp"
 
-#include <string>
 #include <iostream>
-#include <limits>
+#include <string>
 #include <cstdlib>
+#include <cerrno>
+#include <limits>
+#include <cmath>
 #include <iomanip>
 
-// static std::size_t	count_nb(const std::string &lit)
-// {
-// 	std::size_t	i = 0;
-// 	std::size_t	c = 0;
-
-// 	while (i < lit.length())
-// 	{
-// 		if (lit[i] >= '0' && lit[i] <= '9')
-// 			c++;
-// 		i++;
-// 	}
-// 	return (c);
-// }
-
-static void printChar(const std::string &literal)
+static bool isCharLiteral(const std::string &lit)
 {
-	long val = std::strtol(literal.c_str(), NULL, 10);
-
-	std::cout << "char: ";
-	if (errno == ERANGE || val > std::numeric_limits<char>::max() || val < 0)
-	{
-		std::cout << "Impossible" << std::endl;
-	}
-	else if (val < ' ')
-		std::cout << "Non displayable" << std::endl;
-	else
-		std::cout << "\'" << static_cast<char>(val) << "\'" << std::endl;
+    return lit.length() == 3 && lit[0] == '\'' && lit[2] == '\'';
 }
 
-static void printInt(const std::string &literal)
+static void printChar(double value)
 {
-	long val = std::strtol(literal.c_str(), NULL, 10);
-
-	std::cout << "int: ";
-	if (errno == ERANGE || val > std::numeric_limits<int>::max() || val < std::numeric_limits<int>::min())
-	{
-		std::cout << "Impossible" << std::endl;
-	}
-	else
-		std::cout << static_cast<int>(val) << std::endl;
+    std::cout << "char: ";
+    if (std::isnan(value) || std::isinf(value)
+        || value < std::numeric_limits<char>::min()
+        || value > std::numeric_limits<char>::max())
+    {
+        std::cout << "impossible" << std::endl;
+    }
+    else if (value < 32 || value > 126)
+    {
+        std::cout << "Non displayable" << std::endl;
+    }
+    else
+    {
+        std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
+    }
 }
 
-static void	printFloat(const std::string &literal)
+static void printInt(double value)
 {
-	float val = std::strtof(literal.c_str(), NULL);
-	std::size_t	dotPos = 0;
-	int			precision;
-
-	std::cout << "float: ";
-	if (errno == ERANGE)
-		std::cout << "Impossible" << std::endl;
-	else
-	{
-		dotPos = literal.find(".");
-		if (dotPos == std::string::npos)
-			std::cout << std::fixed << std::setprecision(1) << val << "f" << std::endl;
-		else
-		{
-			precision = literal.find_last_of("f") == std::string::npos ? literal.length() : literal.find_last_of("f");
-			precision = precision - dotPos - 1;
-			std::cout << std::fixed << std::setprecision(precision > std::numeric_limits<float>::digits10 ? std::numeric_limits<float>::digits10 : precision) << val << "f" << std::endl;
-		}
-	}
+    std::cout << "int: ";
+    if (std::isnan(value) || std::isinf(value)
+        || value < std::numeric_limits<int>::min()
+        || value > std::numeric_limits<int>::max())
+    {
+        std::cout << "impossible" << std::endl;
+    }
+    else
+    {
+        std::cout << static_cast<int>(value) << std::endl;
+    }
 }
 
-static void	printDouble(const std::string &literal)
+static void printFloat(double value)
 {
-	double val = std::strtod(literal.c_str(), NULL);
-	std::size_t	dotPos = 0;
-	int			precision;
-
-	std::cout << "double: ";
-	if (errno == ERANGE)
-		std::cout << "Impossible" << std::endl;
-	else
-	{
-		dotPos = literal.find(".");
-		if (dotPos == std::string::npos)
-			std::cout << std::fixed << std::setprecision(1) << val << "f" << std::endl;
-		else
-		{
-			precision = literal.find_last_of("f") == std::string::npos ? literal.length() : literal.find_last_of("f");
-			std::cout << std::fixed << std::setprecision(precision - dotPos - 1) << val << std::endl;
-		}
-	}
+    std::cout << "float: ";
+    if (std::isnan(value))
+    {
+        std::cout << "nanf" << std::endl;
+        return;
+    }
+    if (std::isinf(value))
+    {
+        std::cout << (value > 0 ? "+inff" : "-inff") << std::endl;
+        return;
+    }
+    if (value > std::numeric_limits<float>::max()
+        || value < -std::numeric_limits<float>::max())
+    {
+        std::cout << "impossible" << std::endl;
+        return;
+    }
+    float f = static_cast<float>(value);
+    if (f == static_cast<int>(f))
+        std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
+    else
+        std::cout << f << "f" << std::endl;
 }
 
-static bool	checkLiteral(const std::string &literal)
+static void printDouble(double value)
 {
-	std::size_t	lit_size = literal.length();
-	bool		has_dot = false;
-	bool		has_f = false;
-
-	for (std::size_t i = 0; i < lit_size; i++)
-	{
-		/* HANDLE MINUS */
-		if (i == 0 && literal[i] == '-')
-			continue;
-		/* CHECK FOR INVALID CHARACTER */
-		if (!(literal[i] >= '0' && literal[i] <= '9')
-			&& literal[i] != 'f'
-			&& literal[i] != '.')
-			return (true);
-
-		/* HANdLE DOT */
-		if (literal[i] == '.')
-		{
-			if (has_dot || i == lit_size - 1)
-				return (true);
-			has_dot = true;
-			continue;
-		}
-
-		/* HANDLE F AT END */
-		if (literal[i] == 'f')
-		{
-			if (has_f || i != lit_size - 1)
-				return (true);
-			has_f = true;
-			continue;
-		}
-	}
-	return (false);
+    std::cout << "double: ";
+    if (std::isnan(value))
+    {
+        std::cout << "nan" << std::endl;
+        return;
+    }
+    if (std::isinf(value))
+    {
+        std::cout << (value > 0 ? "+inf" : "-inf") << std::endl;
+        return;
+    }
+    if (value == static_cast<int>(value))
+        std::cout << std::fixed << std::setprecision(1) << value << std::endl;
+    else
+        std::cout << value << std::endl;
 }
 
-void	ScalarConverter::convert(const std::string &literal)
+static bool isPseudoLiteral(const std::string &lit)
 {
-	if (literal.empty())
-		return;
-	if (literal == "nan")
-	{
-		std::cout	<< "char: Non displayable\n"
-					<< "int: impossible\n"
-					<< "float: nanf\n"
-					<< "double: nan \n";
-	}
-	else if (literal == "+inf" || literal == "inf" || literal == "+inff" || literal == "inff")
-	{
-		std::cout	<< "char: Non displayable\n"
-					<< "int: infinit\n"
-					<< "float: infinit\n"
-					<< "double: infinit\n";
-	}
-	else if (literal == "-inf" || literal == "-inff")
-	{
-		std::cout	<< "char: Non displayable\n"
-					<< "int: -infinit\n"
-					<< "float: -infinit\n"
-					<< "double: -infinit\n";
-	}
-	else if (checkLiteral(literal))
-		std::cout << "[!] \"" << literal << "\" is invalid!" << std::endl;
-	else
-	{
-		printChar(literal);
-		printInt(literal);
-		printFloat(literal);
-		printDouble(literal);
-	}
+    return lit == "nan" || lit == "nanf"
+        || lit == "+inf" || lit == "-inf" || lit == "inf"
+        || lit == "+inff" || lit == "-inff" || lit == "inff";
+}
+
+void ScalarConverter::convert(const std::string &literal)
+{
+    if (literal.empty())
+        return;
+
+    // --- char literal ---
+    if (isCharLiteral(literal))
+    {
+        char c = literal[1];
+        printChar(static_cast<double>(c));
+        printInt(static_cast<double>(c));
+        printFloat(static_cast<double>(c));
+        printDouble(static_cast<double>(c));
+        return;
+    }
+
+    // --- pseudo literals ---
+    if (isPseudoLiteral(literal))
+    {
+        if (literal == "nan" || literal == "nanf")
+        {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            std::cout << "float: nanf" << std::endl;
+            std::cout << "double: nan" << std::endl;
+        }
+        else if (literal == "+inf" || literal == "inf"
+                 || literal == "+inff" || literal == "inff")
+        {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            std::cout << "float: +inff" << std::endl;
+            std::cout << "double: +inf" << std::endl;
+        }
+        else if (literal == "-inf" || literal == "-inff")
+        {
+            std::cout << "char: impossible" << std::endl;
+            std::cout << "int: impossible" << std::endl;
+            std::cout << "float: -inff" << std::endl;
+            std::cout << "double: -inf" << std::endl;
+        }
+        return;
+    }
+
+    // --- try int ---
+    char *endptr;
+    errno = 0;
+    long intVal = std::strtol(literal.c_str(), &endptr, 10);
+    if (*endptr == '\0' && errno != ERANGE
+        && literal.find('.') == std::string::npos
+        && literal.find('f') == std::string::npos)
+    {
+        double value = static_cast<double>(intVal);
+        printChar(value);
+        printInt(value);
+        printFloat(value);
+        printDouble(value);
+        return;
+    }
+
+    // --- try float / double ---
+    errno = 0;
+    double doubleVal = std::strtod(literal.c_str(), &endptr);
+    if (errno == ERANGE)
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
+        return;
+    }
+    if (*endptr == '\0' || (*endptr == 'f' && *(endptr + 1) == '\0'))
+    {
+        printChar(doubleVal);
+        printInt(doubleVal);
+        printFloat(doubleVal);
+        printDouble(doubleVal);
+        return;
+    }
+
+    std::cout << "[!] \"" << literal << "\" is invalid!" << std::endl;
 }

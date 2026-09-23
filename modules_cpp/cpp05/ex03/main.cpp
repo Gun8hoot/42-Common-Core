@@ -23,12 +23,12 @@ int main(void)
 		{
 			Bureaucrat	user("user", 1);
 			Intern	intern;
-			AForm		*form;
 
-			form = intern.makeForm("robotomy request", "someone");
+			AForm *form = intern.makeForm("robotomy request", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
+			delete form;
 		}
 		catch (std::exception &ex)
 		{
@@ -42,12 +42,12 @@ int main(void)
 		{
 			Bureaucrat	user("user", 1);
 			Intern	intern;
-			AForm		*form;
 
-			form = intern.makeForm("presidential pardon", "someone");
+			AForm *form = intern.makeForm("presidential pardon", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
+			delete form;
 		}
 		catch (std::exception &ex)
 		{
@@ -61,12 +61,12 @@ int main(void)
 		{
 			Bureaucrat	user("user", 1);
 			Intern	intern;
-			AForm		*form;
 
-			form = intern.makeForm("shrubbery creation", "something");
+			AForm *form = intern.makeForm("shrubbery creation", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
+			delete form;
 		}
 		catch (std::exception &ex)
 		{
@@ -81,12 +81,12 @@ int main(void)
 		{
 			Bureaucrat	user("user", 1);
 			Intern	intern;
-			AForm		*form;
 
-			form = intern.makeForm("DONOTEXIST", "form");
+			AForm *form = intern.makeForm("DOESNT_EXIST", "someone");
 
 			user.signForm(*form);
 			user.executeForm(*form);
+			delete form;
 		}
 		catch (std::exception &ex)
 		{

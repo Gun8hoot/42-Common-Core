@@ -1,4 +1,3 @@
-
 #include "Span.hpp"
 
 #include <algorithm>
@@ -7,57 +6,55 @@
 #include <stdexcept>
 #include <vector>
 
-// -- CONSTRUCTOR --
-Span::~Span(void) { ; }
-Span::Span(unsigned int n) : _n(n) {;}
-Span::Span(const Span &cpy)
+Span::Span(void) : _n(0) {}
+
+Span::Span(unsigned int n) : _n(n) {}
+
+Span::Span(const Span &cpy) : _n(cpy._n), _vec(cpy._vec) {}
+
+Span &Span::operator=(const Span &cpy)
 {
 	if (this != &cpy)
 	{
-		this->_vec = cpy._vec;
-		this->_n = cpy._n;
+		_n = cpy._n;
+		_vec = cpy._vec;
 	}
-}
-Span	&Span::operator=(const Span &cpy)
-{
-	if (this != &cpy)
-	{
-		this->_vec = cpy._vec;
-		this->_n = cpy._n;
-	}
-	return (*this);
+	return *this;
 }
 
-// -- METHODE --
-void	Span::addNumber(int number)
+Span::~Span(void) {}
+
+void Span::addNumber(int number)
 {
-	if (_vec.size() >= this->_n)
-		throw (std::runtime_error("Too many number!"));
+	if (_vec.size() >= _n)
+		throw std::runtime_error("Too many numbers");
 	_vec.push_back(number);
 }
-int		Span::shortestSpan(void)
+
+int Span::shortestSpan(void) const
 {
-	int min = std::numeric_limits<int>::max();
-	std::vector<int> cpy;
-	int span;
+	if (_vec.size() < 2)
+		throw std::runtime_error("Not enough numbers stored");
 
-	if (this->_vec.size() == 0 || this->_vec.size() == 1)
-		throw (std::runtime_error("Not enough number are store!"));
-
-	cpy = this->_vec;
+	std::vector<int> cpy(_vec);
 	std::sort(cpy.begin(), cpy.end());
 
-	for (std::size_t i = 0; i < cpy.size() - 1 ; i++)
+	int min = std::numeric_limits<int>::max();
+	for (std::size_t i = 0; i + 1 < cpy.size(); ++i)
 	{
-		span = cpy[i + 1] - cpy[i];
+		int span = cpy[i + 1] - cpy[i];
 		if (span < min)
 			min = span;
 	}
-	return (span);
+	return min;
 }
-int		Span::longestSpan(void)
+
+int Span::longestSpan(void) const
 {
-	if (this->_vec.size() == 0 || this->_vec.size() == 1)
-		throw (std::runtime_error("Not enough number are store!"));
-	return (*std::max_element(this->_vec.begin(), this->_vec.end()) - *std::min_element(this->_vec.begin(), this->_vec.end()));
+	if (_vec.size() < 2)
+		throw std::runtime_error("Not enough numbers stored");
+
+	int max = *std::max_element(_vec.begin(), _vec.end());
+	int min = *std::min_element(_vec.begin(), _vec.end());
+	return max - min;
 }
