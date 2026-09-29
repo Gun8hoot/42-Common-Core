@@ -1,8 +1,0 @@
-
-[mysql]
-port = 3306
-
-[mysqld]
-port = 3306
-bind-address = 0.0.0.0
-log_error = /var/logs/mariadb/kuma_mariadb.log

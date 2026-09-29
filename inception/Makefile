@@ -31,5 +31,6 @@ reset:
 	@$(MAKE) down
 	@yes | docker system prune -a --volumes
 	@sudo rm -rf ~/data
+	@rm -rf ./secret
 
 .PHONY: up down re reset

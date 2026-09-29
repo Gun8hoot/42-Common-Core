@@ -1,7 +1,8 @@
 services:
-    # -- MENDATORY PART --
+    # ========== MENDATORY PART ==========
     nginx:
         container_name: inception-nginx
+        image: inception-nginx:1.0
         build:
             context: ./nginx
             dockerfile: Dockerfile
@@ -24,6 +25,7 @@ services:
             - kuma
     mariadb:
         container_name: inception-mariadb
+        image: inception-mariadb:1.0
         build:
             context: ./mariadb
             dockerfile: Dockerfile
@@ -33,14 +35,15 @@ services:
         volumes:
             - db:/var/lib/mysql
             - logs:/var/logs/mariadb
-        environment:
-            - MARIADB_USER=${MARIADB_USERNAME}
-            - MARIADB_PASSWD=${MARIADB_PASSWORD}
-            - KUMA_DB_USER=${KUMA_DB_USER}
-            - KUMA_DB_PASSWD=${KUMA_DB_PASSWD}
-            - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+        secrets:
+            - SC_MARIADB_ROOT_PASSWORD
+            - SC_WORDPRESS_DB_USER
+            - SC_WORDPRESS_DB_PASSWORD
+            - SC_KUMA_DB_USER
+            - SC_KUMA_DB_PASSWORD
     wordpress:
         container_name: inception-wordpress
+        image: inception-wordpress:1.0
         build:
             context: ./wordpress
             dockerfile: Dockerfile
@@ -48,38 +51,39 @@ services:
             - MainNet
             - DBNetwork
             - RedisNetwork
-        environment:
-            - MARIADB_USER=${MARIADB_USERNAME}
-            - MARIADB_PASSWD=${MARIADB_PASSWORD}
+        secrets:
+            - SC_WORDPRESS_DB_USER
+            - SC_WORDPRESS_DB_PASSWORD
         restart: on-failure:5
         volumes:
             - wordpress_data:/srv/www/wordpress
         depends_on:
             - mariadb
 
-    # -- BONUS PART --
-    # ftp:
-    #     container_name: inception-ftp
-    #     build:
-    #         context: ./ftp
-    #         dockerfile: Dockerfile
-    #     ports:
-    #         - "21:21"
-    #         - "40000-40100:40000-40100"
-    #     volumes:
-    #         - wordpress_data:/srv/ftp
-    #     environment:
-    #         - FTP_PASSWORD=${FTP_PASSWORD}
-    #     secrets:
-    #         - vsftpd.crt
-    #         - vsftpd.key
-    #     restart: on-failure:5
-    #     networks:
-    #         - MainNet
-    #     depends_on:
-    #         - wordpress
+    # ========== BONUS PART ==========
+    ftp:
+        container_name: inception-ftp
+        image: inception-ftp:1.0
+        build:
+            context: ./ftp
+            dockerfile: Dockerfile
+        ports:
+            - "21:21"
+            - "40000-40100:40000-40100"
+        volumes:
+            - wordpress_data:/srv/ftp
+        secrets:
+            - vsftpd.crt
+            - vsftpd.key
+            - SC_FTP_PWD
+        restart: on-failure:5
+        networks:
+            - MainNet
+        depends_on:
+            - wordpress
     adminer:
         container_name: inception-adminer
+        image: inception-adminer:1.0
         build:
             context: ./adminer
             dockerfile: Dockerfile
@@ -92,6 +96,7 @@ services:
         depends_on:
             - mariadb
     redis:
+        image: inception-redis:1.0
         container_name: inception-redis
         build:
             context: ./redis
@@ -103,6 +108,7 @@ services:
             - wordpress
     kuma:
         container_name: inception-kuma
+        image: inception-kuma:1.0
         build:
             context: ./kuma
             dockerfile: Dockerfile
@@ -114,7 +120,8 @@ services:
             - wordpress
 
 secrets:
-    # -- FTP TLS CERTIFICATE --
+    # ========== FILES ==========
+    # -- SFTP TLS CERTIFICATE --
     vsftpd.crt:
         file: ../secret/cert/vsftpd.crt
     vsftpd.key:
@@ -124,6 +131,23 @@ secrets:
         file: ../secret/cert/nginx.key
     nginx.crt:
         file: ../secret/cert/nginx.crt
+    # =========== ENV ===========
+    SC_FTP_PWD:
+        environment: FTP_USER_PASSWORD
+    SC_MARIADB_ROOT_PASSWORD:
+        environment: MARIADB_ROOT_PASSWORD
+    SC_WORDPRESS_DB_USER:
+        environment: WORDPRESS_DB_USER
+    SC_WORDPRESS_DB_PASSWORD:
+        environment: WORDPRESS_DB_PASSWORD
+    SC_KUMA_DB_USER:
+        environment: KUMA_DB_USER
+    SC_KUMA_DB_PASSWORD:
+        environment: KUMA_DB_PASSWORD
+    SC_WORDPRESS_AUTH_PASSWORD:
+        environment: WORDPRESS_AUTH_PASSWORD
+    WORDPRESS_SALT_PASSWORD:
+        environment: WORDPRESS_SALT_PASSWORD
 
 volumes:
     db:

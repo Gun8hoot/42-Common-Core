@@ -1,5 +1,13 @@
 #!/bin/sh
 
+export MARIADB_ROOT_PASSWORD=$(cat /run/secrets/SC_MARIADB_ROOT_PASSWORD)
+
+export MARIADB_USER=$(cat /run/secrets/SC_WORDPRESS_DB_USER)
+export MARIADB_PASSWD=$(cat /run/secrets/SC_WORDPRESS_DB_PASSWORD)
+
+export KUMA_DB_USER=$(cat /run/secrets/SC_KUMA_DB_USER)
+export KUMA_DB_PASSWD=$(cat /run/secrets/SC_KUMA_DB_PASSWORD)
+
 DATABASE_LOCATION=/var/lib/mysql
 
 function ping_database

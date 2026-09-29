@@ -1,5 +1,8 @@
 #!/bin/bash
 
+export MARIADB_USER=$(cat /run/secrets/SC_WORDPRESS_DB_USER)
+export MARIADB_PASSWD=$(cat /run/secrets/SC_WORDPRESS_DB_PASSWORD)
+
 chown -R nobody: /srv/www
 chmod -R u+rw /srv/www
 
